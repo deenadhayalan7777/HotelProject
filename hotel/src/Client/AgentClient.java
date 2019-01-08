@@ -105,7 +105,7 @@ public static void main(String[] args) {
 						             while(i!=0)
 						             {
 						            	 Order order=orders.get(i-1);
-						            	 service.viewOrder( order, agentClient.getHotelList());
+						            	 service.viewOrder( order, agentClient.getHotelDetail(order.getHotelId()));
 						            	 System.out.println("Enter SNO to view the order 0 to back");
 							              i=input.getIntegerInput(0,orders.size());
 						             }
@@ -125,7 +125,7 @@ public static void main(String[] args) {
 						             {
 						            	 Order order=orders.get(i-1);
 						            	 
-						            	 service.viewOrder( order, agentClient.getHotelList());
+						            	 service.viewOrder( order, agentClient.getHotelDetail(order.getHotelId()));
 						            	 System.out.println("Enter SNO to view the order 0 to back");
 							              i=input.getIntegerInput(0,orders.size());
 						             }}

@@ -152,7 +152,7 @@ public class HotelClient extends Client {
 	             while(orderId!=0)
 	             {
 	            	 Order order=orders.get(orderId-1);
-	            	 service.viewOrder( order, hotelClient.getHotelList());
+	            	 service.viewOrder( order, hotelClient.getHotelDetail(order.getHotelId()));
 	            	 System.out.println("Enter orderId to view the order 0 to back");
 		              orderId=input.getIntegerInput(0,orders.size());
 	             }

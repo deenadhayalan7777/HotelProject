@@ -1,6 +1,8 @@
 package hotel;
 
-public class HotelDetail {
+import java.io.Serializable;
+
+public class HotelDetail implements Serializable {
 
 	private int hotelId;
 	private String username;

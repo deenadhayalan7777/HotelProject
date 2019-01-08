@@ -1,7 +1,7 @@
 package Client;
 import Helper.ServerAccess;
 import Helper.InputHandler;
-import Helper.Service;
+import Helper.*;
 import hotel.*;
 
 import java.util.List;

@@ -79,9 +79,9 @@ public class Service {
 			System.out.println(iq.getItemId()+"\t"+iq.getName()+"\t"+iq.getPrice()+"\t"+iq.getQuantity()+"\t"+iq.getSubtotal());
 		}
 	}
-	public void viewOrder(Order order,Map<Integer,HotelDetail>  hotellist)
+	public void viewOrder(Order order,HotelDetail  hotellist)
 	{
-		 String hotelname=hotellist.get(order.getHotelId()).getUsername();
+		 String hotelname=hotellist.getUsername();
 		 System.out.println("---------------"+hotelname+"------------------");
 		System.out.println("\nORDER ID : "+order.getOrderId()+"\t"+order.getDate()+"\tPHONE : "+order.getPhoneNo()+"\n");
 		

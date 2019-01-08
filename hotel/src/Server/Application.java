@@ -35,8 +35,8 @@ public class Application {
 		hotels=(Map<Integer, Hotel>) fh.read("hotels.txt");
 		users=(Map<Integer, User>) fh.read("users.txt");
 		agents=(Map<Integer, Agent>) fh.read("agents.txt");
-		//orders=(Map<Integer, Order>) fh.read("orders.txt");
-		orderCount=(int) fh.read("server.txt");
+		orders=(Map<Integer, Order>) fh.read("orders.txt");
+		
 		 hotelCount=hotels.size()+1;
 		 userCount=users.size()+1;
 		 agentCount=agents.size()+1;
@@ -204,7 +204,7 @@ public class Application {
 		fh.write("hotels.txt", hotels);
 		fh.write("users.txt", users);
 		fh.write("agents.txt", agents);
-		fh.write("server.txt", orderCount);
+		fh.write("orders.txt", orders);
 	}
 
 	public int getOrderCount() {

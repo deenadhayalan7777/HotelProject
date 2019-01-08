@@ -23,7 +23,9 @@ public class HotelDetailHandler extends Handler {
 		 }
 		Gson gson=new Gson();
 		
-		  String response=gson.toJson(app.getHotelList().get(hotelId));
+		HotelDetail hdetail=app.getHotelList().get(hotelId);
+		  String response=gson.toJson(hdetail);
+		  System.out.println(response);
 		  return response;
 		
 		

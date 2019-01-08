@@ -134,7 +134,7 @@ public class UserClient extends Client {
 						             while(i!=0)
 						             {
 						            	 Order order=orders.get(i-1);
-						            	 service.viewOrder( order, userClient.getHotelList());
+						            	 service.viewOrder( order, userClient.getHotelDetail(order.getHotelId()));
 						            	 System.out.println("Enter SNO to view the order 0 to back");
 							              i=input.getIntegerInput(0,orders.size());
 						             }
