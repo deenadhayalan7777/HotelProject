@@ -1,6 +1,6 @@
 package Server.Handlers.User;
 
-import java.io.IOException;
+
 import java.util.Map;
 
 
@@ -16,9 +16,9 @@ public class MyOrderHandler extends Handler{
 		Integer code= Integer.parseInt((String) parameters.get("code")) ;
 		String response=null;
 		if(code==1)
-			response=gson.toJson(app.getUser(userId).getCurrentOrders());
+			response=gson.toJson(app.getUserCurrentOrders(userId));
 		else
-         response=gson.toJson(app.getUser(userId).getMyOrders());
+         response=gson.toJson(app.getUserOrders(userId));
         return response;
 	}
 

@@ -9,38 +9,25 @@ import hotel.*;
 
 public class Application {
 	
-	
-	private Map<Integer,Hotel> hotels;
-	private Map<Integer,User> users;
-	private Map<Integer,Agent> agents;
-	private Map<Integer,Order> orders;
-	private FileHandler fh;
 	private int hotelCount;
 	private int userCount;
 	private int orderCount;
 	private int agentCount;
 	private static Application app=null;
 	Service service;
+	DaoAdapter db;
 	
 	private Application()
 	{
+		 db=DaoAdapter.getInstance();
 		 
-		 hotels=new HashMap<Integer,Hotel>();
-		 users=new HashMap<Integer,User>();
-		 agents=new HashMap<Integer,Agent>();
-		 orders=new HashMap<Integer,Order>();
-         
 		 orderCount=0;
-		 fh=new FileHandler();
-		hotels=(Map<Integer, Hotel>) fh.read("hotels.txt");
-		users=(Map<Integer, User>) fh.read("users.txt");
-		agents=(Map<Integer, Agent>) fh.read("agents.txt");
-		orders=(Map<Integer, Order>) fh.read("orders.txt");
+		 
 		
-		 hotelCount=hotels.size()+1;
-		 userCount=users.size()+1;
-		 agentCount=agents.size()+1;
-		 orderCount=orders.size()+1;
+		 hotelCount=db.getLastId(C.HOTEL)+1;
+		 userCount=db.getLastId(C.USER)+1;
+		 agentCount=db.getLastId(C.AGENT)+1;
+		 orderCount=db.getLastId(C.ORDER)+1;
 		 service=Service.getInstance();
 	}
 	
@@ -54,14 +41,8 @@ public class Application {
 	public int userLogin(String username,String password)
 	{
 		int userId=0;
-		User user=null;
-		 for(User u:users.values())
-		 {
-			 if(u.getUsername().equals(username))
-			 {
-				user=u; 
-			 }
-		 }
+		User user=db.getUser(username);
+		 
 		 if(user!=null)
 		 {
 			 if(user.getPassword().equals(password))
@@ -69,38 +50,28 @@ public class Application {
 			 else
 				 userId=-1;
 		 }
-		return userId;
+		
+		 return userId;
 	}
 	public int userSignUp(String username,String password,String phone)
 	{   
-		User user;
-		for(User u:users.values())
-		 {
-			 if(u.getUsername().equals(username))
-			 {
-				return -2;
-			 }
-		 }
-		synchronized(this){
-			user=new User(userCount,username,password,phone);
+		User user=db.getUser(username);
+		int userId=-2;
+		if(user==null)
+		{synchronized(this){
+			db.setUser(new User(userCount,username,password,phone));
+			userId=userCount;
 			userCount++;
 		    }
+		}
 		
-		users.put(user.getUserId(), user);
-		
-		return user.getUserId();
+		return userId;
 	}
 	public int agentLogin(String username,String password)
 	{
 		int agentId=0;
-		Agent agent=null;
-		 for(Agent u:agents.values())
-		 {
-			 if(u.getUsername().equals(username))
-			 {
-				agent=u; 
-			 }
-		 }
+		Agent agent=db.getAgent(username);
+		 
 		 if(agent!=null)
 		 {
 			 if(agent.getPassword().equals(password))
@@ -112,34 +83,25 @@ public class Application {
 	}
 	public int agentSignUp(String username,String password,String phone)
 	{   
-		Agent agent;
-		for(Agent u:agents.values())
-		 {
-			 if(u.getUsername().equals(username))
-			 {
-				return -2;
-			 }
-		 }
-		synchronized(this){
-			agent=new Agent(agentCount,username,password,phone);
+		Agent agent=db.getAgent(username);
+		int agentId=-2;
+		if(agent==null)
+		{
+			synchronized(this){
+			db.setAgent(new Agent(agentCount,username,password,phone));
+			agentId=agentCount;
 			agentCount++;
 		    }
 		
-		agents.put(agent.getAgentId(), agent);
 		
-		return agent.getAgentId();
+		}
+		return agentId;
 	}
 	public int hotelLogin(String username,String password)
 	{
 		int hotelId=0;
-		Hotel hotel=null;
-		 for(Hotel u:hotels.values())
-		 {
-			 if(u.getUsername().equals(username))
-			 {
-				hotel=u; 
-			 }
-		 }
+		Hotel hotel=db.getHotel(username);
+		 
 		 if(hotel!=null)
 		 {
 			 if(hotel.getPassword().equals(password))
@@ -151,62 +113,50 @@ public class Application {
 	}
 	public int hotelSignUp(String username,String password,String phone)
 	{
-		Hotel hotel;
-		for(Hotel u:hotels.values())
-		 {
-			 if(u.getUsername().equals(username))
-			 {
-				return -2;
-			 }
-		 }
-		synchronized(this) {
-		hotel=new Hotel(hotelCount,username,password,phone);
-		hotelCount++;
+		Hotel hotel=db.getHotel(username);
+		int hotelId=-2;
+		if(hotel==null)
+		{synchronized(this){
+			db.setHotel(new Hotel(hotelCount,username,password,phone));
+			hotelId=hotelCount;
+			hotelCount++;
+		    }
 		}
-		hotels.put(hotel.getHotelId(), hotel);
-		return hotel.getHotelId();
+		
+		return hotelId;
 	}
 	public Map<Integer,HotelDetail> getHotelList()
 	{
-		Map<Integer,HotelDetail> hotellist=new HashMap<Integer,HotelDetail>();
-		for(Hotel hotel:hotels.values())
-		{
-			HotelDetail hdetail=new HotelDetail(hotel.getHotelId(),hotel.getUsername(),hotel.getPhone(),hotel.getRating(),hotel.isOpen());
-			hotellist.put(hotel.getHotelId(), hdetail);
-		}
-		return hotellist;
+		
+		return db.getHotelList();
 		
 	}
 	public User getUser(int userId) {
-		return users.get(userId);
+		return db.getUser(userId);
 		
 	}
 	public Hotel getHotel(int hotelId) {
 		
-	 return hotels.get(hotelId);
+	 return db.getHotel(hotelId);
 	}
 	public void addOrder(Order order)
 	{
-		orders.put(order.getOrderId(), order);
+		db.addOrder(order);
 	}
 	public Order getOrder(int orderId) {
 		
-		 return orders.get(orderId);
+		 return db.getOrder(orderId);
 		}
 	public Agent getAgent(int agentId)
 	{
 		
-		return agents.get(agentId);
+		return db.getAgent(agentId);
+	}
+	public HotelDetail getHotelDetail(int hotelId)
+	{
+		return db.getHotelDetail(hotelId);
 	}
 	
-	public void saveInFile()
-	{
-		fh.write("hotels.txt", hotels);
-		fh.write("users.txt", users);
-		fh.write("agents.txt", agents);
-		fh.write("orders.txt", orders);
-	}
-
 	public int getOrderCount() {
 		return orderCount;
 	}
@@ -215,7 +165,82 @@ public class Application {
 		this.orderCount = orderCount;
 	}
 	
+	 public void addItem(Item item,int hotelId)
+	   {
+		   db.addItem(item,hotelId);
+	   }
+	 public void removeItem(int itemId)
+	 {
+		 db.removeItem(itemId);
+	 }
+	public int getItemId()
+	{
+		return db.getLastItemId();
+	}
 	
+	public Map<Integer,Item> getHotelMenu(int hotelId)
+	{
+		
+		return db.getHotelMenu(hotelId);
+	}
+	public void addAgentOrder(int agentId,int orderId)
+	{
+		db.addAgentOrder(agentId, orderId);
+	}
+	public void setHotelStatus(int hotelId,int status)
+	{
+		db.setHotelStatus(hotelId, status);
+	}
 	
+	public void setOrderStatus(int orderId,int status)
+	{
+		db.setOrderStatus(orderId, status);
+	}
+	public void setOrderRating(int orderId,int rating)
+	{
+		db.setOrderRating(orderId, rating);
+	}
+	public Map<Integer,Order> getHotelOrders(int hotelId)
+	{
+			return db.getOrders(C.HOTEL,hotelId);
+	}
+	public Map<Integer,Order> getHotelCurrentOrders(int hotelId)
+	{
+			return db.getCurrentOrders(C.HOTEL,hotelId);
+	}
+	public Map<Integer,Order> getUserOrders(int userId)
+	{
+			return db.getOrders(C.USER,userId);
+	}
+	public Map<Integer,Order> getUserCurrentOrders(int userId)
+	{
+			return db.getCurrentOrders(C.USER,userId);
+	}
+	public Map<Integer,Order> getAgentOrders(int agentId)
+	{
+			return db.getOrders(C.AGENT,agentId);
+	}
+	public Map<Integer,Order> getAgentCurrentOrders(int agentId)
+	{
+			return db.getCurrentOrders(C.AGENT,agentId);
+	}
+	
+	public void calculateRating(int hotelId)
+	{
+		float totalRating=0;
+		int numberOfRatings=0;
+		for(Order order:getHotelOrders(hotelId).values())
+		{
+			if(order.getRating()!=0)
+			{
+				numberOfRatings++;
+				totalRating+=order.getRating();
+			}
+		}
+		if(numberOfRatings!=0)
+		{totalRating=(totalRating/numberOfRatings);
+		db.setHotelRating(hotelId, totalRating);
+		}
+	}
 	
 }

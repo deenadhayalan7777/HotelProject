@@ -6,6 +6,8 @@ import hotel.*;
 
 import com.google.gson.Gson;
 
+import Helper.C;
+
 public class RateOrderHandler extends Handler{
 
 	@Override
@@ -13,16 +15,15 @@ public class RateOrderHandler extends Handler{
 		
 		String response="0";
 		Gson g = new Gson(); 
-		Integer userId=Integer.parseInt((String) parameters.get("userId"));
-		User user=app.getUser(userId);
+		
 	    String jsonItem=(String) parameters.get("order");
 		Order order =  g.fromJson(jsonItem, Order.class);
-		Hotel hotel=app.getHotel(order.getHotelId());
+		
 		int orderId=order.getOrderId();
-		hotel.getOrders().get(orderId).setRating(order.getRating());
-		user.getCurrentOrders().remove(orderId);
-		user.getMyOrders().put(orderId, order);
-		 hotel.calculateRating();
+		
+		 app.setOrderStatus(orderId, C.RATED);
+		 app.setOrderRating(orderId, order.getRating());
+		 app.calculateRating(order.getHotelId());
 		return response;
 	}
 

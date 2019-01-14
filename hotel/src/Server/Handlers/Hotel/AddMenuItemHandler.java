@@ -1,10 +1,8 @@
 package Server.Handlers.Hotel;
-
-import java.util.List;
 import java.util.Map;
 import Server.Handlers.Handler;
 import hotel.*;
-import Server.Handlers.Handler;
+
 import hotel.*;
 
 import com.google.gson.Gson;
@@ -21,13 +19,14 @@ public class AddMenuItemHandler extends Handler {
 		if(code==2)
 		{
 			Integer itemId=Integer.parseInt((String) parameters.get("itemId"));
-			app.getHotel(hotelId).getMenu().remove(itemId);
+			app.removeItem(itemId);
 		}
 		else
 		{		
 		String jsonItem=(String) parameters.get("item");
 		Item item =  g.fromJson(jsonItem, Item.class);
-		app.getHotel(hotelId).getMenu().put(item.getItemId(),item);
+		item.setItemId(app.getItemId()+1);
+		app.addItem(item,hotelId);
 		}
 		response ="1";
         return response;

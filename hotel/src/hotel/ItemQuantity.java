@@ -18,6 +18,7 @@ public class ItemQuantity implements Serializable {
 		this.name=name;
 		this.price=price;
 	}
+	
 	public int getItemId() {
 		return itemId;
 	}

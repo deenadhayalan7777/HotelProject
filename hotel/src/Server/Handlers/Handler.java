@@ -47,7 +47,6 @@ public abstract class Handler implements HttpHandler{
 		}
 		
 		String response=doService(parameters);
-		app.saveInFile();
 		
 		 try {
 				he.sendResponseHeaders(200, response.length());

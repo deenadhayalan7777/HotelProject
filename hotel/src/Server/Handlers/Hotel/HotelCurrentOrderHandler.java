@@ -15,7 +15,7 @@ public class HotelCurrentOrderHandler extends Handler {
 		
 		Integer hotelId= Integer.parseInt((String) parameters.get("hotelId")) ;
         Gson gson=new Gson();
-        String response=gson.toJson(app.getHotel(hotelId).getCurrentOrders());
+        String response=gson.toJson(app.getHotelCurrentOrders(hotelId));
         return response;
 	}
 

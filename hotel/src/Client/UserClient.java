@@ -12,16 +12,16 @@ public class UserClient extends Client {
 
 	private static InputHandler input;
 	
-	public static ItemQuantity addItem(Map<Integer,Item> items)
+	public static ItemQuantity addItem(List<Item> items)
 	{
 		
-		System.out.println("Enter itemId ");
-		int itemId=input.getIntegerInput(1,items.size());
+		System.out.println("Enter Sno ");
+		int sno=input.getIntegerInput(1,items.size());
 		System.out.println("Enter quantity");
 		int quantity=input.getIntegerInput();
-		Item item=items.get(itemId);
+		Item item=items.get(sno-1);
 		int subtotal=quantity*item.getPrice();
-		return new ItemQuantity(itemId,quantity,subtotal,item.getName(),item.getPrice());
+		return new ItemQuantity(item.getItemId(),quantity,subtotal,item.getName(),item.getPrice());
 	
 	}
 	
@@ -68,6 +68,7 @@ public class UserClient extends Client {
 				           
 				             case C.MAKE_ORDER:{
 				            	                 Map<Integer,Item> menu =userClient.getMenu(hotelId);
+				            	                 List<Item> items=new ArrayList<Item>(menu.values());
 				            	                 service.displayMenu(menu);
 				            	                 Discount discount=userClient.getDiscount(hotelId);
 				            					 int c=1,total=0;
@@ -77,7 +78,7 @@ public class UserClient extends Client {
 					            					 while(c==1)
 					            				     {   
 					            				    	 boolean isItemRepeated=false;
-					            				    	 ItemQuantity iq=addItem(menu);
+					            				    	 ItemQuantity iq=addItem(items);
 					            				    	 
 					            				         for(int i=0;i< itemslist.size();i++)
 					            				         {

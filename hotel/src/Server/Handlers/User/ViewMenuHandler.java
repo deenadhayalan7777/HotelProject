@@ -14,7 +14,7 @@ public class ViewMenuHandler extends Handler  {
 	public String doService(Map<String,Object> parameters) {
 		int hotelId= Integer.parseInt((String) parameters.get("hotelId")) ;
         Gson gson=new Gson();
-       String response=gson.toJson(app.getHotel(hotelId).getMenu());
+       String response=gson.toJson(app.getHotelMenu(hotelId));
        return response;
 	}
 }

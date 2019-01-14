@@ -16,6 +16,13 @@ public Item(int itemId,String name, int price) {
 	this.price = price;
 	
 }
+
+public Item(String name, int price) {
+	
+	this.name = name;
+	this.price = price;
+}
+
 public int getItemId() {
 	return itemId;
 }

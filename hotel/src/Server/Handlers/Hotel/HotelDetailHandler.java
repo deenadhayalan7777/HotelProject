@@ -15,10 +15,7 @@ public class HotelDetailHandler extends Handler {
 		int code= Integer.parseInt((String) parameters.get("code")) ;
 		if(code==2)
 		 {int status= Integer.parseInt((String) parameters.get("status")) ;
-		  if(status==1)
-			  app.getHotel(hotelId).setOpen(true);
-		  else
-			  app.getHotel(hotelId).setOpen(false); 
+		  app.setHotelStatus(hotelId, status);
 		  return "1";
 		 }
 		Gson gson=new Gson();

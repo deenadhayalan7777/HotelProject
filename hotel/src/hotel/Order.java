@@ -1,6 +1,7 @@
 package hotel;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +31,10 @@ public class Order implements Serializable {
 		this.setHotelId(hotelId);
 		this.userId=userId;
 		setStatus(C.ACCEPTED);
-		date=new Date();
+		date= Calendar.getInstance().getTime();
 	}
+	
+	
 	public int getOrderId() {
 		return orderId;
 	}

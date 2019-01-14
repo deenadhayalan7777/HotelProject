@@ -28,10 +28,13 @@ public class Service {
 	{
 		if(items.size()>0)
 		{   
-			System.out.println("ItemID \t Name \t Price");
+			System.out.println("SNO \t Name \t Price");
+			
+			int i=1;
 			for(Item item:items.values())
 			{
-				System.out.println(item.getItemId()+"\t"+item.getName()+"\t"+item.getPrice());
+				System.out.println(i+"\t"+item.getName()+"\t"+item.getPrice());
+				i++;
 			}
 		}
 		else

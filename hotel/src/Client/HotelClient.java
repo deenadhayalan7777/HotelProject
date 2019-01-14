@@ -47,15 +47,17 @@ public class HotelClient extends Client {
 		if(hotelClient.isLogged)
 		{
 			int hotelId=hotelClient.id;
-			HotelDetail hdetail=hotelClient.getHotelDetail(hotelId);
+			
 			System.out.println("1.Add Menu Item 2.List Order 3.Discount 4.Open/Close 5.Exit");
 			int choice=input.getIntegerInput(1, 4);
 			while(choice<5)
 			{
+				HotelDetail hdetail=hotelClient.getHotelDetail(hotelId);
 			switch(choice)
 			{
 			 case C.ADD_MENU:{
 				   Map<Integer,Item> menu=hotelClient.getMenu(hotelId);
+				   List<Item> items=new ArrayList<Item>(menu.values());
 				 service.displayMenu(menu);
 				    
 					System.out.println("Enter 1.Add item 2.Remove item 0 to back");
@@ -64,20 +66,20 @@ public class HotelClient extends Client {
 						{
 						if(ch==1)
 						{
-						System.out.println("Enter ItemId");
-						int itemId=input.getIntegerInput();
+						
 						System.out.println("Enter Name");
 						String name=input.getStringInput();
 						System.out.println("Enter price");
 						int price=input.getIntegerInput();
-						Item item=new Item(itemId,name,price);
+						Item item=new Item(name,price);
 						hotelClient.addItem(item,hotelId);
 						System.out.println("Item added successfully");
 						}
 						else
 						{
-							System.out.println("Enter itemId");
-							int itemId=input.getIntegerInput();
+							System.out.println("Enter SNO");
+							int sno=input.getIntegerInput();
+							int itemId=items.get(sno-1).getItemId();
 							hotelClient.removeItem(itemId,hotelId);
 						}
 						service.displayMenu(hotelClient.getMenu(hotelId));

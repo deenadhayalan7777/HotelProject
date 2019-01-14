@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="src/httpclient-4.5.6.jar"/>
 	<classpathentry kind="lib" path="src/httpcore-4.4.10.jar"/>
 	<classpathentry kind="lib" path="src/json-20180813.jar"/>
+	<classpathentry kind="lib" path="src/Server/mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

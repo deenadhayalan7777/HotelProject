@@ -24,7 +24,7 @@ public class HotelOrderHandler extends Handler {
 		ServerHelper helper=ServerHelper.getInstance();
 		int code= Integer.parseInt((String) parameters.get("code")) ;
 		Integer hotelId= Integer.parseInt((String) parameters.get("hotelId")) ;
-		Set<Order> orderList = new HashSet<Order>(app.getHotel(hotelId).getOrders().values());
+		Set<Order> orderList = new HashSet<Order>(app.getHotelOrders(hotelId).values());
 	        
 	        System.out.println("code is" +code);
 	        

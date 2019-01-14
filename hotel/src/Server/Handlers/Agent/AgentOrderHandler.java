@@ -15,14 +15,14 @@ public class AgentOrderHandler extends Handler {
 		
 		Integer agentId= Integer.parseInt((String) parameters.get("agentId")) ;
 		Integer code= Integer.parseInt((String) parameters.get("code")) ;
-		Agent agent=app.getAgent(agentId);
+		
 		String response=null;
 		if(code==C.CURRENT_ORDERS)
 		{
-			response=gson.toJson(agent.getCurrentOrders());
+			response=gson.toJson(app.getAgentCurrentOrders(agentId));
 		}
 		else
-          response=gson.toJson(agent.getMyOrders());
+          response=gson.toJson(app.getAgentOrders(agentId));
         
 		return response;
 		
