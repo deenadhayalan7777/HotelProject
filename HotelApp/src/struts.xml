@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+<package name="default" namespace="/" extends="struts-default">
+
+<action name ="index">
+			<result >index.jsp</result>
+		</action>
+		
+		
+		
+<action name ="UserLogin">
+			<result >/user/Login.jsp</result>
+</action>
+<action name ="UserSignUp">
+			<result >/user/SignUp.jsp</result>
+</action>		
+<action name="UserLoginAction" class="controller.userController.LoginAction">  
+<result name="success">/user/User.jsp</result> 
+<result name="failure">index.jsp</result>  
+</action>  
+<action name="UserSignUpAction" class="controller.userController.SignUpAction">  
+<result name="success">/user/User.jsp</result> 
+<result name="failure">index.jsp</result>  
+</action>
+
+
+
+<action name ="AgentLogin">
+			<result >/agent/Login.jsp</result>
+</action>	
+<action name ="AgentSignUp">
+			<result >/agent/SignUp.jsp</result>
+</action>
+<action name="AgentLoginAction" class="controller.agentController.LoginAction">  
+<result name="success">/agent/Agent.jsp</result> 
+<result name="failure">index.jsp</result>  
+</action>  
+<action name="AgentSignUpAction" class="controller.agentController.SignUpAction">  
+<result name="success">/agent/Agent.jsp</result> 
+<result name="failure">index.jsp</result>  
+</action>
+
+
+
+<action name ="HotelLogin">
+			<result >/hotel/Login.jsp</result>
+</action>	
+<action name ="HotelSignUp">
+			<result >/hotel/SignUp.jsp</result>
+</action>
+<action name="HotelLoginAction" class="controller.hotelController.LoginAction">  
+<result name="success">/hotel/Hotel.jsp</result> 
+<result name="failure">index.jsp</result>  
+</action>  
+<action name="HotelSignUpAction" class="controller.hotelController.SignUpAction">  
+<result name="success">/hotel/Hotel.jsp</result> 
+<result name="failure">index.jsp</result>  
+</action>
+</package>
+
+</struts>    
