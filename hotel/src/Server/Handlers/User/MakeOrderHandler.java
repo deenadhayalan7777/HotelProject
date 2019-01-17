@@ -33,7 +33,7 @@ public class MakeOrderHandler extends Handler {
 	    	
 	    	int orderId;
 	    	synchronized(this) {
-	    	orderId=app.getOrderCount();
+	    	orderId=app.getOrderCount()+1;
 	    	app.setOrderCount(orderId);
 	    	}
 	    	

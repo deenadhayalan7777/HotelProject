@@ -70,20 +70,23 @@ public abstract class Handler implements HttpHandler{
     	                          String param[] = pair.split("[=]");
     	                          String key = null;
     	                          String value = null;
+    	                          try {   
+    	                          if (param.length > 0) {  
+								key = URLDecoder.decode(param[0], 
+								   System.getProperty("file.encoding"));
+								                  
+    	                                                }
+								if (param.length > 1) {
+								  
+									value = URLDecoder.decode(param[1], 
+									   System.getProperty("file.encoding"));
+								      }
     	                          
-    	                          try {
-    	                        	  if (param.length > 0) {  
-									key = URLDecoder.decode(param[0], 
-									  	System.getProperty("file.encoding"));}
-									if (param.length > 1) {
- 	                                   value = URLDecoder.decode(param[1], 
- 	                                   System.getProperty("file.encoding"));
- 	                          
+    	                          } catch (UnsupportedEncodingException e) {
+  									
+  									e.printStackTrace();
 
-								}} catch (UnsupportedEncodingException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+                                 }
     	                         
     	                                   parameters.put(key, value);
     	                          
