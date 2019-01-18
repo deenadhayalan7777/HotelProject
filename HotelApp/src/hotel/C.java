@@ -34,7 +34,7 @@ public static final	int DELIVERED=3;
 public static final	int RATED=4;
 public static final int ORDER_LIMIT=2;
 public static final	int DELIVERY=4;
-
+public static final	int LOGOUT=5;
 public static final	int HOTEL=1;
 public static final	int USER=2;
 public static final	int AGENT=3;

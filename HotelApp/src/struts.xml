@@ -5,14 +5,17 @@
 <struts>
 <package name="default" namespace="/" extends="struts-default">
 
-<action name ="index">
+<global-results>
+
+        <action name ="index">
 			<result >index.jsp</result>
 		</action>
 		
+</global-results>		
 		
-		
-<action name ="UserLogin">
-			<result >/user/Login.jsp</result>
+<action name ="UserLogin" class="controller.userController.PreLogin">
+			<result name="success" >/user/Login.jsp</result>
+			<result name="alreadyLogged">/user/User.jsp</result>		
 </action>
 <action name ="UserSignUp">
 			<result >/user/SignUp.jsp</result>
@@ -25,12 +28,20 @@
 <result name="success">/user/User.jsp</result> 
 <result name="failure">index.jsp</result>  
 </action>
+<action name="UserAction" class="controller.userController.UserAction">  
+<result name="hotelList">/user/HotelList.jsp</result> 
+<result name="myOrders">/user/MyOrders.jsp</result> 
+<result name="currentOrders">/user/CurrentOrders.jsp</result> 
+<result name="logout">index.jsp</result> 
+<result name="failure">index.jsp</result>  
+</action>
 
 
 
-<action name ="AgentLogin">
-			<result >/agent/Login.jsp</result>
-</action>	
+<action name ="AgentLogin" class="controller.agentController.PreLogin">
+			<result name="success" >/agent/Login.jsp</result>
+			<result name="alreadyLogged">/agent/Agent.jsp</result>		
+</action>
 <action name ="AgentSignUp">
 			<result >/agent/SignUp.jsp</result>
 </action>
@@ -45,9 +56,10 @@
 
 
 
-<action name ="HotelLogin">
-			<result >/hotel/Login.jsp</result>
-</action>	
+<action name ="HotelLogin" class="controller.hotelController.PreLogin">
+			<result name="success" >/hotel/Login.jsp</result>
+			<result name="alreadyLogged">/hotel/Hotel.jsp</result>		
+</action>
 <action name ="HotelSignUp">
 			<result >/hotel/SignUp.jsp</result>
 </action>
