@@ -23,7 +23,7 @@ public class LoginInterceptor extends AbstractInterceptor implements
 				.get(HTTP_REQUEST);
 		HttpSession session = request.getSession(true);
 
-		
+		System.out.println("workspace updating");
 		Object user = session.getAttribute("user");
 		if (user == null) {
 			
