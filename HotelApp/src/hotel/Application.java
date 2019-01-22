@@ -9,10 +9,7 @@ import java.util.Map;
 
 public class Application {
 	
-	private int hotelCount;
-	private int userCount;
-	private int orderCount;
-	private int agentCount;
+	
 	private static Application app=null;
 	
 	DaoAdapter db;
@@ -20,14 +17,7 @@ public class Application {
 	private Application()
 	{
 		 db=DaoAdapter.getInstance();
-		 
-		 orderCount=0;
-		 
 		
-		 hotelCount=db.getLastId(C.HOTEL)+1;
-		 userCount=db.getLastId(C.USER)+1;
-		 agentCount=db.getLastId(C.AGENT)+1;
-		 orderCount=db.getLastId(C.ORDER)+1;
 		
 	}
 	
@@ -59,6 +49,7 @@ public class Application {
 		int userId=-2;
 		if(user==null)
 		{synchronized(this){
+			int userCount=getUserCount()+1;
 			db.setUser(new User(userCount,username,cryptWithMD5(password),phone));
 			userId=userCount;
 			userCount++;
@@ -88,6 +79,7 @@ public class Application {
 		if(agent==null)
 		{
 			synchronized(this){
+				int agentCount=getAgentCount()+1;
 			db.setAgent(new Agent(agentCount,username,cryptWithMD5(password),phone));
 			agentId=agentCount;
 			agentCount++;
@@ -117,6 +109,7 @@ public class Application {
 		int hotelId=-2;
 		if(hotel==null)
 		{synchronized(this){
+			int hotelCount=getHotelCount()+1;
 			db.setHotel(new Hotel(hotelCount,username,cryptWithMD5(password),phone));
 			hotelId=hotelCount;
 			hotelCount++;
@@ -124,6 +117,24 @@ public class Application {
 		}
 		
 		return hotelId;
+	}
+	public int getOrderCount()
+	{
+		return db.getLastId(C.ORDER);
+	}
+	public int getHotelCount()
+	{
+		return db.getLastId(C.HOTEL);
+	}
+	
+	public int getUserCount()
+	{
+		return db.getLastId(C.USER);
+	}
+	
+	public int getAgentCount()
+	{
+		return db.getLastId(C.AGENT);
 	}
 	public Map<Integer,HotelDetail> getHotelList()
 	{
@@ -141,6 +152,8 @@ public class Application {
 	}
 	public void addOrder(Order order)
 	{
+		HotelDetail hdetail=getHotelDetail(order.getHotelId());
+		order.setHotelname(hdetail.getUsername());
 		db.addOrder(order);
 	}
 	public Order getOrder(int orderId) {
@@ -157,13 +170,6 @@ public class Application {
 		return db.getHotelDetail(hotelId);
 	}
 	
-	public int getOrderCount() {
-		return orderCount;
-	}
-
-	public void setOrderCount(int orderCount) {
-		this.orderCount = orderCount;
-	}
 	
 	 public void addItem(Item item,int hotelId)
 	   {
@@ -199,6 +205,8 @@ public class Application {
 	public void setOrderRating(int orderId,int rating)
 	{
 		db.setOrderRating(orderId, rating);
+		Order order=getOrder(orderId);
+		calculateRating(order.getHotelId());
 	}
 	public Map<Integer,Order> getHotelOrders(int hotelId)
 	{

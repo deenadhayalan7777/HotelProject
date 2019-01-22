@@ -58,6 +58,7 @@ public class DaoAdapter {
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
 				Hotel hotel=new Hotel(hotelId,username,password,phone);
+				hotel.setStatus(rs.getInt(6));
 				return hotel;
 			}
 		} catch (SQLException e) {System.out.println(e);}
@@ -74,7 +75,9 @@ public class DaoAdapter {
 				String username=rs.getString(2);
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
+				int status=rs.getInt(6);
 				Hotel hotel=new Hotel(hotelId,username,password,phone);
+				hotel.setStatus(status);
 				return hotel;
 			}
 		} catch (SQLException e) {System.out.println(e);}
@@ -247,7 +250,7 @@ public Agent getAgent(int agentId)
 			  SimpleDateFormat ft = new SimpleDateFormat ("YYYY-MM-dd HH:mm:ss");
 			  Date date=ft.parse(rs.getString(5));
 			  int status=rs.getInt(6);
-			 
+			  
 			  List<ItemQuantity> items=new ArrayList<ItemQuantity>();
 			  rs=dao.getItemQuantity(orderId);
 			  while(rs.next())
@@ -263,6 +266,9 @@ public Agent getAgent(int agentId)
 			  order.setRating(rating);
 			  order.setStatus(status);
 			  order.setAgentId(agentId);
+			  order.setHotelname(getHotelDetail(hotelId).getUsername());
+			  if(agentId!=0)
+			  order.setAgentname(getAgent(agentId).getUsername());
 			  }
 		} catch (SQLException | ParseException e) {
 			
@@ -294,9 +300,8 @@ public Agent getAgent(int agentId)
 	   try {
 		   ResultSet rs=dao.getHotels();
 			while(rs.next())  
-			{ boolean status=true;
-			  if(rs.getInt(6)==0)
-				  status=false;
+			{ int status=rs.getInt(6);
+			  
 			  HotelDetail hdetail=new HotelDetail(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(5),status);
 			 hotellist.put(hdetail.getHotelId(), hdetail);
 			}
@@ -357,9 +362,11 @@ public Agent getAgent(int agentId)
 	 	   }
 			while(rs.next())  
 			{ 
-			  Order order=getOrder(rs.getInt(1));	
+			  Order order=getOrder(rs.getInt(1));
+			  if(order!=null)
 			  orders.put(order.getOrderId(), order);
-			
+			  else
+				  System.out.println("order is null");
 			}
 			
 		} catch (SQLException e) {System.out.println(e);} 
@@ -382,10 +389,8 @@ public Agent getAgent(int agentId)
 	   try {
 		   ResultSet rs=dao.getHotelDetail(hotelId);
 			while(rs.next())  
-			{ boolean status=true;
-			  if(rs.getInt(6)==0)
-				  status=false;
-			  return new HotelDetail(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(5),status);
+			{ 
+			  return new HotelDetail(rs.getInt(1),rs.getString(2),rs.getString(4),rs.getInt(5),rs.getInt(6));
 			 
 			}
 			

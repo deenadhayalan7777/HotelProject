@@ -13,7 +13,7 @@ public class Hotel implements Serializable {
 	private String password;
 	private String phone;
 	private float rating;
-	private boolean isOpen;
+	private int status;
 	
 	private Discount discount;
 	
@@ -31,7 +31,7 @@ public class Hotel implements Serializable {
 		setRating(5);
 		
 		discount=new Discount();
-		setOpen(true);
+		setStatus(1);
 	}
 	public int getHotelId() {
 		return hotelId;
@@ -91,11 +91,13 @@ public class Hotel implements Serializable {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	public boolean isOpen() {
-		return isOpen;
+
+	public int getStatus() {
+		return status;
 	}
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	

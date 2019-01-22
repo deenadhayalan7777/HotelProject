@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1 align="center">HOTEL SIGNUP</h1>
-  <s:form action ="HotelSignUpAction" align="center" validate="true">
+  <s:form action ="signupaction" align="center" validate="true">
    
 	<s:textfield name ="username" label="Username:"/>
 	<s:password name ="password" label ="Password:"/>

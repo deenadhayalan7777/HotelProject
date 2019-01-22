@@ -19,6 +19,8 @@ public class Order implements Serializable {
     private int userId;
     private int agentId;
     private int status; 
+    private String hotelname;
+    private String agentname;
 	public Order(int orderId,List<ItemQuantity> itemsList, int total,String phoneNo,int discount,int hotelId,int userId) {
 		
 		this.itemsList = itemsList;
@@ -30,7 +32,7 @@ public class Order implements Serializable {
 		this.setHotelId(hotelId);
 		this.userId=userId;
 		setStatus(C.ACCEPTED);
-		date= Calendar.getInstance().getTime();
+		date= new Date();
 	}
 	
 	
@@ -120,6 +122,26 @@ public class Order implements Serializable {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+
+	public String getHotelname() {
+		return hotelname;
+	}
+
+
+	public void setHotelname(String hotelname) {
+		this.hotelname = hotelname;
+	}
+
+
+	public String getAgentname() {
+		return agentname;
+	}
+
+
+	public void setAgentname(String agentname) {
+		this.agentname = agentname;
 	}
     
     

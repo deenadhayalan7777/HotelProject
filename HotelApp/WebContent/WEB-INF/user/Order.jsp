@@ -1,35 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HotelList</title>
+<title>Order</title>
+<script src="/HotelApp/user/Order.js"></script>
 </head>
 <body>
 <h4 align="left" style="color:green"> <s:property value=" #session.user.username"/></h4> 
  
-  <c:set var="count" value="0" scope="page" />
-  <form action="selecthotelaction" method="get" align="center">
-  <br>Select any one of the Hotel below<br>
-  <div class="row">
-  <div align="center" class="column">
+  
+  
+  <br>Hotel Menu<br>
   <table border="0" cellpadding="20">
-   <s:iterator value="hotels" >  
+   <s:iterator  value="menu" status="status">  
 			<tr>
-			<td><button name="sno" type="submit" value="${count }"><s:property value="username"/></button></td>
-			<td><s:property value="rating"/></td>  
-			<c:set var="count" value="${count + 1}" scope="page"/>
+			<td><s:property value="name"/></td>  
+			<td><s:property value="price"/></td> 
+			<td><input name="quantity" class="quantity" type="text" >Quantity</input></td>
+			<td> <button onclick="addItem('<s:property value="itemId"/>','<s:property value="name"/>','<s:property value="price"/>','<s:property value="%{#status.count}" />')">ADD</button></td>
 			</tr>  
   </s:iterator> 
   </table>
-  </div>
-  </div>
   
-</form>
+  <p id="box" > </p>
+<s:form name="myForm" action="orderaction"   method="post" >
+
+<s:hidden name="itemslist" id="itemslist" value="items" />
+<s:hidden name="total" id="total" value='0' />
+<s:hidden name="hotelId" id="hotelId" value='0'/>
+ <input  type="button" onclick="makeOrder('<s:property value="#session.hdetail.hotelId"/> ')"  value="MAKE ORDER"/>
+</s:form>
+ 
 <br><br><br>
 <s:if test="hasActionErrors()">
    
@@ -44,5 +49,7 @@
      <strong>Success!</strong> <s:actionmessage/>
    </div>
 </s:if>
+
+
 </body>
 </html>

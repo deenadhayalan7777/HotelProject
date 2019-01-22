@@ -11,18 +11,18 @@
 <h1 align="center">AGENT LOGIN</h1>
 
   <div class="container" align="center">
-  <s:form action ="AgentLoginAction" validate="true">
-    <div class="form-group">
+  <s:form action ="loginaction" validate="true">
+   
 	<s:textfield name ="username" cssClass="form-control" placeholder="username"/>
-	</div>
-	<div class="form-group">
+	
+	
 	<s:password name ="password" cssClass="form-control" placeholder ="Password:"/>
-	</div>
+	
 	<s:submit value="login" cssClass="btn btn-success btn-md" align="center"/>
 	
 	</s:form >
 	
-	<p >New User? <a href="AgentSignUp">Sign Up Here</a></p>
+	<p >New User? <a href="signup">Sign Up Here</a></p>
 	  
   </div>
 

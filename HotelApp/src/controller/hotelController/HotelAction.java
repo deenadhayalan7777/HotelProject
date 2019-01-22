@@ -1,4 +1,4 @@
-package controller.userController;
+package controller.hotelController;
 
 
 import java.util.ArrayList;
@@ -18,18 +18,19 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Application;
 import hotel.C;
-
+import hotel.Hotel;
 import hotel.HotelDetail;
+import hotel.Item;
 import hotel.Order;
 import hotel.User;
 
 
 
-public class UserAction extends ActionSupport implements ServletResponseAware {
+public class HotelAction extends ActionSupport implements ServletResponseAware {
 
 	private int option;
-    private List<HotelDetail> hotels;
-    private List<Order> currentOrders;
+    private List<Item> menu;
+   
     private List<Order> myOrders;
 	
     public void setOption(int option) {
@@ -39,22 +40,7 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 		return option;
 	}
 
-	public List<HotelDetail> getHotels() {
-		return hotels;
-	}
-
-	public void setHotels(List<HotelDetail> hotels) {
-		this.hotels = hotels;
-	}
-
-	public List<Order> getCurrentOrders() {
-		return currentOrders;
-	}
-
-	public void setCurrentOrders(List<Order> currentOrders) {
-		this.currentOrders = currentOrders;
-	}
-
+	
 	public List<Order> getMyOrders() {
 		return myOrders;
 	}
@@ -77,39 +63,47 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 	
 	public String execute() 
 	{
-		System.out.println("in user action " +option);
+		
 		Application app=Application.getInstance();
-	   //HttpSession session=ServletActionContext.getRequest().getSession(); 
-		User user=(User) ServletActionContext.getRequest().getSession().getAttribute("user");
-		int userId=user.getUserId();
+		HttpSession session=ServletActionContext.getRequest().getSession(); 
+		Hotel hotel=(Hotel) session.getAttribute("hotel");
+		int hotelId=hotel.getHotelId();
 		
 		switch(option)
 		  {
 		 
 		                              
-		  case C.HOTELS: {
-			                    		setHotels(new ArrayList<HotelDetail>(app.getHotelList().values()));
-									System.out.println("In hotels");
+		  case C.ADD_MENU: {
+			                    		
+			                    		 setMenu(new ArrayList<Item>(app.getHotelMenu(hotelId).values()));
 									  
-									 return "hotelList";
+									 return "addMenu";
 						}
+		 
 		  
-		  
-		  case C.MYORDERS: {
-			                 setMyOrders(new ArrayList<Order>(app.getUserOrders(userId).values()));
+		  case C.LIST_ORDER: {
+			                 setMyOrders(new ArrayList<Order>(app.getHotelOrders(hotelId).values()));
 			               
 			             return "myOrders";
 	                       }
-		  case C.RATE_ORDER: {
-              setCurrentOrders(new ArrayList<Order>(app.getUserCurrentOrders(userId).values()));
-            
-          return "rateOrder";
-            }
 		
+		  case C.DISCOUNT: {
+              setMyOrders(new ArrayList<Order>(app.getUserOrders(hotelId).values()));
+            
+          return "discount";
+            }
+		  case C.OPEN_CLOSE: {
+			                int status=0;
+                                if(hotel.getStatus()==0)
+                                	status=1;
+                               app.setHotelStatus(hotelId, status); 
+                          return "success";     
+                                	
+            }
+		  
 		  case C.LOGOUT: {
-		     // session.invalidate();
-			  ServletActionContext.getRequest().getSession().invalidate();
-		      Cookie ck = new Cookie("userId","" );
+		      session.invalidate();
+		      Cookie ck = new Cookie("hotelId","" );
 			  ck.setMaxAge(0); 
 			  servletResponse.addCookie(ck);
 			  return "logout";
@@ -120,6 +114,12 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 		
 		return "failure";
 		
+	}
+	public List<Item> getMenu() {
+		return menu;
+	}
+	public void setMenu(List<Item> menu) {
+		this.menu = menu;
 	}
 
 	

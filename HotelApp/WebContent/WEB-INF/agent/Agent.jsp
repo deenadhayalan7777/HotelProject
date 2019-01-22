@@ -9,16 +9,15 @@
 <title>User</title>
 </head>
 <body>
-<h4 align="left" style="color:green">Welcome </h4> 
+<h4 align="left" style="color:green">Welcome  <s:property value=" #session.agent.username"/></h4> 
  
   
-  <form action="AgentAction" method="post" align="center">
+  <form action="agentaction" method="get" align="center">
   <br>choose any of the option below<br>
   <div class="row">
   <div align="center" class="column">
   <br><button name="option" type="submit" value=1>PICK UP ORDERS</button></br>
   <br><button name="option" type="submit" value=2>MY ORDERS</button></br>
-  <br><button name="option" type="submit" value=3>CURRENT ORDERS</button></br>
   <br><button name="option" type="submit" value=4>DELIVER ORDER</button></br>
    <br><button name="option" type="submit" value=5>LOGOUT</button></br>
   </div>

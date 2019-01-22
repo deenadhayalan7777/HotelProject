@@ -11,7 +11,7 @@
 <h1 align="center">HOTEL LOGIN</h1>
 
   <div class="container" align="center">
-  <s:form action ="HotelLoginAction" validate="true">
+  <s:form action ="loginaction" validate="true">
     <div class="form-group">
 	<s:textfield name ="username" cssClass="form-control" placeholder="username"/>
 	</div>
@@ -22,7 +22,7 @@
 	
 	</s:form >
 	
-	<p >New User? <a href="HotelSignUp">Sign Up Here</a></p>
+	<p >New User? <a href="signup">Sign Up Here</a></p>
 	  
   </div>
 

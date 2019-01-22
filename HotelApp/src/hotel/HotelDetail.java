@@ -10,13 +10,13 @@ public class HotelDetail implements Serializable {
 	public int getHotelId() {
 		return hotelId;
 	}
-	public HotelDetail(int hotelId, String username, String phone, float rating, boolean isOpen) {
+	public HotelDetail(int hotelId, String username, String phone, float rating, int status) {
 		
 		this.hotelId = hotelId;
 		this.username = username;
 		this.phone = phone;
 		this.rating = rating;
-		this.isOpen = isOpen;
+		this.status=status;
 	}
 	public void setHotelId(int hotelId) {
 		this.hotelId = hotelId;
@@ -39,13 +39,15 @@ public class HotelDetail implements Serializable {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	public boolean isOpen() {
-		return isOpen;
+	
+	public int getStatus() {
+		return status;
 	}
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
+	public void setStatus(int status) {
+		this.status = status;
 	}
+
 	private float rating;
-	private boolean isOpen;
+	private int status;
 	
 }

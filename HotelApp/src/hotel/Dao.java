@@ -338,7 +338,7 @@ public class Dao {
    {  
  	    Statement stmt=con.createStatement();  
  	   return stmt.executeQuery(" select hotel_orders.orderId "
-				+ " from hotel_orders inner join orders on hotel_orders.orderId =orders.orderId where hotelId="+ hotelId+" and status >1  ");
+				+ " from hotel_orders inner join orders on hotel_orders.orderId =orders.orderId where hotelId="+ hotelId+" and status >=1  ");
    }
    
    public ResultSet getHotelCurrentOrders(int hotelId) throws SQLException
@@ -368,14 +368,14 @@ public class Dao {
   {  
 	    Statement stmt=con.createStatement(); 
 	    return stmt.executeQuery(" select orders.orderId "
-				+ " from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status =4  ");
+				+ " from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status >=1 ");
 
   }
   
   public ResultSet getUserCurrentOrders(int userId) throws SQLException
   {  
 	    Statement stmt=con.createStatement();
-	    return stmt.executeQuery(" select orders.orderId from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status <4  ");
+	    return stmt.executeQuery(" select orders.orderId from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status =3  ");
 	    	
   }
   
@@ -397,7 +397,7 @@ public class Dao {
  public ResultSet getAgentOrders(int agentId) throws SQLException
  {  
 	    Statement stmt=con.createStatement();  
-		return stmt.executeQuery(" select agent_orders.orderId from agent_orders inner join orders on agent_orders.orderId=orders.orderId WHERE agentId="+ agentId+" and status >2 ");
+		return stmt.executeQuery(" select agent_orders.orderId from agent_orders inner join orders on agent_orders.orderId=orders.orderId WHERE agentId="+ agentId+" and status >=2 ");
  }
  
  public ResultSet getAgentCurrentOrders(int agentId) throws SQLException

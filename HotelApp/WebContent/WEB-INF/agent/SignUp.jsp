@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1 align="center">AGENT SIGNUP</h1>
-  <s:form action ="AgentSignUpAction" align="center" validate="true">
+  <s:form action ="signupaction" align="center" validate="true">
    
 	<s:textfield name ="username" label="Username:"/>
 	<s:password name ="password" label ="Password:"/>

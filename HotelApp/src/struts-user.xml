@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>	
+<package name="user" namespace="/user" extends="struts-default">
+
+
+    <interceptors>
+			<interceptor class="controller.userController.LoginInterceptor"
+				name="loginInterceptor" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+ 		<default-interceptor-ref name="loginStack"/>
+
+		<global-results>
+			<result name="login">/user/Login.jsp</result>
+		</global-results>
+
+	<action name ="">
+					<result >/user/User.jsp</result>
+	</action>
+	<action name ="signup" >
+		<result >/user/SignUp.jsp</result>
+	</action>		
+	<action name="loginaction" class="controller.userController.LoginAction">  
+		<result name="success">/user/User.jsp</result> 
+		<result name="failure">/user/Login.jsp</result>  
+	</action>  
+	<action name="signupaction" class="controller.userController.SignUpAction">  
+		<result name="success">/user/User.jsp</result> 
+		<result name="failure">/user/SignUp.jsp</result>  
+	</action>
+	
+	<action name="useraction" class="controller.userController.UserAction">  
+		<result name="hotelList">/user/HotelList.jsp</result> 
+		<result name="myOrders">/user/MyOrders.jsp</result> 
+		<result name="rateOrder">/user/RateOrder.jsp</result>
+		<result name="logout">/user/Login.jsp</result> 
+		<result name="failure">/user/SignUp.jsp</result>  
+	</action>
+	
+	<action name="selecthotelaction" class="controller.userController.SelectHotelAction" >  
+		<result name="success">/user/Order.jsp</result> 
+		<result name="input">/user/input.jsp</result>
+	</action>
+	<action name="orderaction" class="controller.userController.OrderAction">  
+		<result name="success">/user/User.jsp</result> 
+		<result name="failure">/user/User.jsp</result>  
+	</action>
+	<action name="rateorderaction" class="controller.userController.RateOrderAction">  
+		<result name="success">/user/User.jsp</result> 
+		<result name="failure">/user/User.jsp</result>  
+	</action>
+	
+</package>
+</struts>	
+	

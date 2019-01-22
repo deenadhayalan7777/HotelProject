@@ -1,4 +1,4 @@
-package controller.userController;
+package controller.hotelController;
 
 
 import java.util.Map;
@@ -12,11 +12,11 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import hotel.Application;
-import hotel.User;
+import hotel.Hotel;
 
 public class PreLogin implements SessionAware,ServletRequestAware {
 
-	private User user;
+	private Hotel hotel;
 	
 	private SessionMap<String,Object> sessionMap;
 	
@@ -36,21 +36,21 @@ public class PreLogin implements SessionAware,ServletRequestAware {
 public String execute() {
 		
 	 
-		String userIdString=null;
+		String hotelIdString=null;
 		for(Cookie c : servletRequest.getCookies()) {
-		    if (c.getName().equals("userId"))
-		      userIdString=c.getValue();
+		    if (c.getName().equals("hotelId"))
+		      hotelIdString=c.getValue();
 		  }
 		
 		
-		if(userIdString!=null)
+		if(hotelIdString!=null)
 		{
 			Application app=Application.getInstance();
 			
-				int userId=Integer.parseInt(userIdString);
-				user=app.getUser(userId);
+				int hotelId=Integer.parseInt(hotelIdString);
+				hotel=app.getHotel(hotelId);
 				
-				  sessionMap.put("user", user);
+				  sessionMap.put("hotel", hotel);
 				  
 		  
 			   return "alreadyLogged";

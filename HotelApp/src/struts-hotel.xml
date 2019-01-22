@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+<package name="hotel" namespace="/hotel" extends="struts-default">
+	
+		 <interceptors>
+			<interceptor class="controller.hotelController.LoginInterceptor"
+				name="loginInterceptor" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+ 		<default-interceptor-ref name="loginStack"/>
+
+		<global-results>
+			<result name="login">/hotel/Login.jsp</result>
+		</global-results>
+		<action name ="">
+					<result >/hotel/Hotel.jsp</result>
+		</action>
+		
+		<action name ="signup">
+					<result >/hotel/SignUp.jsp</result>
+		</action>
+		
+		<action name="loginaction" class="controller.hotelController.LoginAction">  
+		<result name="success">/hotel/Hotel.jsp</result> 
+		<result name="failure">/hotel/Login.jsp</result>  
+		</action>  
+		<action name="signupaction" class="controller.hotelController.SignUpAction">  
+		<result name="success">/hotel/Hotel.jsp</result> 
+		<result name="failure">/hotel/SignUp.jsp</result>  
+		</action>
+
+	    <action name="hotelaction" class="controller.hotelController.HotelAction">  
+	    <result name="myOrders">/hotel/MyOrders.jsp</result> 
+		<result name="addMenu">/hotel/AddMenu.jsp</result>  
+		<result name="success">/hotel/Hotel.jsp</result> 
+		<result name="logout">/hotel/Login.jsp</result>
+		<result name="failure">/hotel/Hotel.jsp</result>  
+		</action>
+		
+		<action name="addmenuaction" class="controller.hotelController.AddMenuAction">  
+		<result name="success">/hotel/Hotel.jsp</result> 
+		<result name="failure">/hotel/Hotel.jsp</result>  
+		</action>
+	
+	
+</package>
+</struts>	

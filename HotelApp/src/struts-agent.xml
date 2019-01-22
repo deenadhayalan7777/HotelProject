@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+ 
+<package name="agent" namespace="/agent" extends="struts-default">
+
+
+
+       <interceptors>
+			<interceptor class="controller.agentController.LoginInterceptor"
+				name="loginInterceptor" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+ 		<default-interceptor-ref name="loginStack"/>
+
+		<global-results>
+			<result name="login">/agent/Login.jsp</result>
+		</global-results>
+	
+		<action name ="">
+					<result >/agent/Agent.jsp</result>
+		</action>
+		<action name ="signup">
+					<result >/agent/SignUp.jsp</result>
+		</action>
+		<action name="loginaction" class="controller.agentController.LoginAction">  
+		<result name="success">/agent/Agent.jsp</result> 
+		<result name="failure">/agent/Login.jsp</result>  
+		</action>  
+		<action name="signupaction" class="controller.agentController.SignUpAction">  
+		<result name="success">/agent/Agent.jsp</result> 
+		<result name="failure">/agent/SignUp.jsp</result>  
+		</action>
+	
+	    <action name ="agentaction" class="controller.agentController.AgentAction">
+					<result name="myOrders" >/agent/MyOrders.jsp</result>
+					<result name="delivery">/agent/Delivery.jsp</result>		
+					<result name="hotelList" >/agent/HotelList.jsp</result>
+					<result name="logout">/agent/Login.jsp</result>
+					<result name="success" >/agent/Agent.jsp</result>
+					<result name="failure">/agent/Agent.jsp</result>				
+		</action>
+		
+		<action name="deliveryaction" class="controller.agentController.DeliveryAction">  
+		<result name="success">/agent/Agent.jsp</result> 
+		<result name="failure">/agent/SignUp.jsp</result>  
+		</action>
+		
+		<action name="selecthotelaction" class="controller.agentController.SelectHotelAction">  
+		<result name="success">/agent/PickUp.jsp</result> 
+		<result name="failure">/agent/Agent.jsp</result>  
+		</action>
+		
+		<action name="pickupaction" class="controller.agentController.PickUpAction">  
+		<result name="success">/agent/Agent.jsp</result> 
+		<result name="failure">/agent/SignUp.jsp</result>  
+		</action>
+	
+	
+</package>
+
+</struts>

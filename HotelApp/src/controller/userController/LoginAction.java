@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -58,11 +59,11 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		 if(userId>0)
 		 {
 			 User user=app.getUser(userId);
-			 sessionMap.put("user",user.getUserId() );
-			  
-			  Cookie ck = new Cookie("userId",Integer.toString(user.getUserId()));
+			// sessionMap.put("user",user );
+			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
+			 /* Cookie ck = new Cookie("userId",Integer.toString(user.getUserId()));
 			  ck.setMaxAge(60*60*24*7); 
-			  servletResponse.addCookie(ck);
+			  servletResponse.addCookie(ck);*/
 			  
 			 return "success";
 			 

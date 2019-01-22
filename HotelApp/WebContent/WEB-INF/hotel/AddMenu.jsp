@@ -6,28 +6,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HotelList</title>
+<title>Order</title>
+<script src="/HotelApp/hotel/AddMenu.js"></script>
 </head>
 <body>
-<h4 align="left" style="color:green"> <s:property value=" #session.hotel.username"/></h4> 
+<h4 align="left" style="color:green"> <s:property value=" #session.user.username"/></h4> 
  
   
-  <form action="HotelAction" method="post" align="center">
-  <br>Select any one of the Hotel below<br>
-  <div class="row">
-  <div align="center" class="column">
-  <table border="1" cellpadding="5">
-   <s:iterator value="hotels" >  
+  
+  <br>Hotel Menu<br>
+  <table border="0" cellpadding="20">
+   <s:iterator  value="menu" >  
 			<tr>
-			<td> <button name="option" type="submit" value=hotelId ><s:property value="username"/></button></td>
-			<td><s:property value="rating"/></td>  
+			<td><s:property value="name"/></td>  
+			<td><s:property value="price"/></td>  
 			</tr>  
   </s:iterator> 
   </table>
-  </div>
-  </div>
   
-</form>
+  <input name="name" id="name" type="text" />
+  <input name="price" id="price" type="text" />
+  <input name="buttonExecute" onclick="addItem()" type="button" value="ADD ITEM" />
+  
+  <p id="box" > </p>
+  
+<s:form name="myForm" action="addmenuaction"   method="post" >
+
+<s:hidden name="itemslist" id="itemslist" value="items" />
+
+ <input  type="button" onclick="addItems()"  value="ADD MENU ITEMS"/>
+</s:form>
+ 
 <br><br><br>
 <s:if test="hasActionErrors()">
    
@@ -42,5 +51,7 @@
      <strong>Success!</strong> <s:actionmessage/>
    </div>
 </s:if>
+
+
 </body>
 </html>

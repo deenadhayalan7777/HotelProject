@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -16,12 +17,12 @@ import hotel.Agent;
 import hotel.Application;
 import hotel.Hotel;
 
-public class LoginAction extends ActionSupport implements SessionAware,ServletResponseAware{
+public class LoginAction extends ActionSupport {
 
 	
 	private String username;
 	private String password;
-	private SessionMap<String,Object> sessionMap;
+	
 	
 	public String getUsername() {
 		return username;
@@ -39,16 +40,7 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		this.password = password;
 	}
 
-	public void setSession(Map<String, Object> map) {  
-	    sessionMap=(SessionMap<String, Object>)map;  
-	}  
-	
-	protected HttpServletResponse servletResponse;
-	  @Override
-	  public void setServletResponse(HttpServletResponse servletResponse) {
-	    this.servletResponse = servletResponse;
-	  }
-	 
+ 
 	
 	public String execute() 
 	{
@@ -58,12 +50,8 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		 if(agentId>0)
 		 {
 			 Agent agent=app.getAgent(agentId);
-			 sessionMap.put("hotel",agent.getAgentId() );
-			  
-			  Cookie ck = new Cookie("agentId",Integer.toString(agent.getAgentId()));
-			  ck.setMaxAge(60*60*24*7); 
-			  servletResponse.addCookie(ck);
-			  
+			 ServletActionContext.getRequest().getSession().setAttribute("agent", agent);
+			
 			 return "success";
 			 
 		 }

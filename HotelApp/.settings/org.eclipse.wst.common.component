@@ -2,10 +2,6 @@
     <wb-module deploy-name="HotelApp">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/controller"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/HotelController"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/AgentController"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/userController"/>
         <property name="context-root" value="HotelApp"/>
         <property name="java-output-path" value="/HotelApp/build/classes"/>
     </wb-module>

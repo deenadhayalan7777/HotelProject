@@ -7,19 +7,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User</title>
+<script type="text/javascript">
+function test(status){
+	 var x = parseInt(status);
+	 if(x==1)
+	 document.getElementById("status").innerHTML ="CLOSE";
+	 else
+		document.getElementById("status").innerHTML="OPEN"; 
+	}
+</script>
 </head>
-<body>
+<body onload = "test('<s:property value="#session.hotel.status"/>')">
 <h4 align="left" style="color:green">Welcome <s:property value=" #session.hotel.username"/></h4> 
  
   
-  <form action="HotelAction" method="post" align="center">
+  <form action="hotelaction" method="get" align="center">
   <br>choose any of the option below<br>
   <div class="row">
   <div align="center" class="column">
   <br><button name="option" type="submit" value=1>ADD MENU ITEM</button></br>
   <br><button name="option" type="submit" value=2>LIST ORDERS</button></br>
   <br><button name="option" type="submit" value=3>DISCOUNT</button></br>
-  <br><button name="option" type="submit" value=4>OPEN/CLOSE</button></br>
+  <br><button id="status" name="option" type="submit" value=4 >OPEN/CLOSE</button></br>
    <br><button name="option" type="submit" value=5>LOGOUT</button></br>
   </div>
   </div>

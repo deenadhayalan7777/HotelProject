@@ -1,4 +1,4 @@
-package controller.userController;
+package controller.agentController;
 
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-
+import hotel.Agent;
 import hotel.Application;
 import hotel.C;
 
@@ -25,7 +25,7 @@ import hotel.User;
 
 
 
-public class UserAction extends ActionSupport implements ServletResponseAware {
+public class AgentAction extends ActionSupport implements ServletResponseAware {
 
 	private int option;
     private List<HotelDetail> hotels;
@@ -77,11 +77,11 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 	
 	public String execute() 
 	{
-		System.out.println("in user action " +option);
+		
 		Application app=Application.getInstance();
-	   //HttpSession session=ServletActionContext.getRequest().getSession(); 
-		User user=(User) ServletActionContext.getRequest().getSession().getAttribute("user");
-		int userId=user.getUserId();
+		HttpSession session=ServletActionContext.getRequest().getSession(); 
+		Agent agent=(Agent) session.getAttribute("agent");
+		int agentId=agent.getAgentId();
 		
 		switch(option)
 		  {
@@ -89,27 +89,27 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 		                              
 		  case C.HOTELS: {
 			                    		setHotels(new ArrayList<HotelDetail>(app.getHotelList().values()));
-									System.out.println("In hotels");
+									
 									  
 									 return "hotelList";
 						}
 		  
 		  
 		  case C.MYORDERS: {
-			                 setMyOrders(new ArrayList<Order>(app.getUserOrders(userId).values()));
+			                 setMyOrders(new ArrayList<Order>(app.getAgentOrders(agentId).values()));
 			               
 			             return "myOrders";
-	                       }
-		  case C.RATE_ORDER: {
-              setCurrentOrders(new ArrayList<Order>(app.getUserCurrentOrders(userId).values()));
-            
-          return "rateOrder";
-            }
-		
+	       
+		               }
+		  case C.DELIVERY: {
+      		
+			  setCurrentOrders(new ArrayList<Order>(app.getAgentCurrentOrders(agentId).values()));
+			  
+			 return "delivery";
+                        }		
 		  case C.LOGOUT: {
-		     // session.invalidate();
-			  ServletActionContext.getRequest().getSession().invalidate();
-		      Cookie ck = new Cookie("userId","" );
+		      session.invalidate();
+		      Cookie ck = new Cookie("agentId","" );
 			  ck.setMaxAge(0); 
 			  servletResponse.addCookie(ck);
 			  return "logout";
