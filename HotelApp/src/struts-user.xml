@@ -24,6 +24,9 @@
 	<action name ="">
 					<result >/user/User.jsp</result>
 	</action>
+	<action name ="home">
+					<result >/user/User.jsp</result>
+	</action>
 	<action name ="signup" >
 		<result >/user/SignUp.jsp</result>
 	</action>		
@@ -36,11 +39,15 @@
 		<result name="failure">/user/SignUp.jsp</result>  
 	</action>
 	
-	<action name="useraction" class="controller.userController.UserAction">  
-		<result name="myOrders">/user/MyOrders.jsp</result> 
-		<result name="rateOrder">/user/RateOrder.jsp</result>
-		<result name="logout">/user/Login.jsp</result> 
+	<action name="logout" class="controller.userController.LogOutAction">  
+		<result name="success">/user/Login.jsp</result> 
 		<result name="failure">/user/SignUp.jsp</result>  
+	</action>
+	
+	<action name="myorders" class="controller.userController.MyOrderAction" >  
+		<result name="success">/user/MyOrders.jsp</result> 
+		<result name="rateOrder">/user/RateOrder.jsp</result>
+		<result name="input">/user/input.jsp</result>
 	</action>
 	
 	<action name="selecthotelaction" class="controller.userController.SelectHotelAction" >  

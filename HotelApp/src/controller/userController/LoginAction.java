@@ -65,7 +65,7 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 			 List<HotelDetail> hotels=new ArrayList<HotelDetail>(app.getHotelList().values());
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
 			 ServletActionContext.getRequest().getSession().setAttribute("hotels", hotels);
-			 System.out.println("Updated login");
+			 System.out.println("Updated without useraction login");
 			 
 			 return "success";
 			 
