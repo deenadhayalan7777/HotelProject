@@ -22,7 +22,7 @@
 		</global-results>
 
 	<action name ="">
-					<result type="chain" >home</result>
+			<result type="redirectAction" >home</result>
 	</action>
 	<action name ="home" class="controller.userController.UserAction">
 		<result name="success" >/user/User.jsp</result>
@@ -31,11 +31,11 @@
 		<result >/user/SignUp.jsp</result>
 	</action>		
 	<action name="loginaction" class="controller.userController.LoginAction">  
-		<result name="success" type="chain">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/user/Login.jsp</result>  
 	</action>  
 	<action name="signupaction" class="controller.userController.SignUpAction">  
-		<result name="success"type="chain">home</result> 
+		<result name="success" type="chain" >home</result> 
 		<result name="failure">/user/SignUp.jsp</result>  
 	</action>
 	
