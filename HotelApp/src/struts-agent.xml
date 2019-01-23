@@ -65,7 +65,7 @@
 		</action>
 		
 		<action name="pickupaction" class="controller.agentController.PickUpAction">  
-		<result name="success" result="redirectAction">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/agent/SignUp.jsp</result>  
 		</action>
 	
