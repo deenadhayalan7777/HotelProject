@@ -39,7 +39,7 @@
 		<result name="failure">/user/Login.jsp</result>  
 	</action>  
 	<action name="signupaction" class="controller.userController.SignUpAction">  
-		<result name="success" type="chain" >home</result> 
+		<result name="success" type="redirectAction" >home</result> 
 		<result name="failure">/user/SignUp.jsp</result>  
 	</action>
 	
@@ -59,11 +59,11 @@
 		<result name="input">/user/input.jsp</result>
 	</action>
 	<action name="orderaction" class="controller.userController.OrderAction">  
-		<result name="success" type="chain">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/user/User.jsp</result>  
 	</action>
 	<action name="rateorderaction" class="controller.userController.RateOrderAction">  
-		<result name="success"type="chain">home</result>
+		<result name="success" type="redirectAction">home</result>
 		<result name="failure">/user/User.jsp</result>  
 	</action>
 	
