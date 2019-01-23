@@ -62,9 +62,10 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		 if(userId>0)
 		 {
 			 User user=app.getUser(userId);
-			 List<HotelDetail> hotellist=new ArrayList<HotelDetail>(app.getHotelList().values());
+			 List<HotelDetail> hotels=new ArrayList<HotelDetail>(app.getHotelList().values());
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
-			 ServletActionContext.getRequest().getSession().setAttribute("hotellist", hotellist);
+			 ServletActionContext.getRequest().getSession().setAttribute("hotels", hotels);
+			 System.out.println("Updated login");
 			 
 			 return "success";
 			 

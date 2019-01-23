@@ -49,7 +49,7 @@
   <div class="row">
   <div align="center" class="column">
   <table border="0" cellpadding="20">
-   <s:iterator value="#session.hotellist" >  
+   <s:iterator value="#session.hotels" >  
 			<tr>
 			<td><button name="sno" type="submit" value="${count }"><s:property value="username"/></button></td>
 			<td><s:property value="rating"/></td>  
