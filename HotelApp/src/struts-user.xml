@@ -20,7 +20,11 @@
 		<global-results>
 			<result name="login" >/user/Login.jsp</result>
 		</global-results>
-
+   
+   
+   <action name ="login">
+			<result  >/user/Login.jsp</result>
+	</action>
 	<action name ="">
 			<result type="redirectAction" >home</result>
 	</action>
