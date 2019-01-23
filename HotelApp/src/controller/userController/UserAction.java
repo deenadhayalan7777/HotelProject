@@ -25,10 +25,10 @@ import hotel.User;
 
 
 
-public class UserAction extends ActionSupport implements ServletResponseAware {
+public class UserAction extends ActionSupport  {
 
 	private int option;
-    private List<HotelDetail> hotels;
+   
     private List<Order> currentOrders;
     private List<Order> myOrders;
 	
@@ -39,13 +39,7 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 		return option;
 	}
 
-	public List<HotelDetail> getHotels() {
-		return hotels;
-	}
 
-	public void setHotels(List<HotelDetail> hotels) {
-		this.hotels = hotels;
-	}
 
 	public List<Order> getCurrentOrders() {
 		return currentOrders;
@@ -63,17 +57,9 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 		this.myOrders = myOrders;
 	}
 
-	public HttpServletResponse getServletResponse() {
-		return servletResponse;
-	}
+	
+	
 
-	
-	
-	protected HttpServletResponse servletResponse;
-	  @Override
-	  public void setServletResponse(HttpServletResponse servletResponse) {
-	    this.servletResponse = servletResponse;
-	  }
 	
 	public String execute() 
 	{
@@ -85,15 +71,6 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
 		
 		switch(option)
 		  {
-		 
-		                              
-		  case C.HOTELS: {
-			                    		setHotels(new ArrayList<HotelDetail>(app.getHotelList().values()));
-									System.out.println("In hotels");
-									  
-									 return "hotelList";
-						}
-		  
 		  
 		  case C.MYORDERS: {
 			                 setMyOrders(new ArrayList<Order>(app.getUserOrders(userId).values()));
@@ -107,11 +84,9 @@ public class UserAction extends ActionSupport implements ServletResponseAware {
             }
 		
 		  case C.LOGOUT: {
-		     // session.invalidate();
+		    
 			  ServletActionContext.getRequest().getSession().invalidate();
-		      Cookie ck = new Cookie("userId","" );
-			  ck.setMaxAge(0); 
-			  servletResponse.addCookie(ck);
+		     
 			  return "logout";
 	           					}
 		  

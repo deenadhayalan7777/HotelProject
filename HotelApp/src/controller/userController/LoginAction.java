@@ -2,6 +2,8 @@ package controller.userController;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Application;
 import hotel.Hotel;
+import hotel.HotelDetail;
 import hotel.User;
 
 public class LoginAction extends ActionSupport implements SessionAware,ServletResponseAware{
@@ -59,12 +62,10 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		 if(userId>0)
 		 {
 			 User user=app.getUser(userId);
-			// sessionMap.put("user",user );
+			 List<HotelDetail> hotellist=new ArrayList<HotelDetail>(app.getHotelList().values());
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
-			 /* Cookie ck = new Cookie("userId",Integer.toString(user.getUserId()));
-			  ck.setMaxAge(60*60*24*7); 
-			  servletResponse.addCookie(ck);*/
-			  
+			 ServletActionContext.getRequest().getSession().setAttribute("hotellist", hotellist);
+			 
 			 return "success";
 			 
 		 }

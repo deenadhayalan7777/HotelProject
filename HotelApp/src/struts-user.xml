@@ -37,7 +37,6 @@
 	</action>
 	
 	<action name="useraction" class="controller.userController.UserAction">  
-		<result name="hotelList">/user/HotelList.jsp</result> 
 		<result name="myOrders">/user/MyOrders.jsp</result> 
 		<result name="rateOrder">/user/RateOrder.jsp</result>
 		<result name="logout">/user/Login.jsp</result> 
