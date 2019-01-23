@@ -25,19 +25,12 @@ import hotel.User;
 
 
 
-public class AgentAction extends ActionSupport implements ServletResponseAware {
+public class AgentAction extends ActionSupport {
 
-	private int option;
+	
     private List<HotelDetail> hotels;
     private List<Order> currentOrders;
-    private List<Order> myOrders;
-	
-    public void setOption(int option) {
-		this.option = option;
-	}
-    public int getOption() {
-		return option;
-	}
+   
 
 	public List<HotelDetail> getHotels() {
 		return hotels;
@@ -55,25 +48,8 @@ public class AgentAction extends ActionSupport implements ServletResponseAware {
 		this.currentOrders = currentOrders;
 	}
 
-	public List<Order> getMyOrders() {
-		return myOrders;
-	}
-
-	public void setMyOrders(List<Order> myOrders) {
-		this.myOrders = myOrders;
-	}
-
-	public HttpServletResponse getServletResponse() {
-		return servletResponse;
-	}
-
 	
 	
-	protected HttpServletResponse servletResponse;
-	  @Override
-	  public void setServletResponse(HttpServletResponse servletResponse) {
-	    this.servletResponse = servletResponse;
-	  }
 	
 	public String execute() 
 	{
@@ -82,43 +58,10 @@ public class AgentAction extends ActionSupport implements ServletResponseAware {
 		HttpSession session=ServletActionContext.getRequest().getSession(); 
 		Agent agent=(Agent) session.getAttribute("agent");
 		int agentId=agent.getAgentId();
+		setHotels(new ArrayList<HotelDetail>(app.getHotelList().values()));
+		setCurrentOrders(new ArrayList<Order>(app.getAgentCurrentOrders(agentId).values()));
 		
-		switch(option)
-		  {
-		 
-		                              
-		  case C.HOTELS: {
-			                    		setHotels(new ArrayList<HotelDetail>(app.getHotelList().values()));
-									
-									  
-									 return "hotelList";
-						}
-		  
-		  
-		  case C.MYORDERS: {
-			                 setMyOrders(new ArrayList<Order>(app.getAgentOrders(agentId).values()));
-			               
-			             return "myOrders";
-	       
-		               }
-		  case C.DELIVERY: {
-      		
-			  setCurrentOrders(new ArrayList<Order>(app.getAgentCurrentOrders(agentId).values()));
-			  
-			 return "delivery";
-                        }		
-		  case C.LOGOUT: {
-		      session.invalidate();
-		      Cookie ck = new Cookie("agentId","" );
-			  ck.setMaxAge(0); 
-			  servletResponse.addCookie(ck);
-			  return "logout";
-	           					}
-		  
-		  }
-	
-		
-		return "failure";
+		return "success";
 		
 	}
 

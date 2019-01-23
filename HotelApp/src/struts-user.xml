@@ -18,24 +18,24 @@
  		<default-interceptor-ref name="loginStack"/>
 
 		<global-results>
-			<result name="login">/user/Login.jsp</result>
+			<result name="login" >/user/Login.jsp</result>
 		</global-results>
 
 	<action name ="">
-					<result >/user/User.jsp</result>
+					<result type="chain" >home</result>
 	</action>
-	<action name ="home">
-					<result >/user/User.jsp</result>
+	<action name ="home" class="controller.userController.UserAction">
+		<result name="success" >/user/User.jsp</result>
 	</action>
 	<action name ="signup" >
 		<result >/user/SignUp.jsp</result>
 	</action>		
 	<action name="loginaction" class="controller.userController.LoginAction">  
-		<result name="success">/user/User.jsp</result> 
+		<result name="success" type="chain">home</result> 
 		<result name="failure">/user/Login.jsp</result>  
 	</action>  
 	<action name="signupaction" class="controller.userController.SignUpAction">  
-		<result name="success">/user/User.jsp</result> 
+		<result name="success"type="chain">home</result> 
 		<result name="failure">/user/SignUp.jsp</result>  
 	</action>
 	
@@ -55,11 +55,11 @@
 		<result name="input">/user/input.jsp</result>
 	</action>
 	<action name="orderaction" class="controller.userController.OrderAction">  
-		<result name="success">/user/User.jsp</result> 
+		<result name="success" type="chain">home</result> 
 		<result name="failure">/user/User.jsp</result>  
 	</action>
 	<action name="rateorderaction" class="controller.userController.RateOrderAction">  
-		<result name="success">/user/User.jsp</result> 
+		<result name="success"type="chain">home</result>
 		<result name="failure">/user/User.jsp</result>  
 	</action>
 	

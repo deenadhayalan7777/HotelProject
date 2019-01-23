@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 <script type="text/javascript">
 function test(status){
 	 var x = parseInt(status);
@@ -18,23 +20,63 @@ function test(status){
 </script>
 </head>
 <body onload = "test('<s:property value="#session.hotel.status"/>')">
-<h4 align="left" style="color:green">Welcome <s:property value=" #session.hotel.username"/></h4> 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.hotel.username"/></a>
  
   
-  <form action="hotelaction" method="get" align="center">
-  <br>choose any of the option below<br>
-  <div class="row">
-  <div align="center" class="column">
-  <br><button name="option" type="submit" value=1>ADD MENU ITEM</button></br>
-  <br><button name="option" type="submit" value=2>LIST ORDERS</button></br>
-  <br><button name="option" type="submit" value=3>DISCOUNT</button></br>
-  <br><button id="status" name="option" type="submit" value=4 >OPEN/CLOSE</button></br>
-   <br><button name="option" type="submit" value=5>LOGOUT</button></br>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="menu">CurrentOrders</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="myorders">MyOrders</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="discount">Discount</a>
+      </li>
+      
+    </ul>
+    <ul class="navbar-nav ml-auto">
+    
+    <li class="nav-item">
+      <a href="logout" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
+      </li>
+      
+      <li class="nav-item">
+      <a href="logout" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
+      </li>
+    </ul>
+
   </div>
-  </div>
-  
-</form>
-<br><br><br>
+</nav>
+
+<table border="0" cellpadding="20">
+            <tr>
+                <th>PHONE NO</th>
+                <th>TOTAL</th>
+                <th>DATE</th>
+                <th>STATUS</th>
+                <th>RATING</th>
+            </tr>
+            <s:iterator value="currentOrders">  
+			<tr>
+			<td><s:property value="phoneNo"/></td>
+			<td><s:property value="total"/></td>  
+			<td><s:property value="date"/></td>  
+			<td><s:property value="status"/></td>  
+			<td><s:property value="rating"/></td> 
+			</tr>   
+			</s:iterator>
+ </table>
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">

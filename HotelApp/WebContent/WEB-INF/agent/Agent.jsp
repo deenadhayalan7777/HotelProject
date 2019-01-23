@@ -6,25 +6,90 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User</title>
+<title>Agent</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 </head>
 <body>
-<h4 align="left" style="color:green">Welcome  <s:property value=" #session.agent.username"/></h4> 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.agent.username"/></a>
  
   
-  <form action="agentaction" method="get" align="center">
-  <br>choose any of the option below<br>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="myorders">MyOrders</a>
+      </li>
+     
+      
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+      <a href="logout" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+<h3>Deliver your orders now</h3>
+<div class="container">
+ <c:set var="count" value="0" scope="page" />
+<form action="deliveryaction" method="post" align="center">
+ <table border="0" cellpadding="20">
+            <tr>
+                <th>HOTEL NAME</th>
+                <th>USER PHONE</th>
+                <th>TOTAL</th>
+                <th>DATE</th>
+                <th>STATUS</th>
+                <th>RATING</th>
+            </tr>
+            <s:iterator value="currentOrders">  
+			<tr>
+			<td><s:property value="hotelname"/></td>
+			<td><s:property value="phoneNo"/></td>  
+			<td><s:property value="total"/></td>  
+			<td><s:property value="date"/></td>  
+			<td><s:property value="status"/></td>  
+			<td><s:property value="rating"/></td> 
+			<td><button name="sno" type="submit" value="${count }">DELIVER</button></td>
+			 <c:set var="count" value="${count + 1}" scope="page"/>
+			</tr>   
+			</s:iterator>
+        </table>
+</form>    
+</div>
+<h3>Pick Up Orders from below hotels</h3>
+<div class="container">
+  <c:set var="count" value="0" scope="page" />
+  <form action="selecthotelaction" method="get" align="center">
+  <br>Select any one of the Hotel below<br>
   <div class="row">
   <div align="center" class="column">
-  <br><button name="option" type="submit" value=1>PICK UP ORDERS</button></br>
-  <br><button name="option" type="submit" value=2>MY ORDERS</button></br>
-  <br><button name="option" type="submit" value=4>DELIVER ORDER</button></br>
-   <br><button name="option" type="submit" value=5>LOGOUT</button></br>
+  <table border="0" cellpadding="20">
+   <s:iterator value="hotels" >  
+			<tr>
+			<td><s:property value="username"/></td>
+			<td><s:property value="rating"/></td>  
+			<td><button name="sno" type="submit" value="${count }">PICKUP</button></td>
+			<c:set var="count" value="${count + 1}" scope="page"/>
+			</tr>  
+  </s:iterator> 
+  </table>
   </div>
   </div>
   
 </form>
-<br><br><br>
+</div>
+
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">

@@ -24,10 +24,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="useraction?option=2">MyOrders</a>
+        <a class="nav-link" href="myorders">MyOrders</a>
       </li>
      
       
@@ -35,7 +35,7 @@
     <ul class="navbar-nav ml-auto">
       
       <li class="nav-item">
-      <a href="useraction?option=5" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
+      <a href="logout" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
       </li>
     </ul>
 
@@ -48,7 +48,7 @@
   <div class="row">
   <div align="center" class="column">
   <table border="0" cellpadding="20">
-   <s:iterator value="#session.hotels" >  
+   <s:iterator value="hotels" >  
 			<tr>
 			<td><button name="sno" type="submit" value="${count }"><s:property value="username"/></button></td>
 			<td><s:property value="rating"/></td>  
