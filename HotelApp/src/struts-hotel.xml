@@ -20,7 +20,7 @@
 			<result name="login" >/hotel/Login.jsp</result>
 		</global-results>
 		<action name ="">
-					<result type="chain" >home</result>
+					<result type="redirectAction" >home</result>
 		</action>
 		
 		<action name="home" class="controller.hotelController.HotelAction">  
@@ -43,24 +43,24 @@
 		<result name="failure">/hotel/Login.jsp</result>  
 		</action>
 		<action name="status" class="controller.hotelController.StatusAction">  
-		<result name="success" type="chain">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/hotel/Login.jsp</result>  
 		</action>
 		<action name="logout" class="controller.hotelController.LogOutAction">  
 		<result name="success">/hotel/Login.jsp</result> 
-		<result name="failure" type="chain">home</result>  
+		<result name="failure" type="redirectAction">home</result>  
 		</action>
 		<action name="loginaction" class="controller.hotelController.LoginAction">  
-		<result name="success" type="chain">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/hotel/Login.jsp</result>  
 		</action>  
 		<action name="signupaction" class="controller.hotelController.SignUpAction">  
-		<result name="success" type="chain">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/hotel/SignUp.jsp</result>  
 		</action>
 
 		<action name="addmenuaction" class="controller.hotelController.AddMenuAction">  
-		<result name="success"type="chain">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/hotel/Hotel.jsp</result>  
 		</action>
 	

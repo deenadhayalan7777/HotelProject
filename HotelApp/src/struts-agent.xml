@@ -24,7 +24,7 @@
 		</global-results>
 		
 		<action name ="">
-					<result type="chain" >home</result>
+					<result type="redirectAction" >home</result>
 		</action>
 		<action name ="home" class="controller.agentController.AgentAction">
 					
@@ -44,18 +44,18 @@
 					<result >/agent/SignUp.jsp</result>
 		</action>
 		<action name="loginaction" class="controller.agentController.LoginAction">  
-		<result name="success" type="chain">home</result> 
+		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/agent/Login.jsp</result>  
 		</action>  
 		<action name="signupaction" class="controller.agentController.SignUpAction">  
-		<result name="success" result="chain">home</result> 
+		<result name="success" result="redirectAction">home</result> 
 		<result name="failure">/agent/SignUp.jsp</result>  
 		</action>
 	
 	    
 		
 		<action name="deliveryaction" class="controller.agentController.DeliveryAction">  
-		<result name="success" result="chain">home</result> 
+		<result name="success" result="redirectAction">home</result> 
 		<result name="failure">/agent/SignUp.jsp</result>  
 		</action>
 		
@@ -65,7 +65,7 @@
 		</action>
 		
 		<action name="pickupaction" class="controller.agentController.PickUpAction">  
-		<result name="success" result="chain">home</result> 
+		<result name="success" result="redirectAction">home</result> 
 		<result name="failure">/agent/SignUp.jsp</result>  
 		</action>
 	
