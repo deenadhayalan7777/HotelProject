@@ -64,7 +64,7 @@
 		</action>
 
 		<action name="addmenuaction" class="controller.hotelController.AddMenuAction">  
-		<result name="success" type="redirectAction">home</result> 
+		<result name="success" type="redirectAction">menu</result> 
 		<result name="failure">/hotel/Hotel.jsp</result>  
 		</action>
 	

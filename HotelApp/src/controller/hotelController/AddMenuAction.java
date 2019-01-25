@@ -47,15 +47,9 @@ public class AddMenuAction extends ActionSupport{
 		Hotel hotel=(Hotel) session.getAttribute("hotel");
 		int hotelId=hotel.getHotelId();
 		Gson gson = new Gson();
-		
-		List<Item> items=gson.fromJson(itemslist, new TypeToken<ArrayList<Item>>(){}.getType());
-		
-		for(Item item:items)
-		{
-			item.setItemId(app.getItemId()+1);
-			app.addItem(item, hotelId);
-		}
-		
+		Item item=gson.fromJson(itemslist, Item.class);
+		item.setItemId(app.getItemId()+1);
+		app.addItem(item, hotelId);
 		
 		return "success";
 	}

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Order</title>
-<script src="/HotelApp/hotel/AddMenu1.js"></script>
+<script src="/HotelApp/hotel/AddMenu5.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
@@ -38,12 +38,7 @@
       
     </ul>
     <ul class="navbar-nav ml-auto">
-    
-    <li class="nav-item">
-      <a href="status" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
-      </li>
-      
-      <li class="nav-item">
+     <li class="nav-item">
       <a href="logout" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
       </li>
     </ul>
@@ -57,24 +52,25 @@
   
   <br>Hotel Menu<br>
   <table id="mytable" border="0" cellpadding="20">
-   <s:iterator  value="menu" status="stat">  
-            <tr>
+   <tr>
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>PREPARATION TIME</th>
-                <th></th>
                 <th>STOCK</th>
             </tr>
+   <s:iterator  value="menu" status="stat">  
+           
 			<tr>
 			<td><s:property value="name"/></td>  
 			<td><s:property value="price"/></td>  
 			<td><s:property value="time"/></td>
-			<td><s:property value="stock"/></td>
+			
 			<td><div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-success btn-sm on" onclick="changeStatus('<s:property value="itemId" />','<s:property value="stock" />','1')" >ON</button>
             <button type="button" class="btn btn-default btn-sm off" onclick="changeStatus('<s:property value="itemId" />','<s:property value="stock" />','0')" >OFF</button>
             </div>
-            <td>
+            </td>
+            <td><s:property value="stock"/></td>
 			</tr>  
   </s:iterator> 
   </table>
