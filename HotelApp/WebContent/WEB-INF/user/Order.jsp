@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Order</title>
-<script src="/HotelApp/user/Order.js"></script>
+<script src="/HotelApp/user/Order3.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
@@ -52,8 +52,9 @@
 			<tr>
 			<td><s:property value="name"/></td>  
 			<td><s:property value="price"/></td> 
-			<td><input name="quantity" class="quantity" type="text" >Quantity</input></td>
-			<td> <button onclick="addItem('<s:property value="itemId"/>','<s:property value="name"/>','<s:property value="price"/>','<s:property value="%{#status.count}" />')">ADD</button></td>
+			
+			<td><button type="button" class="btn btn-outline-success" onclick="removeItem('<s:property value="itemId"/>','<s:property value="name"/>','<s:property value="price"/>','<s:property value="%{#status.count}" />','1')">-</button>   <span class="badge badge-success quantity">ADD</span>  <button type="button" class="btn btn-outline-success" onclick="addItem('<s:property value="itemId"/>','<s:property value="name"/>','<s:property value="price"/>','<s:property value="%{#status.count}" />','1')">+</button></td>
+			
 			</tr>  
   </s:iterator> 
   </table>

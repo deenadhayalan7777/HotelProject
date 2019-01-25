@@ -46,6 +46,10 @@
 		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/hotel/Login.jsp</result>  
 		</action>
+		<action name="changestockaction" class="controller.hotelController.ChangeStockAction">  
+		<result name="success" type="redirectAction">menu</result> 
+		<result name="failure" type="redirectAction">home</result>  
+		</action>
 		<action name="logout" class="controller.hotelController.LogOutAction">  
 		<result name="success">/hotel/Login.jsp</result> 
 		<result name="failure" type="redirectAction">home</result>  

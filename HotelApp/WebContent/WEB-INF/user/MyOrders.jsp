@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="s" uri="/struts-tags" %>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="/HotelApp/user/Rate.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
-<body>
+<body onload="test('<s:property value ="myOrders.size()"/>')" >
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.user.username"/></a>
@@ -40,7 +42,7 @@
   </div>
 </nav>
 
- <table border="0" cellpadding="20">
+ <table id="mytable" class="table table-hover">
             <tr>
                 <th>HOTEL NAME</th>
                 <th>TOTAL</th>
@@ -48,15 +50,20 @@
                 <th>STATUS</th>
                 <th>RATING</th>
             </tr>
-            <s:iterator value="myOrders">  
+            <s:iterator value="myOrders" status="stat">  
 			<tr>
 			<td><s:property value="hotelname"/></td>
 			<td><s:property value="total"/></td>  
 			<td><s:property value="date"/></td>  
-			<td><s:property value="status"/></td>  
-			<td><s:property value="rating"/></td> 
+			<td ><s:property  value="status"/></td> 
+			<td ><s:property  value="rating"/></td> 
+			<td><button  type="button" class="btn btn-outline-success" onclick="rateOrder('<s:property value="orderId"/>','<s:property value="%{#stat.index}" />')"> RATE </button></td>
 			</tr>   
 			</s:iterator>
-        </table>
+</table>
+ <s:form name="myForm" action="rateorderaction"   method="post" >
+<s:hidden name="rating" id="rating" value='0' />
+<s:hidden name="orderId" id="orderId" value='0'/>
+</s:form>
 </body>
 </html>

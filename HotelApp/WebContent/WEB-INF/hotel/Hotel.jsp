@@ -35,7 +35,7 @@ function test(status){
         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="menu">CurrentOrders</a>
+        <a class="nav-link" href="menu">Menu</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="myorders">MyOrders</a>
@@ -48,7 +48,7 @@ function test(status){
     <ul class="navbar-nav ml-auto">
     
     <li class="nav-item">
-      <a href="logout" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
+      <a href="status" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
       </li>
       
       <li class="nav-item">

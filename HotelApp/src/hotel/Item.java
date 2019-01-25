@@ -7,7 +7,17 @@ public class Item implements Serializable{
 private int itemId;
 private String name;
 private int price;
+private int stock=1;
+private int time=0;
 
+public Item(int itemId, String name, int price,  int time,int stock) {
+	
+	this.itemId = itemId;
+	this.name = name;
+	this.price = price;
+	this.stock = stock;
+	this.time = time;
+}
 
 public Item(int itemId,String name, int price) {
 	
@@ -60,6 +70,22 @@ public boolean equals(Object obj) {
 	if (itemId != other.itemId)
 		return false;
 	return true;
+}
+
+public int getTime() {
+	return time;
+}
+
+public void setTime(int time) {
+	this.time = time;
+}
+
+public int getStock() {
+	return stock;
+}
+
+public void setStock(int stock) {
+	this.stock = stock;
 }
 
 

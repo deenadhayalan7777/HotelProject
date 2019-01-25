@@ -41,5 +41,6 @@ public static final	int USER=2;
 public static final	int AGENT=3;
 public static final	int ORDER=4;
 public static final	int CHECKING=5;
+public static final	int WAITING=0;
 
 }

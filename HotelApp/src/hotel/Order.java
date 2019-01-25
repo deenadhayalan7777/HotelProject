@@ -31,7 +31,7 @@ public class Order implements Serializable {
 		this.setDiscount(discount);
 		this.setHotelId(hotelId);
 		this.userId=userId;
-		setStatus(C.ACCEPTED);
+		setStatus(C.WAITING);
 		date= new Date();
 	}
 	

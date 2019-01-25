@@ -8,9 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Agent</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="/HotelApp/agent/Agent.js"></script>
 
 </head>
-<body>
+<body onload = "test('<s:property value ="currentOrders.size()"/>','<s:property value ="hotels.size()"/>')" >
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.agent.username"/></a>
@@ -39,8 +40,8 @@
 
   </div>
 </nav>
-<h3>Deliver your orders now</h3>
-<div class="container">
+<p>Deliver your orders now</p>
+<div id="ordercontainer" class="container">
  <c:set var="count" value="0" scope="page" />
 <form action="deliveryaction" method="post" align="center">
  <table border="0" cellpadding="20">
@@ -67,8 +68,8 @@
         </table>
 </form>    
 </div>
-<h3>Pick Up Orders from below hotels</h3>
-<div class="container">
+<p>Pick Up Orders from below hotels<p>
+<div id="hotelcontainer" class="container">
   <c:set var="count" value="0" scope="page" />
   <form action="selecthotelaction" method="get" align="center">
   <br>Select any one of the Hotel below<br>

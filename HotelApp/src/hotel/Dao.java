@@ -24,7 +24,7 @@ public class Dao {
 		    		+ "name varchar(25) not null,price int not null,primary key(itemId))";
 		    stmt.execute(query);
 		    
-		    query="create table if not exists hotel_menu(hotelId int,itemId int,"
+		    query="create table if not exists hotel_menu(hotelId int,itemId int,time int default 0,stock int default 1"
 		    		+ "foreign key(hotelId) references hotel(hotelId),foreign key(itemId) references item(itemId))";
 		
 		    stmt.execute(query);
@@ -278,16 +278,18 @@ public class Dao {
 	    Statement stmt=con.createStatement();  
 		return stmt.executeQuery(" select * from hotel where hotelId= "+ hotelId);
   }
-  public void setHotelMenu(int hotelId,int itemId) throws SQLException
+  public void setHotelMenu(int hotelId,int itemId,int time,int stock) throws SQLException
   {
-	  String query = " insert into hotel_menu(hotelId,itemId)"
-		        + " values (?,?)";
+	  String query = " insert into hotel_menu(hotelId,itemId,time,stock)"
+		        + " values (?,?,?,?)";
 
 		     
 		      PreparedStatement preparedStmt = con.prepareStatement(query);
 		     
 		      preparedStmt.setInt(1, hotelId);
 		      preparedStmt.setInt(2, itemId);
+		      preparedStmt.setInt(3, time);
+		      preparedStmt.setInt(4, stock);
 		      preparedStmt.execute();
 	  
   }
@@ -410,7 +412,7 @@ public class Dao {
  public ResultSet getHotelMenu(int hotelId) throws SQLException
  {  
 	    Statement stmt=con.createStatement();  
-		return stmt.executeQuery(" select item.itemId, item.name,item.price from hotel_menu INNER JOIN item"
+		return stmt.executeQuery(" select item.itemId, item.name,item.price,hotel_menu.time,hotel_menu.stock from hotel_menu INNER JOIN item"
 				+ " ON hotel_menu.hotelId="+ hotelId+" and hotel_menu.itemId=item.itemId");
  }
  public ResultSet getLastHotelId() 
@@ -533,6 +535,25 @@ public class Dao {
 		return stmt.executeQuery("select agentId from agent_orders where agentId= " + orderId);
   	 
    }
+public void setItemStock(int itemId, int stock) {
+	
+	String query = " update hotel_menu set stock=? where itemId=? ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setInt(1, stock);
+	      preparedStmt.setInt(2, itemId);
+	      
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
   
    
 

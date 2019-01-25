@@ -270,5 +270,10 @@ public class Application {
 
 
 	   }
+
+	public void setItemStock(int itemId, int stock) {
+		db.setItemStock(itemId,stock);
+		
+	}
 	
 }

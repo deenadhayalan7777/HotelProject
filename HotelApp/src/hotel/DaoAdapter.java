@@ -314,7 +314,7 @@ public Agent getAgent(int agentId)
    {
 	   try {
 		dao.setItem(item.getItemId(),item.getName(),item.getPrice());
-		dao.setHotelMenu(hotelId, item.getItemId());
+		dao.setHotelMenu(hotelId, item.getItemId(),item.getTime(),item.getStock());
 	    } catch (SQLException e) {System.out.println(e);}   
    
    }
@@ -405,7 +405,7 @@ public Agent getAgent(int agentId)
 			    ResultSet rs=dao.getHotelMenu(hotelId);
 				while(rs.next())  
 				{ 
-				  Item item=new Item(rs.getInt(1),rs.getString(2),rs.getInt(3));
+				  Item item=new Item(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getInt(5));
 				 menu.put(item.getItemId(), item);
 				}
 			
@@ -414,5 +414,10 @@ public Agent getAgent(int agentId)
 	   
 	   return menu;
    }
+
+public void setItemStock(int itemId, int stock) {
+	
+	dao.setItemStock(itemId,stock);
+}
 	
 }
