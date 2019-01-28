@@ -17,6 +17,14 @@ function test(status){
 	 else
 		document.getElementById("status").innerHTML="OPEN"; 
 	}
+function acceptOrder(orderId)
+{
+	
+	document.getElementById("orderId").value=parseInt(orderId);
+	document.forms[0].submit();
+	
+}	
+	
 </script>
 </head>
 <body onload = "test('<s:property value="#session.hotel.status"/>')">

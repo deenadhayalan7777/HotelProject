@@ -63,6 +63,7 @@
 			<td><s:property value="date"/></td>  
 			<td><s:property value="status"/></td>  
 			<td><s:property value="rating"/></td> 
+			<td><s:property value="timer"/></td>
 			</tr>   
 			</s:iterator>
         </table>
