@@ -250,7 +250,7 @@ public Agent getAgent(int agentId)
 			  { total=rs.getInt(2);
 			   discount = rs.getInt(3);
 			   rating=rs.getInt(4);
-			   SimpleDateFormat ft = new SimpleDateFormat ("YYYY-MM-dd HH:mm:ss");
+			   SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 			  date=ft.parse(rs.getString(5));
 			  status=rs.getInt(6);
 			  }
@@ -465,7 +465,7 @@ public int getOrderTimer(Order order)
 	int orderId=order.getOrderId();
 	Date date=new Date();
 	long diff=date.getTime()-order.getDate().getTime();
-	int min=(int)diff / (60 * 1000) % 60;
+	int min=(int)diff / (60 * 1000) ;
 	int timer=getOrderTime(orderId);
 	timer=timer-min;
 	
