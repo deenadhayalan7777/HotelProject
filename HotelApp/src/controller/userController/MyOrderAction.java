@@ -24,7 +24,7 @@ import hotel.User;
 public class MyOrderAction extends ActionSupport {
 
 	 private List<Order> myOrders;
-	
+	 private List<Order> currentOrders;
 	
 	public String execute() 
 	{
@@ -33,7 +33,7 @@ public class MyOrderAction extends ActionSupport {
 		User user=(User) ServletActionContext.getRequest().getSession().getAttribute("user");
 		int userId=user.getUserId();
 		setMyOrders(new ArrayList<Order>(app.getUserOrders(userId).values())); 
-		
+		setCurrentOrders(new ArrayList<Order>(app.getUserCurrentOrders(userId).values())); 
 	    return "success";
 		
 	}
@@ -46,6 +46,16 @@ public class MyOrderAction extends ActionSupport {
 
 	public void setMyOrders(List<Order> myOrders) {
 		this.myOrders = myOrders;
+	}
+
+
+	public List<Order> getCurrentOrders() {
+		return currentOrders;
+	}
+
+
+	public void setCurrentOrders(List<Order> currentOrders) {
+		this.currentOrders = currentOrders;
 	}
 	
 	 

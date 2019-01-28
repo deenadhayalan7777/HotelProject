@@ -16,15 +16,11 @@ import hotel.HotelDetail;
 import hotel.Item;
 import hotel.Order;
 
-public class SelectHotelAction extends ActionSupport implements SessionAware{
+public class SelectHotelAction extends ActionSupport {
 
 	private int sno;
 	private List<Order> orders;
-	private SessionMap<String,Object> sessionMap;
 	
-	public void setSession(Map<String, Object> map) {  
-	    sessionMap=(SessionMap<String, Object>)map;  
-	}  
 	
 	public String execute()
 	{
@@ -32,9 +28,7 @@ public class SelectHotelAction extends ActionSupport implements SessionAware{
 		Application app=Application.getInstance();
 		    HotelDetail hdetail=new ArrayList<HotelDetail>(app.getHotelList().values()).get(sno);
 			orders=new ArrayList<Order>(app.getHotelCurrentOrders(hdetail.getHotelId()).values());
-			sessionMap.put("hdetail",hdetail );
-			sessionMap.put("orders",orders );
-		
+			
 		return "success";
 		
 	}

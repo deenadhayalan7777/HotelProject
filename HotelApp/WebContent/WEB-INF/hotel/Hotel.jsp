@@ -9,25 +9,9 @@
 <title>User</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<script type="text/javascript">
-function test(status){
-	 var x = parseInt(status);
-	 if(x==1)
-	 document.getElementById("status").innerHTML ="CLOSE";
-	 else
-		document.getElementById("status").innerHTML="OPEN"; 
-	}
-function acceptOrder(orderId)
-{
-	
-	document.getElementById("orderId").value=parseInt(orderId);
-	document.forms[0].submit();
-	
-}	
-	
-</script>
+<script src="/HotelApp/hotel/hotel.js"></script>
 </head>
-<body onload = "test('<s:property value="#session.hotel.status"/>')">
+<body onload = "test('<s:property value="#session.hotel.status"/>','<s:property value ="currentOrders.size()"/>')">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.hotel.username"/></a>
@@ -72,18 +56,17 @@ function acceptOrder(orderId)
                 <th>PHONE NO</th>
                 <th>TOTAL</th>
                 <th>DATE</th>
-                <th>STATUS</th>
-                <th>RATING</th>
+                
+               
             </tr>
             <s:iterator value="currentOrders">  
 			<tr>
 			<td><s:property value="phoneNo"/></td>
 			<td><s:property value="total"/></td>  
 			<td><s:property value="date"/></td>  
-			<td><s:property value="status"/></td>  
-			<td><s:property value="rating"/></td> 
-			<td><s:property value="timer"/></td>  
-			<td><button  type="button" class="btn btn-outline-success acceptOrder" onclick="acceptOrder('<s:property value="orderId"/>')"> ACCEPT </button></td>
+			<td class="acceptbtn"><button  type="button" class="btn btn-outline-success acceptOrder" onclick="acceptOrder('<s:property value="orderId"/>')"> ACCEPT </button></td>
+			<td class="timer"><s:property value="timer"/></td>  
+			<td class="status"><s:property value="status"/></td>  
 			</tr>   
 			</s:iterator>
  </table>

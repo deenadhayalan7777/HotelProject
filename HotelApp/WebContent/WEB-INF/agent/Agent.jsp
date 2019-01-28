@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Agent</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script src="/HotelApp/agent/Agent.js"></script>
+<script src="/HotelApp/agent/Agent3.js"></script>
 
 </head>
 <body onload = "test('<s:property value ="currentOrders.size()"/>','<s:property value ="hotels.size()"/>')" >
@@ -50,8 +50,6 @@
                 <th>USER PHONE</th>
                 <th>TOTAL</th>
                 <th>DATE</th>
-                <th>STATUS</th>
-                <th>RATING</th>
             </tr>
             <s:iterator value="currentOrders">  
 			<tr>
@@ -59,10 +57,9 @@
 			<td><s:property value="phoneNo"/></td>  
 			<td><s:property value="total"/></td>  
 			<td><s:property value="date"/></td>  
-			<td><s:property value="status"/></td>  
-			<td><s:property value="rating"/></td> 
-			<td><button name="sno" type="submit" value="${count }">DELIVER</button></td>
+			<td class="deliverbtn"><button class="btn btn-outline-primary" name="sno" type="submit" value="${count }">DELIVER</button></td>
 			 <c:set var="count" value="${count + 1}" scope="page"/>
+			  <td class="timer" ><s:property value="timer"/></td>  
 			</tr>   
 			</s:iterator>
         </table>
@@ -80,8 +77,9 @@
 			<tr>
 			<td><s:property value="username"/></td>
 			<td><s:property value="rating"/></td>  
-			<td><button name="sno" type="submit" value="${count }">PICKUP</button></td>
+			<td><button class="btn btn-outline-info pickupbtn" name="sno" type="submit" value="${count }">PICKUP</button></td>
 			<c:set var="count" value="${count + 1}" scope="page"/>
+			<td class="status" ><s:property value="status"/></td>  
 			</tr>  
   </s:iterator> 
   </table>

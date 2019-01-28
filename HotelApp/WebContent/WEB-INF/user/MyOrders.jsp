@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
-<body onload="test('<s:property value ="myOrders.size()"/>')" >
+<body onload="test('<s:property value ="currentOrders.size()"/>','<s:property value ="myOrders.size()"/>')" >
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.user.username"/></a>
@@ -42,6 +42,31 @@
   </div>
 </nav>
 
+<div class="container border border-danger">
+
+ <table id="mytable" class="table table-hover">
+            <tr>
+                <th>HOTEL NAME</th>
+                <th>TOTAL</th>
+                <th>DATE</th>
+                <th>STATUS</th>
+                <th>EST TIME</th>
+            </tr>
+            <s:iterator value="currentOrders" status="stat">  
+			<tr>
+			<td><s:property value="hotelname"/></td>
+			<td><s:property value="total"/></td>  
+			<td><s:property value="date"/></td>  
+			<td class="status" ><s:property  value="status"/></td> 
+			<td > <span class="badge badge-light"><s:property  value="timer"/></span></td> 
+			<td class="timer" ><s:property  value="timer"/></td> 
+			</tr>   
+			</s:iterator>
+</table>
+
+</div>
+
+<div class="container border border-primary">
  <table id="mytable" class="table table-hover">
             <tr>
                 <th>HOTEL NAME</th>
@@ -65,5 +90,8 @@
 <s:hidden name="rating" id="rating" value='0' />
 <s:hidden name="orderId" id="orderId" value='0'/>
 </s:form>
+</div>
+
+ 
 </body>
 </html>

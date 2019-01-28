@@ -386,14 +386,14 @@ public class Dao {
   {  
 	    Statement stmt=con.createStatement(); 
 	    return stmt.executeQuery(" select orders.orderId "
-				+ " from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status >=0 ");
+				+ " from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status >2 ");
 
   }
   
   public ResultSet getUserCurrentOrders(int userId) throws SQLException
   {  
 	    Statement stmt=con.createStatement();
-	    return stmt.executeQuery(" select orders.orderId from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status =3  ");
+	    return stmt.executeQuery(" select orders.orderId from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status <=2  ");
 	    	
   }
   

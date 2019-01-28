@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
-<body>
+<body onload = "test('<s:property value ="orders.size()"/>')" >
 <h4 align="left" style="color:green"> <s:property value=" #session.user.username"/></h4> 
  
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,18 +50,17 @@
                 <th>USER PHONE</th>
                 <th>TOTAL</th>
                 <th>DATE</th>
-                <th>STATUS</th>
-                <th>RATING</th>
+               
             </tr>
             <s:iterator value="orders">  
-			<tr>
+			<tr class="rowh">
 			<td><s:property value="hotelname"/></td>
 			<td><s:property value="phoneNo"/></td>  
 			<td><s:property value="total"/></td>  
 			<td><s:property value="date"/></td>  
-			<td><s:property value="status"/></td>  
-			<td><s:property value="rating"/></td> 
-			<td> <button onclick="addOrder('<s:property value="orderId"/>')">ADD</button></td>
+		    <td  class="pickupbtn"> <button class="btn btn-primary" onclick="addOrder('<s:property value="orderId"/>')">ADD</button></td>
+			<td class="status"><s:property value="status"/></td> 
+			<td class="timer"><s:property value="timer"/></td> 
 			</tr>   
 			</s:iterator>
 </table>

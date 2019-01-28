@@ -7,10 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User</title>
+<script src="/HotelApp/user/user.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
-<body>
+<body onload="test('<s:property value ="hotels.size()"/>')" >
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
@@ -41,8 +42,8 @@
 
   </div>
 </nav>
-
-<c:set var="count" value="0" scope="page" />
+<div class="container" id="hotelcontainer">
+ <c:set var="count" value="0" scope="page" />
   <form action="selecthotelaction" method="get" align="center">
   
   <div class="row">
@@ -50,15 +51,19 @@
   <table border="0" cellpadding="20">
    <s:iterator value="hotels" >  
 			<tr>
-			<td><button name="sno" type="submit" value="${count }"><s:property value="username"/></button></td>
+			<td><s:property value="username"/></td> 
 			<td><s:property value="rating"/></td>  
+			<td><button class="btn btn-outline-info viewbtn" name="sno" type="submit" value="${count }">OPEN</button></td>
 			<c:set var="count" value="${count + 1}" scope="page"/>
+			<td class="status"><s:property value="status"/></td> 
 			</tr>  
   </s:iterator> 
   </table>
   </div>
   </div>
   
+</div>
+
 </form>
 <s:if test="hasActionErrors()">
    
