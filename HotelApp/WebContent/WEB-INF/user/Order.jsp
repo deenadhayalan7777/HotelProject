@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Order</title>
-<script src="/HotelApp/user/Order3.js"></script>
+<script src="/HotelApp/user/Order7.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
-<body>
+<body onload="test('<s:property value ="menu.size()"/>')" >
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
@@ -47,14 +47,13 @@
   
   
   <br>Hotel Menu<br>
-  <table border="0" cellpadding="20">
+  <table id="mytable" border="0" cellpadding="20">
    <s:iterator  value="menu" status="status">  
 			<tr>
 			<td><s:property value="name"/></td>  
 			<td><s:property value="price"/></td> 
-			
 			<td><button type="button" class="btn btn-outline-success" onclick="removeItem('<s:property value="itemId"/>','<s:property value="name"/>','<s:property value="price"/>','<s:property value="%{#status.count}" />','1')">-</button>   <span class="badge badge-success quantity">ADD</span>  <button type="button" class="btn btn-outline-success" onclick="addItem('<s:property value="itemId"/>','<s:property value="name"/>','<s:property value="price"/>','<s:property value="%{#status.count}" />','1')">+</button></td>
-			
+			<td><s:property value="stock"/></td> 
 			</tr>  
   </s:iterator> 
   </table>

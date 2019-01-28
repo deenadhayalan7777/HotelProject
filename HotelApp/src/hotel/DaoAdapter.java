@@ -42,7 +42,7 @@ public class DaoAdapter {
 	public void setHotel(Hotel hotel)  
 	{
        try {
-		dao.setHotel(hotel.getHotelId(),hotel.getUsername(),hotel.getPassword(),hotel.getPhone(),hotel.getRating());
+		dao.setHotel(hotel.getHotelId(),hotel.getUsername(),hotel.getPassword(),hotel.getPhone(),hotel.getRating(),hotel.getLocation().getX(),hotel.getLocation().getY());
 	       } catch (SQLException e) {System.out.println(e);}
 	}
    
@@ -57,7 +57,7 @@ public class DaoAdapter {
 				int hotelId=rs.getInt(1);
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
-				Hotel hotel=new Hotel(hotelId,username,password,phone);
+				Hotel hotel=new Hotel(hotelId,username,password,phone,rs.getInt(7),rs.getInt(8));
 				hotel.setStatus(rs.getInt(6));
 				return hotel;
 			}
@@ -76,7 +76,7 @@ public class DaoAdapter {
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
 				int status=rs.getInt(6);
-				Hotel hotel=new Hotel(hotelId,username,password,phone);
+				Hotel hotel=new Hotel(hotelId,username,password,phone,rs.getInt(7),rs.getInt(8));
 				hotel.setStatus(status);
 				return hotel;
 			}
@@ -87,7 +87,7 @@ public class DaoAdapter {
   public void setUser(User user )  
 	{
 	  try {
-			dao.setUser(user.getUserId(), user.getUsername(), user.getPassword(),user.getPhone());
+			dao.setUser(user.getUserId(), user.getUsername(), user.getPassword(),user.getPhone(),user.getLocation().getX(),user.getLocation().getY());
 	      } catch (SQLException e) {System.out.println(e);}
 	}
   public User getUser(String username)
@@ -100,7 +100,7 @@ public class DaoAdapter {
 				int userId=rs.getInt(1);
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
-				User user=new User(userId,username,password,phone);
+				User user=new User(userId,username,password,phone,rs.getInt(5),rs.getInt(6));
 				
 				return user;
 			 }
@@ -118,7 +118,7 @@ public class DaoAdapter {
 				String username=rs.getString(2);
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
-				User user=new User(userId,username,password,phone);
+				User user=new User(userId,username,password,phone,rs.getInt(5),rs.getInt(6));
 				
 				return user;
 			 }
@@ -129,7 +129,7 @@ public class DaoAdapter {
   public void setAgent(Agent agent ) 
 	{
 	  try {
-			dao.setAgent(agent.getAgentId(),agent.getUsername() , agent.getPassword(), agent.getPhone());
+			dao.setAgent(agent.getAgentId(),agent.getUsername() , agent.getPassword(), agent.getPhone(),agent.getLocation().getX(),agent.getLocation().getY());
 	      } catch (SQLException e) {System.out.println(e);}
 	}
 public Agent getAgent(String username)
@@ -140,7 +140,7 @@ public Agent getAgent(String username)
 	    	{int agentId=rs.getInt(1);
 			String password=rs.getString(3);
 			String phone=rs.getString(4);
-			Agent agent=new Agent(agentId,username,password,phone);
+			Agent agent=new Agent(agentId,username,password,phone,rs.getInt(5),rs.getInt(6));
 			
 			return agent;
 	    	}
@@ -155,7 +155,7 @@ public Agent getAgent(int agentId)
 	    	{String username=rs.getString(2);
 			String password=rs.getString(3);
 			String phone=rs.getString(4);
-			Agent agent=new Agent(agentId,username,password,phone);
+			Agent agent=new Agent(agentId,username,password,phone,rs.getInt(5),rs.getInt(6));
 			
 			return agent;
 	    	}
@@ -219,13 +219,14 @@ public Agent getAgent(int agentId)
    public void addOrder(Order order)
    {
 	   try {
-		   System.out.println("In adapter add order");
+		  
 		   
 		   DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
 		   String strDate = dateFormat.format(order.getDate());
 		dao.setOrder(order.getOrderId(), order.getTotal(), order.getDiscount(),order.getRating(), strDate, order.getStatus());
 		dao.addUserOrder(order.getUserId(), order.getOrderId());
 		dao.addHotelOrder(order.getHotelId(), order.getOrderId());
+		dao.addOrderTime(order.getOrderId(), order.getTimer());
 		for(ItemQuantity item:order.getItemsList())
 		{
 			dao.addOrderItems(order.getOrderId(), item.getItemId(),item.getQuantity());
@@ -239,18 +240,20 @@ public Agent getAgent(int agentId)
 		  
 		try {
 			  ResultSet rs=dao.getOrder(orderId);
-			  while(rs.next())
-			  {int total=rs.getInt(2);
-			  int discount = rs.getInt(3);
-			 int rating=rs.getInt(4);
+			  int total=0,discount=0,rating=0,status=0;
+			  Date date =null;
 			  int hotelId = getId(C.HOTEL,orderId);
 			  int agentId=getId(C.AGENT,orderId);
-			  int userId=getId(C.USER,orderId);
+			  int userId=getId(C.USER,orderId);	
 			  String phoneNo = getUser(userId).getPhone();
-			  SimpleDateFormat ft = new SimpleDateFormat ("YYYY-MM-dd HH:mm:ss");
-			  Date date=ft.parse(rs.getString(5));
-			  int status=rs.getInt(6);
-			  
+			  while(rs.next())
+			  { total=rs.getInt(2);
+			   discount = rs.getInt(3);
+			   rating=rs.getInt(4);
+			   SimpleDateFormat ft = new SimpleDateFormat ("YYYY-MM-dd HH:mm:ss");
+			  date=ft.parse(rs.getString(5));
+			  status=rs.getInt(6);
+			  }
 			  List<ItemQuantity> items=new ArrayList<ItemQuantity>();
 			  rs=dao.getItemQuantity(orderId);
 			  while(rs.next())
@@ -265,16 +268,36 @@ public Agent getAgent(int agentId)
 			  order.setDate(date);
 			  order.setRating(rating);
 			  order.setStatus(status);
+			  int timer=getOrderTimer(order);
+			  order.setTimer(timer);
 			  order.setAgentId(agentId);
 			  order.setHotelname(getHotelDetail(hotelId).getUsername());
 			  if(agentId!=0)
 			  order.setAgentname(getAgent(agentId).getUsername());
-			  }
+			  
+			  
+			  
 		} catch (SQLException | ParseException e) {
 			
 			e.printStackTrace();
 		}
 	return order;	  
+   }
+   
+   public int getOrderTime(int orderId)
+   {
+	   int timer=0;
+	   
+	   try {
+		   ResultSet rs=dao.getOrderTime(orderId);
+		while(rs.next())
+			   timer=rs.getInt(2);
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	   return timer;
+	   
    }
    public void  addAgentOrder(int agentId,int orderId)
    {
@@ -419,5 +442,45 @@ public void setItemStock(int itemId, int stock) {
 	
 	dao.setItemStock(itemId,stock);
 }
+
+public void setUserLocation(Integer userId, int x, int y) {
+	dao.setUserLocation(userId, x, y);
 	
+}
+
+public void setAgentLocation(Integer agentId, int x, int y) {
+	dao.setAgentLocation(agentId, x, y);
+	
+}
+
+public void setOrderDate(int orderId,Date date)
+{
+	 DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+	   String strDate = dateFormat.format(date);
+	   dao.setOrderDate(orderId, strDate);
+}
+
+public int getOrderTimer(Order order)
+{
+	int orderId=order.getOrderId();
+	Date date=new Date();
+	long diff=date.getTime()-order.getDate().getTime();
+	int min=(int)diff / (60 * 1000) % 60;
+	int timer=getOrderTime(orderId);
+	timer=timer-min;
+	
+	if(timer<0)
+		timer= 0;
+	
+	setOrderTimer(orderId, timer);
+	
+	return timer;
+}
+
+public void setOrderTimer(int orderId, int timer) {
+	
+	dao.setOrderTimer(orderId, timer);
+	
+}
+
 }

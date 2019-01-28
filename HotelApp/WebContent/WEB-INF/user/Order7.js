@@ -16,6 +16,7 @@ class ItemQuantity{
 }
 var itemslist=[];
 var total=0;
+var citems=1;
 function addItem(itemId,name,price,status,quan)
 {
 	var q = document.getElementsByClassName("quantity");
@@ -111,5 +112,28 @@ function makeOrder(hotelId)
 	document.getElementById("total").value=total;
 	document.getElementById("hotelId").value=parseInt(hotelId);
 	document.forms[0].submit();
+	
+}
+
+function test(s)
+{
+	var table = document.getElementById("mytable");
+	var row=table.getElementsByTagName("tr");
+	var size=parseInt(s);
+	
+	for (var i = 0; i < size; i ++ )
+	{   
+		var cell=row[i].getElementsByTagName("td");
+		
+		var stock=parseInt(cell[3].innerHTML);
+	    
+	    if(stock==0)
+	    	{
+	    	cell[2].innerHTML="<span class=\"badge badge-success quantity\">CURRENTLY UNAVAILABLE</span>";
+	    	
+	    	}
+	    cell[3].innerHTML="";
+	}
+	
 	
 }

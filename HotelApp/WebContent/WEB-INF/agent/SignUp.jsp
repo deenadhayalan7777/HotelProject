@@ -15,7 +15,11 @@
    
 	<s:textfield name ="username" label="Username:"/>
 	<s:password name ="password" label ="Password:"/>
-	<s:textfield name="phone" label="Phone"/>   
+	<s:textfield name="phone" label="Phone"/> 
+	<div class="form-group">
+	<s:textfield name ="x" cssClass="form-control" placeholder="x"/>
+	<s:textfield name ="y" cssClass="form-control" placeholder="y"/>
+	</div>  
 	<s:submit />
 	</s:form>
 <br><br><br>

@@ -12,18 +12,20 @@ public class User implements Serializable{
 	private String username;
 	private String password;
 	private String phone;
+	private Location location;
 	
 	
 	public User()
 	{
 		
 	}
-	public User(int userId, String username, String password, String phone) {
+	public User(int userId, String username, String password, String phone,int x,int y) {
 		
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.phone = phone;
+		setLocation(new Location(x,y));
 		
 	}
 	public int getUserId() {
@@ -70,6 +72,12 @@ public class User implements Serializable{
 		if (userId != other.userId)
 			return false;
 		return true;
+	}
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	

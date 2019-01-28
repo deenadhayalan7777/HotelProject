@@ -18,6 +18,7 @@
 	<div class="form-group">
 	<s:password name ="password" cssClass="form-control" placeholder ="Password:"/>
 	</div>
+	
 	<s:submit value="login" cssClass="btn btn-success btn-md" align="center"/>
 	
 	</s:form >

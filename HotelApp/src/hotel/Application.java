@@ -3,6 +3,7 @@ package hotel;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -43,14 +44,14 @@ public class Application {
 		
 		 return userId;
 	}
-	public int userSignUp(String username,String password,String phone)
+	public int userSignUp(String username,String password,String phone, int x, int y)
 	{   
 		User user=db.getUser(username);
 		int userId=-2;
 		if(user==null)
 		{synchronized(this){
 			int userCount=getUserCount()+1;
-			db.setUser(new User(userCount,username,cryptWithMD5(password),phone));
+			db.setUser(new User(userCount,username,cryptWithMD5(password),phone,x,y));
 			userId=userCount;
 			userCount++;
 		    }
@@ -72,7 +73,7 @@ public class Application {
 		 }
 		return agentId;
 	}
-	public int agentSignUp(String username,String password,String phone)
+	public int agentSignUp(String username,String password,String phone,int x, int y)
 	{   
 		Agent agent=db.getAgent(username);
 		int agentId=-2;
@@ -80,7 +81,7 @@ public class Application {
 		{
 			synchronized(this){
 				int agentCount=getAgentCount()+1;
-			db.setAgent(new Agent(agentCount,username,cryptWithMD5(password),phone));
+			db.setAgent(new Agent(agentCount,username,cryptWithMD5(password),phone,x,y));
 			agentId=agentCount;
 			agentCount++;
 		    }
@@ -103,14 +104,14 @@ public class Application {
 		 }
 		return hotelId;
 	}
-	public int hotelSignUp(String username,String password,String phone)
+	public int hotelSignUp(String username,String password,String phone,int x,int y)
 	{
 		Hotel hotel=db.getHotel(username);
 		int hotelId=-2;
 		if(hotel==null)
 		{synchronized(this){
 			int hotelCount=getHotelCount()+1;
-			db.setHotel(new Hotel(hotelCount,username,cryptWithMD5(password),phone));
+			db.setHotel(new Hotel(hotelCount,username,cryptWithMD5(password),phone,x,y));
 			hotelId=hotelCount;
 			hotelCount++;
 		    }
@@ -118,6 +119,11 @@ public class Application {
 		
 		return hotelId;
 	}
+	
+	
+	
+	
+	
 	public int getOrderCount()
 	{
 		return db.getLastId(C.ORDER);
@@ -273,6 +279,50 @@ public class Application {
 
 	public void setItemStock(int itemId, int stock) {
 		db.setItemStock(itemId,stock);
+		
+	}
+
+	public void setUserLocation(Integer userId, int x, int y) {
+		db.setUserLocation(userId,x,y);
+		
+	}
+
+	public void setAgentLocation(Integer agentId, int x, int y) {
+		db.setAgentLocation(agentId,x,y);
+	}
+	
+	
+
+	public void setOrderDate(int orderId, Date date) {
+		db.setOrderDate(orderId, date);
+		
+	}
+
+	public void setOrderTimer(int orderId) {
+		
+		Order order=getOrder(orderId);
+		
+		if(order.getStatus()==C.ACCEPTED)
+		{ Map<Integer,Item> menu=getHotelMenu(order.getHotelId());
+			int max=0;
+			for(ItemQuantity item:order.getItemsList())
+			{
+				int time=menu.get(item.getItemId()).getTime();
+				if(max<time)
+				{
+					max=time;
+				}
+			}
+	      db.setOrderTimer(orderId,max);
+		}
+		
+		if(order.getStatus()==C.ASSIGNED)
+		{
+			Location hotelLocation=getHotel(order.getHotelId()).getLocation();
+			int deliverTime=getUser(order.getUserId()).getLocation().getDistance(hotelLocation);
+			db.setOrderTimer(orderId, deliverTime);
+			
+		}
 		
 	}
 	

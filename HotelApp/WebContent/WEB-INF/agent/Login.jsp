@@ -14,12 +14,12 @@
   <s:form action ="loginaction" validate="true">
    
 	<s:textfield name ="username" cssClass="form-control" placeholder="username"/>
-	
-	
 	<s:password name ="password" cssClass="form-control" placeholder ="Password:"/>
-	
+	<div class="form-group">
+	<s:textfield name ="x" cssClass="form-control" placeholder="x"/>
+	<s:textfield name ="y" cssClass="form-control" placeholder="y"/>
+	</div>
 	<s:submit value="login" cssClass="btn btn-success btn-md" align="center"/>
-	
 	</s:form >
 	
 	<p >New User? <a href="signup">Sign Up Here</a></p>

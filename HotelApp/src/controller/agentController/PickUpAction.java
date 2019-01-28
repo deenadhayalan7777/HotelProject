@@ -2,6 +2,7 @@ package controller.agentController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,6 +54,9 @@ public class PickUpAction extends ActionSupport{
 		{
 			app.addAgentOrder(agentId, orderId);
 			app.setOrderStatus(orderId, C.ASSIGNED);
+			Date date=new Date();
+			app.setOrderDate(orderId, date);
+			app.setOrderTimer(orderId);
 		}
 		
 		

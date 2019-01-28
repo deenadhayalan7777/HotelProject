@@ -22,7 +22,8 @@ public class LoginAction extends ActionSupport {
 	
 	private String username;
 	private String password;
-	
+	private int x;
+	private int y;
 	
 	public String getUsername() {
 		return username;
@@ -49,14 +50,31 @@ public class LoginAction extends ActionSupport {
 		 Integer  agentId=app.agentLogin(username, password);
 		 if(agentId>0)
 		 {
+			 app.setAgentLocation(agentId,x,y);
 			 Agent agent=app.getAgent(agentId);
 			 ServletActionContext.getRequest().getSession().setAttribute("agent", agent);
-			
+			 
 			 return "success";
 			 
 		 }
 		
 		return "failure";
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 	
 	 

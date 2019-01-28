@@ -14,6 +14,7 @@ public class Hotel implements Serializable {
 	private String phone;
 	private float rating;
 	private int status;
+	private Location location;
 	
 	private Discount discount;
 	
@@ -22,7 +23,7 @@ public class Hotel implements Serializable {
 		
 	}
 	
-	public Hotel(int hotelId,String username, String password, String phone) {
+	public Hotel(int hotelId,String username, String password, String phone,int x,int y) {
 		
 		this.hotelId=hotelId;
 		this.username = username;
@@ -32,6 +33,7 @@ public class Hotel implements Serializable {
 		
 		discount=new Discount();
 		setStatus(1);
+		setLocation(new Location(x,y));
 	}
 	public int getHotelId() {
 		return hotelId;
@@ -99,6 +101,15 @@ public class Hotel implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	
 	
 	

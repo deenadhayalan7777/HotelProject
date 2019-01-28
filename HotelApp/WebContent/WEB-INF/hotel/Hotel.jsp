@@ -74,9 +74,16 @@ function test(status){
 			<td><s:property value="date"/></td>  
 			<td><s:property value="status"/></td>  
 			<td><s:property value="rating"/></td> 
+			<td><s:property value="timer"/></td>  
+			<td><button  type="button" class="btn btn-outline-success acceptOrder" onclick="acceptOrder('<s:property value="orderId"/>')"> ACCEPT </button></td>
 			</tr>   
 			</s:iterator>
  </table>
+ 
+ <s:form name="myForm" action="orderacceptaction"   method="post" >
+<s:hidden name="orderId" id="orderId" value='0'/>
+</s:form>
+ 
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">

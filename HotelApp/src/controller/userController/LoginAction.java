@@ -2,29 +2,42 @@ package controller.userController;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
+
+
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ServletResponseAware;
-import org.apache.struts2.interceptor.SessionAware;
-import javax.servlet.http.Cookie;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Application;
-import hotel.Hotel;
-import hotel.HotelDetail;
+
 import hotel.User;
 
-public class LoginAction extends ActionSupport implements SessionAware,ServletResponseAware{
+public class LoginAction extends ActionSupport {
 
 	
 	private String username;
 	private String password;
+	private int x,y;
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
 	private SessionMap<String,Object> sessionMap;
 	
 	public String getUsername() {
@@ -47,12 +60,7 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 	    sessionMap=(SessionMap<String, Object>)map;  
 	}  
 	
-	protected HttpServletResponse servletResponse;
-	  @Override
-	  public void setServletResponse(HttpServletResponse servletResponse) {
-	    this.servletResponse = servletResponse;
-	  }
-	 
+	
 	
 	public String execute() 
 	{
@@ -61,11 +69,12 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		 Integer  userId=app.userLogin(username, password);
 		 if(userId>0)
 		 {
+			 app.setUserLocation(userId,x,y);
 			 User user=app.getUser(userId);
 			 
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
 			 
-			 System.out.println("Updated without useraction login");
+			
 			 
 			 return "success";
 			 

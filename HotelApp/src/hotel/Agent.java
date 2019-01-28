@@ -10,7 +10,7 @@ public class Agent implements Serializable {
 	private String username;
 	private String password;
 	private String phone;
-	
+	private Location location;
 	
 	
 	public Agent()
@@ -18,12 +18,13 @@ public class Agent implements Serializable {
 		
 	}
 	
-	public Agent(int agentId, String username, String password, String phone) {
+	public Agent(int agentId, String username, String password, String phone,int x,int y) {
 		
 		this.agentId = agentId;
 		this.username = username;
 		this.password = password;
 		this.phone = phone;
+		this.location=new Location(x,y);
 		
 	}
 	public int getAgentId() {
@@ -49,6 +50,14 @@ public class Agent implements Serializable {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	

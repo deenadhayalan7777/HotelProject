@@ -15,7 +15,7 @@ public class Dao {
 			//con=DriverManager.getConnection( "jdbc:mysql://localhost:3306/hotel","root","root1234");
 			System.out.println("Database connection established");
 			String query="create table if not exists HOTEL (hotelId int,username varchar(25) unique not null,"
-					+ "password varchar(50) not null,phone varchar(10) not null,rating int default 5,status int default 1, primary key(hotelId))";
+					+ "password varchar(50) not null,phone varchar(10) not null,rating int default 5,status int default 1,x int default 0, y int default 0, primary key(hotelId))";
 
 			Statement stmt = con.createStatement();
 		    stmt.execute(query);
@@ -43,7 +43,7 @@ public class Dao {
 		    stmt.execute(query);
 		    
 		    query="create table if not exists user (userId int,username varchar(25) unique not null,"
-		    		+ "password varchar(50) not null,phone varchar(10) not null, primary key(userId))";
+		    		+ "password varchar(50) not null,phone varchar(10) not null,x int default 0, y int default 0, primary key(userId))";
 		    
 		    stmt.execute(query);
 		    
@@ -52,14 +52,15 @@ public class Dao {
 		    stmt.execute(query);
 		    
 		    query="create table if not exists agent(agentId int,username varchar(25) unique not null,"
-		    		+ "password varchar(50) not null,phone varchar(10) not null, primary key(agentId))";
+		    		+ "password varchar(50) not null,phone varchar(10) not null,x int default 0, y int default 0, primary key(agentId))";
 		    stmt.execute(query);
 		   
 		    query=" create table if not exists agent_orders(agentId int,orderId int,"
 		    		+ "foreign key(agentId) references agent(agentId),foreign key(orderId) references orders(orderId))";
 		    stmt.execute(query);
 		    
-		   
+		    query="create table if not exists order_time(orderId int,timer int default 0,foreign key(orderId) references orders(orderId))";
+		    stmt.execute(query);
 		    
 		} catch (ClassNotFoundException e) {
 			
@@ -85,10 +86,10 @@ public class Dao {
 		return dao;
 	}
 	
-	public void setHotel(int hotelId,String username,String password,String phone,float rating) throws SQLException 
+	public void setHotel(int hotelId,String username,String password,String phone,float rating,int x,int y) throws SQLException 
 	{
-        String query = " insert into hotel(hotelId,username,password,phone,rating)"
-			        + " values (?,?,?,?,?)";
+        String query = " insert into hotel(hotelId,username,password,phone,rating,x,y)"
+			        + " values (?,?,?,?,?,?,?)";
 
 			     
 			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -98,7 +99,8 @@ public class Dao {
 			      preparedStmt.setString (3,password);
 			      preparedStmt.setString (4,phone);
 			      preparedStmt.setFloat(5, rating);
-			      			      
+			      preparedStmt.setInt(6, x);
+			      preparedStmt.setInt(7, y);
 			      preparedStmt.execute();
 
 	}
@@ -125,10 +127,10 @@ public class Dao {
 		return stmt.executeQuery(" select * from hotel where hotelId= "+hotelId);
   }
   
-  public void setUser(int userId,String username,String password,String phone ) throws SQLException 
+  public void setUser(int userId,String username,String password,String phone ,int x,int y) throws SQLException 
 	{
-      String query = " insert into user(userId,username,password,phone)"
-			        + " values (?,?,?,?)";
+      String query = " insert into user(userId,username,password,phone,x,y)"
+			        + " values (?,?,?,?,?,?)";
 
 			     
 			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -137,7 +139,8 @@ public class Dao {
 			      preparedStmt.setString (2,username);
 			      preparedStmt.setString (3,password);
 			      preparedStmt.setString (4,phone);
-			     
+			      preparedStmt.setInt(5, x);
+	 			    preparedStmt.setInt(6, y);
 			      preparedStmt.execute();
 
 	}
@@ -149,10 +152,10 @@ public class Dao {
   }
   
  
-  public void setAgent(int agentId,String username,String password,String phone ) throws SQLException 
+  public void setAgent(int agentId,String username,String password,String phone,int x,int y ) throws SQLException 
  	{
-       String query = " insert into agent(agentId,username,password,phone)"
- 			        + " values (?,?,?,?)";
+       String query = " insert into agent(agentId,username,password,phone,x,y)"
+ 			        + " values (?,?,?,?,?,?)";
 
  			     
  			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -161,7 +164,8 @@ public class Dao {
  			      preparedStmt.setString (2,username);
  			      preparedStmt.setString (3,password);
  			      preparedStmt.setString (4,phone);
- 			     
+ 			     preparedStmt.setInt(5, x);
+ 			    preparedStmt.setInt(6, y);
  			      preparedStmt.execute();
 
  	}
@@ -335,6 +339,18 @@ public class Dao {
  			      preparedStmt.execute();
 
  	}
+  
+  public void addOrderTime(int orderId,int timer) throws SQLException 
+	{
+     String query = " insert into order_time(orderId,timer)"
+			        + " values (?,?)";
+ 
+			      PreparedStatement preparedStmt = con.prepareStatement(query);
+			      preparedStmt.setInt(1, orderId);
+			      preparedStmt.setInt(2, timer);
+			      preparedStmt.execute();
+
+	}
    
    public ResultSet getHotelOrders(int hotelId) throws SQLException
    {  
@@ -347,7 +363,7 @@ public class Dao {
    {  
  	    Statement stmt=con.createStatement();  
  	   return stmt.executeQuery(" select hotel_orders.orderId "
-				+ " from hotel_orders inner join orders on hotel_orders.orderId=orders.orderId where hotelId="+ hotelId+" and status =1  ");
+				+ " from hotel_orders inner join orders on hotel_orders.orderId=orders.orderId where hotelId="+ hotelId+" and status =0  ");
 
     }
    
@@ -370,7 +386,7 @@ public class Dao {
   {  
 	    Statement stmt=con.createStatement(); 
 	    return stmt.executeQuery(" select orders.orderId "
-				+ " from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status >=1 ");
+				+ " from user_orders inner join orders on user_orders.orderId=orders.orderId where userId="+ userId+" and status >=0 ");
 
   }
   
@@ -478,7 +494,13 @@ public class Dao {
 		return stmt.executeQuery("select * from hotel where username= '" + username+"'");
   	 
    }
-   
+   public ResultSet getOrderTime(int orderId) throws SQLException 
+   {
+  	    
+	   Statement stmt = con.createStatement();
+		return stmt.executeQuery("select * from order_time where orderId="+orderId);
+  	 
+   }
    public ResultSet getUser(String username) throws SQLException 
    {
   	
@@ -555,6 +577,85 @@ public void setItemStock(int itemId, int stock) {
     
 }
   
+public void setUserLocation(int userId,int x, int y) {
+	
+	String query = " update user set x=?,y=? where userId=?; ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setInt(1, x);
+	      preparedStmt.setInt(2, y);
+	      preparedStmt.setInt(3, userId);
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
    
+
+public void setAgentLocation(int agentId,int x, int y) {
+	
+	String query = " update user set x=?,y=? where agentId=?; ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setInt(1, x);
+	      preparedStmt.setInt(2, y);
+	      preparedStmt.setInt(3, agentId); 
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+
+public void setOrderTimer(int orderId,int timer) {
+	
+	String query = " update order_time set timer=? where orderId=?; ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setInt(1, timer);
+	      preparedStmt.setInt(2, orderId);
+	     
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+
+public void setOrderDate(int orderId,String date) {
+	
+	String query = " update orders set date=? where orderId=?; ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setString(1, date);
+	      preparedStmt.setInt(2, orderId);
+	     
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
 
 }

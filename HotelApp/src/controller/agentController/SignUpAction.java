@@ -15,6 +15,8 @@ import hotel.Application;
 public class SignUpAction extends ActionSupport implements ModelDriven<Agent> {
 
 	private Agent agent;
+	private int x;
+	private int y;
 	
 	
 	
@@ -40,7 +42,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Agent> {
 	public String execute() 
 	{
 		Application app=Application.getInstance();
-		int agentId=app.agentSignUp(agent.getUsername(), agent.getPassword(), agent.getPhone());
+		int agentId=app.agentSignUp(agent.getUsername(), agent.getPassword(), agent.getPhone(),x,y);
 		
 		if(agentId>0)
 		return "success";
@@ -54,6 +56,22 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Agent> {
 
 	public void setAgent(Agent agent) {
 		this.agent = agent;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

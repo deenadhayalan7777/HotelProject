@@ -1,27 +1,22 @@
 package controller.hotelController;
 
 
-
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.ServletResponseAware;
-import org.apache.struts2.interceptor.SessionAware;
-import javax.servlet.http.Cookie;
+
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Application;
 import hotel.Hotel;
 
-public class LoginAction extends ActionSupport implements SessionAware,ServletResponseAware{
+public class LoginAction extends ActionSupport {
 
 	
 	private String username;
 	private String password;
-	private SessionMap<String,Object> sessionMap;
+	
+
+	
 	
 	public String getUsername() {
 		return username;
@@ -39,16 +34,6 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		this.password = password;
 	}
 
-	public void setSession(Map<String, Object> map) {  
-	    sessionMap=(SessionMap<String, Object>)map;  
-	}  
-	
-	protected HttpServletResponse servletResponse;
-	  @Override
-	  public void setServletResponse(HttpServletResponse servletResponse) {
-	    this.servletResponse = servletResponse;
-	  }
-	 
 	
 	public String execute() 
 	{
@@ -59,8 +44,6 @@ public class LoginAction extends ActionSupport implements SessionAware,ServletRe
 		 {
 			 Hotel hotel=app.getHotel(hotelId);
 			 ServletActionContext.getRequest().getSession().setAttribute("hotel", hotel);
-			  
-			 
 			  
 			 return "success";
 			 

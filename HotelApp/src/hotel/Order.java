@@ -21,6 +21,8 @@ public class Order implements Serializable {
     private int status; 
     private String hotelname;
     private String agentname;
+    private int timer;
+    
 	public Order(int orderId,List<ItemQuantity> itemsList, int total,String phoneNo,int discount,int hotelId,int userId) {
 		
 		this.itemsList = itemsList;
@@ -33,6 +35,7 @@ public class Order implements Serializable {
 		this.userId=userId;
 		setStatus(C.WAITING);
 		date= new Date();
+		timer=0;
 	}
 	
 	
@@ -142,6 +145,16 @@ public class Order implements Serializable {
 
 	public void setAgentname(String agentname) {
 		this.agentname = agentname;
+	}
+
+
+	public int getTimer() {
+		return timer;
+	}
+
+
+	public void setTimer(int timer) {
+		this.timer = timer;
 	}
     
     

@@ -86,7 +86,6 @@
 
 <s:hidden name="itemslist" id="itemslist" value="items" />
 
- <input  type="button" onclick="addItems()"  value="ADD MENU ITEMS"/>
 </s:form>
 
  <s:form name="form1" action="changestockaction"   method="post" >
