@@ -363,7 +363,7 @@ public class Dao {
    {  
  	    Statement stmt=con.createStatement();  
  	   return stmt.executeQuery(" select hotel_orders.orderId "
-				+ " from hotel_orders inner join orders on hotel_orders.orderId=orders.orderId where hotelId="+ hotelId+" and status =0  ");
+				+ " from hotel_orders inner join orders on hotel_orders.orderId=orders.orderId where hotelId="+ hotelId+" and status <=1  ");
 
     }
    
