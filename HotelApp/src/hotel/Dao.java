@@ -24,9 +24,7 @@ public class Dao {
 		    		+ "name varchar(25) not null,price int not null,primary key(itemId))";
 		    stmt.execute(query);
 		    
-		    query="create table if not exists hotel_menu(hotelId int,itemId int,time int default 0,stock int default 1"
-		    		+ "foreign key(hotelId) references hotel(hotelId),foreign key(itemId) references item(itemId))";
-		
+		    query="create table if not exists hotel_menu(hotelId int,itemId int,time int default 0,stock int default 1,foreign key(hotelId) references hotel(hotelId),foreign key(itemId) references item(itemId))";
 		    stmt.execute(query);
 		    
 		    query="create table if not exists orders (orderId int,total int, "
