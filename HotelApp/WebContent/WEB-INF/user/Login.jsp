@@ -6,14 +6,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+<script src="/HotelApp/user/Login.js"></script>
 <title>User Login</title>
 </head>
 <body>
 <h1 align="center">USER LOGIN</h1>
 
   <div class="container" align="center">
-  <s:form action ="loginaction" validate="true">
+  <s:form name="myform" action ="loginaction" validate="true"  method="post">
     <div class="form-group">
 	<s:textfield name ="username" cssClass="form-control" placeholder="username"/>
 	</div>
@@ -25,7 +25,7 @@
 	<s:textfield name ="y" cssClass="form-control" placeholder="y"/>
 	</div>
 	
-	<s:submit value="login" cssClass="btn btn-success btn-md" align="center"/>
+	<s:submit value="login" onclick="" cssClass="btn btn-success btn-md" align="center"/>
 	
 	</s:form >
 	
