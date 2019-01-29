@@ -60,10 +60,12 @@
 		</action>
 		<action name="loginaction" class="controller.hotelController.LoginAction">  
 		<result name="success" type="redirectAction">home</result> 
+		<result name="input">/hotel/Login.jsp</result>  
 		<result name="failure">/hotel/Login.jsp</result>  
 		</action>  
 		<action name="signupaction" class="controller.hotelController.SignUpAction">  
 		<result name="success" type="redirectAction">home</result> 
+		<result name="input">/hotel/SignUp.jsp</result>  
 		<result name="failure">/hotel/SignUp.jsp</result>  
 		</action>
 

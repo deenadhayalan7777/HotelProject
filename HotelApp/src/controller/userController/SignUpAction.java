@@ -54,6 +54,10 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 	        addFieldError("password","Password must be greater than 5"); 
 	    if(user.getPhone()==null)  
 	        addFieldError("phone","PhoneNo  can't be blank");  
+	    if(x>100||x<0)  
+	        addFieldError("x","Enter x within 0 to 100");  
+	    if(y<0||y>100)  
+	        addFieldError("y","Enter y within 0 to 100");  
 	    if(!user.getUsername().matches(regex))
 	    	 addFieldError("username","Enter Proper Username");  
 	}  
