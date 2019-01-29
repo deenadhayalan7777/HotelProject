@@ -28,7 +28,7 @@ public class LoginInterceptor extends AbstractInterceptor implements
 		Object hotel = session.getAttribute("hotel");
 		if (hotel == null) {
 			
-			if (invocation.getAction().getClass().equals(LoginAction.class)||invocation.getInvocationContext().getName().equals("signup")||invocation.getAction().getClass().equals(SignUpAction.class))
+			if (invocation.getAction().getClass().equals(controller.hotelController.LoginAction.class)||invocation.getInvocationContext().getName().equals("signup")||invocation.getAction().getClass().equals(controller.hotelController.SignUpAction.class))
 			{
 				return invocation.invoke();
 			}
