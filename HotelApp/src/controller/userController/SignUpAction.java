@@ -48,11 +48,11 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 	
 	public void validate() { 
 		String regex="[A-Za-z0-9]+";
-	    if(user.getUsername()==null)  
+	    if(user.getUsername()=="")  
 	        addFieldError("username","Name can't be blank");  
-	    if(user.getPassword()==null)  
+	    if(user.getPassword()=="")  
 	        addFieldError("password","Password must be greater than 5"); 
-	    if(user.getPhone()==null)  
+	    if(user.getPhone()=="")  
 	        addFieldError("phone","PhoneNo  can't be blank");  
 	    if(x>100||x<0)  
 	        addFieldError("x","Enter x within 0 to 100");  
