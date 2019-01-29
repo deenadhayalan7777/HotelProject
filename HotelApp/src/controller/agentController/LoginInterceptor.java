@@ -24,7 +24,7 @@ public class LoginInterceptor extends AbstractInterceptor implements
 		HttpServletRequest request = (HttpServletRequest) context
 				.get(HTTP_REQUEST);
 		HttpSession session = request.getSession(true);
-
+        System.out.println(invocation.getAction().getClass());
 		
 		Object agent = session.getAttribute("agent");
 		if (agent == null) {
