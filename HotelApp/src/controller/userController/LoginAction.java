@@ -60,6 +60,15 @@ public class LoginAction extends ActionSupport {
 	    sessionMap=(SessionMap<String, Object>)map;  
 	}  
 	
+	public void validate() { 
+		String regex="[A-Za-z0-9]+";
+	    if(username==null)  
+	        addFieldError("username","Name can't be blank");  
+	    if(password==null)  
+	        addFieldError("password","Password must be greater than 5"); 
+	    if(!username.matches(regex))
+	    	 addFieldError("username","Enter Proper Username");  
+	}  
 	
 	
 	public String execute() 

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="/HotelApp/user/Rate.js"></script>
+<script src="/HotelApp/user/MyOrders5.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
@@ -66,23 +66,17 @@
 
 </div>
 
-<div class="container border border-primary">
+<div class="container border border-light">
  <table id="mytable" class="table table-hover">
-            <tr>
-                <th>HOTEL NAME</th>
-                <th>TOTAL</th>
-                <th>DATE</th>
-                <th>STATUS</th>
-                <th>RATING</th>
-            </tr>
+           
             <s:iterator value="myOrders" status="stat">  
 			<tr>
 			<td><s:property value="hotelname"/></td>
 			<td><s:property value="total"/></td>  
 			<td><s:property value="date"/></td>  
-			<td ><s:property  value="status"/></td> 
-			<td ><s:property  value="rating"/></td> 
-			<td><button  type="button" class="btn btn-outline-success" onclick="rateOrder('<s:property value="orderId"/>','<s:property value="%{#stat.index}" />')"> RATE </button></td>
+			<td class="rating1"><s:property  value="rating"/></td> 
+			<td class="ratebtn"><button  type="button" class="btn btn-outline-success" onclick="rateOrder('<s:property value="orderId"/>','<s:property value="%{#stat.index}" />')"> RATE </button></td>
+			<td class="status1"><s:property  value="status"/></td> 
 			</tr>   
 			</s:iterator>
 </table>

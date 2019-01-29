@@ -129,7 +129,7 @@ function test(s)
 	    
 	    if(stock==0)
 	    	{
-	    	cell[2].innerHTML="<span class=\"badge badge-success quantity\">CURRENTLY UNAVAILABLE</span>";
+	    	cell[2].innerHTML="<span class=\"badge badge-danger quantity\">CURRENTLY UNAVAILABLE</span>";
 	    	
 	    	}
 	    cell[3].innerHTML="";

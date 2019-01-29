@@ -11,7 +11,7 @@ function test(s){
 	
 	  var st=document.getElementsByClassName("status");
 	  var bt=document.getElementsByClassName("viewbtn");
-	  for(var i=0;i<hotelsize;i++)
+	  for(var i=0;i<size;i++)
 		  {
 		  var status=st[i].innerHTML;
 		  st[i].innerHTML="";
