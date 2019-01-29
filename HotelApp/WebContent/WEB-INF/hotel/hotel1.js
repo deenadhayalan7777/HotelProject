@@ -16,7 +16,8 @@ function test(status,s){
 	 var st=document.getElementsByClassName("status");
 	 var ti=document.getElementsByClassName("timer");
 	 var bt=document.getElementsByClassName("acceptbtn");
-	 
+	 if(size==0)
+		  document.getElementById("ordercontainer").innerHTML ="No Orders";
 	 for(var i=0;i<size;i++)
 		 {
 		   var status=st[i].innerHTML;

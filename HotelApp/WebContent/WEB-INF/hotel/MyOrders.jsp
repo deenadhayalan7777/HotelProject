@@ -7,9 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+<script type="text/javascript">
+function test(s)
+{
+	 if(parseInt(s)==0)
+		  document.getElementById("ordercontainer").innerHTML ="No Orders";
+}
+</script>
 </head>
-<body>
+<body onload = "test('<s:property value ="myOrders.size()"/>')">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.hotel.username"/></a>
@@ -48,6 +54,7 @@
 
   </div>
 </nav>
+<div class="container" id="ordercontainer">
  <table border="0" cellpadding="20">
             <tr>
                 <th>PHONE NO</th>
@@ -67,5 +74,6 @@
 			</tr>   
 			</s:iterator>
         </table>
+</div>        
 </body>
 </html>

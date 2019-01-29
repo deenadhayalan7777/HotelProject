@@ -9,7 +9,7 @@
 <title>User</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<script src="/HotelApp/hotel/hotel.js"></script>
+<script src="/HotelApp/hotel/hotel1.js"></script>
 </head>
 <body onload = "test('<s:property value="#session.hotel.status"/>','<s:property value ="currentOrders.size()"/>')">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,7 +50,7 @@
 
   </div>
 </nav>
-
+<div class="container" id="ordercontainer">
 <table border="0" cellpadding="20">
             <tr>
                 <th>PHONE NO</th>
@@ -70,7 +70,7 @@
 			</tr>   
 			</s:iterator>
  </table>
- 
+ </div>
  <s:form name="myForm" action="orderacceptaction"   method="post" >
 <s:hidden name="orderId" id="orderId" value='0'/>
 </s:form>
@@ -88,5 +88,6 @@
      <strong>Success!</strong> <s:actionmessage/>
    </div>
 </s:if>
+
 </body>
 </html>
