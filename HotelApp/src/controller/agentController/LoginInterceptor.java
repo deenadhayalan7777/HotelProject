@@ -25,11 +25,11 @@ public class LoginInterceptor extends AbstractInterceptor implements
 				.get(HTTP_REQUEST);
 		HttpSession session = request.getSession(true);
         System.out.println(invocation.getAction().getClass());
-		
+		System.out.println(controller.agentController.SignUpAction.class);
 		Object agent = session.getAttribute("agent");
 		if (agent == null) {
 			
-			if (invocation.getAction().getClass().equals(LoginAction.class)||invocation.getInvocationContext().getName().equals("signup")||invocation.getAction().getClass().equals(SignUpAction.class))
+			if (invocation.getAction().getClass().equals(controller.agentController.LoginAction.class)||invocation.getInvocationContext().getName().equals("signup")||invocation.getAction().getClass().equals(controller.agentController.SignUpAction.class))
 			{
 				return invocation.invoke();
 			}
