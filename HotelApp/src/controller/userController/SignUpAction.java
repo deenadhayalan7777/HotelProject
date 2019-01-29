@@ -2,6 +2,8 @@ package controller.userController;
 
 import java.sql.SQLException;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
@@ -69,8 +71,12 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 		int userId=app.userSignUp(user.getUsername(), user.getPassword(), user.getPhone(),x,y);
 		
 		if(userId>0)
+		{	
+			User user=app.getUser(userId);
+			 
+			 ServletActionContext.getRequest().getSession().setAttribute("user", user);	
 		return "success";
-		
+		}
 		return "failure";
 	}
 

@@ -2,6 +2,8 @@ package controller.agentController;
 
 
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
@@ -49,7 +51,14 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Agent> {
 		int agentId=app.agentSignUp(agent.getUsername(), agent.getPassword(), agent.getPhone(),x,y);
 		
 		if(agentId>0)
-		return "success";
+		{
+			
+			 Agent agent=app.getAgent(agentId);
+			 ServletActionContext.getRequest().getSession().setAttribute("agent", agent);
+			 
+			return "success";
+		}
+		
 		
 		return "failure";
 	}

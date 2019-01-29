@@ -2,6 +2,8 @@ package controller.hotelController;
 
 import java.sql.SQLException;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
@@ -69,7 +71,11 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 		int hotelId=app.hotelSignUp(hotel.getUsername(), hotel.getPassword(), hotel.getPhone(),x,y);
 		
 		if(hotelId>0)
+		{	
+			Hotel hotel=app.getHotel(hotelId);
+			 ServletActionContext.getRequest().getSession().setAttribute("hotel", hotel);
 		return "success";
+		}
 		
 		return "failure";
 	}
