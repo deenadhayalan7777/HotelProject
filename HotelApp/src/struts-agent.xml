@@ -51,7 +51,7 @@
 		<action name="signupaction" class="controller.agentController.SignUpAction">  
 		<result name="success" type="redirectAction">home</result> 
 		<result name="input">/agent/SignUp.jsp</result> 
-		<result name="failure">/agent/SignUp.jsp</result>  
+		<result name="failure" type="redirectAction">signup</result>  
 		</action>
 	
 	    
