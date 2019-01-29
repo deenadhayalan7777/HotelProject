@@ -47,3 +47,17 @@ function acceptOrder(orderId)
 	
 }	
 	
+function status()
+{
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	var a = JSON.parse(this.responseText);
+	    	document.getElementById("status").innerHTML = a[0].status;
+	    }
+	  };
+	  xhttp.open("GET", "status", true);
+	  xhttp.send();
+	  
+	
+}

@@ -20,7 +20,7 @@ import hotel.Order;
 
 public class StatusAction extends ActionSupport {
 
-	
+	private String st;
 	
 	public String execute() 
 	{
@@ -29,8 +29,11 @@ public class StatusAction extends ActionSupport {
 		Hotel hotel=(Hotel) ServletActionContext.getRequest().getSession().getAttribute("hotel");
 		int hotelId=hotel.getHotelId();
 		int status=0;
+		st="CLOSE";
         if(hotel.getStatus()==0)
-        	status=1;
+        	{status=1;
+        	 st="OPEN";
+        	}
          app.setHotelStatus(hotelId, status);
          hotel=app.getHotel(hotelId);
          ServletActionContext.getRequest().getSession().removeAttribute("hotel");
@@ -38,6 +41,14 @@ public class StatusAction extends ActionSupport {
    
 	    return "success";
 		
+	}
+
+	public String getSt() {
+		return st;
+	}
+
+	public void setSt(String st) {
+		this.st = st;
 	}
 
 
