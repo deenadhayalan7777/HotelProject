@@ -37,10 +37,12 @@
 	<action name="loginaction" class="controller.userController.LoginAction">  
 		<result name="success" type="redirectAction">home</result> 
 		<result name="input">/user/Login.jsp</result>  
+		<result name="failure">/user/Login.jsp</result>  
 	</action>  
 	<action name="signupaction" class="controller.userController.SignUpAction">  
 		<result name="success" type="redirectAction" >home</result> 
 		<result name="input">/user/SignUp.jsp</result>  
+		<result name="failure">/user/SignUp.jsp</result>  
 	</action>
 	
 	<action name="logout" class="controller.userController.LogOutAction">  
