@@ -76,15 +76,15 @@
 <s:form action="location" method="post">
 <s:hidden name="userId"><s:property value=" #session.user.userId"/></s:hidden>
 <s:select label="Location" 
-		headerKey="-1" headerValue="#session.location"
+		headerKey="-1" headerValue="%{#session.location}"
 		list="#session.locations" 
 		name="locations" />
 <s:submit value="submit" name="submit" />		
 </s:form>
 
 <s:iterator value="#session.locations" status="stat">
-<s:hidden id="id%{#stat.index}" name="id" ><s:property value="locationId"/></s:hidden>
-<s:hidden id="name%{stat.index}" name="id" ><s:property value="name"/></s:hidden>
+<s:hidden id="id%{#stat.index}" name="id" value="%{locationId}"></s:hidden>
+<s:hidden id="name%{stat.index}" name="id" ><s:property value="%{name}"/></s:hidden>
 </s:iterator>
 
 <s:if test="hasActionErrors()">
