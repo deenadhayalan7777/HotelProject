@@ -18,22 +18,7 @@ import hotel.Hotel;
 public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 
 	private Hotel hotel;
-	private int x,y;
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
+	private int locationId;
 	
 	public Hotel getHotel() {
 		return hotel;
@@ -56,10 +41,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 	        addFieldError("password","Password must be greater than 5"); 
 	    if(hotel.getPhone()=="")  
 	        addFieldError("phone","PhoneNo  can't be blank");  
-	    if(x>100||x<0)  
-	        addFieldError("x","Enter x within 0 to 100");  
-	    if(y<0||y>100)  
-	        addFieldError("y","Enter y within 0 to 100");  
+	    
 	    if(!hotel.getUsername().matches(regex))
 	    	 addFieldError("username","Enter Proper Username");  
 	}  
@@ -68,7 +50,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 	public String execute() 
 	{
 		Application app=Application.getInstance();
-		int hotelId=app.hotelSignUp(hotel.getUsername(), hotel.getPassword(), hotel.getPhone(),x,y);
+		int hotelId=app.hotelSignUp(hotel.getUsername(), hotel.getPassword(), hotel.getPhone(),locationId);
 		
 		if(hotelId>0)
 		{	
@@ -78,6 +60,14 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 		}
 		
 		return "failure";
+	}
+
+	public int getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
 	}
 
 }

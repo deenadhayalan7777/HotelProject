@@ -18,13 +18,13 @@ public class Agent implements Serializable {
 		
 	}
 	
-	public Agent(int agentId, String username, String password, String phone,int x,int y) {
+	public Agent(int agentId, String username, String password, String phone) {
 		
 		this.agentId = agentId;
 		this.username = username;
 		this.password = password;
 		this.phone = phone;
-		this.location=new Location(x,y);
+		
 		
 	}
 	public int getAgentId() {

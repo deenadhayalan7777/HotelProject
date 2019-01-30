@@ -23,7 +23,7 @@ public class Hotel implements Serializable {
 		
 	}
 	
-	public Hotel(int hotelId,String username, String password, String phone,int x,int y) {
+	public Hotel(int hotelId,String username, String password, String phone) {
 		
 		this.hotelId=hotelId;
 		this.username = username;
@@ -33,7 +33,7 @@ public class Hotel implements Serializable {
 		
 		discount=new Discount();
 		setStatus(1);
-		setLocation(new Location(x,y));
+		
 	}
 	public int getHotelId() {
 		return hotelId;

@@ -40,7 +40,7 @@
     <ul class="navbar-nav ml-auto">
     
     <li class="nav-item">
-      <button onclick="status()" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</button>
+      <a href="status" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
       </li>
       
       <li class="nav-item">

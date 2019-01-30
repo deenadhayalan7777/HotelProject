@@ -25,8 +25,7 @@
 	<s:password name ="phone" cssClass="form-control" placeholder ="Phone"/>
 	</div>
 	<div class="form-group">
-	<s:textfield name ="x" cssClass="form-control" placeholder="x"/>
-	<s:textfield name ="y" cssClass="form-control" placeholder="y"/>
+	<s:textfield name ="locationId" cssClass="form-control" placeholder="location"/>
 	</div>
 	
 	<s:submit value="SIGNUP" onclick="" cssClass="btn btn-success btn-md" align="center"/>

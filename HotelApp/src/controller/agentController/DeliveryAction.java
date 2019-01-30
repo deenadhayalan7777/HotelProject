@@ -36,6 +36,8 @@ public class DeliveryAction extends ActionSupport{
 		
 		Order order=new ArrayList<Order>(app.getAgentCurrentOrders(agent.getAgentId()).values()).get(sno);
 		app.setOrderStatus(order.getOrderId(), C.DELIVERED);
+		if(app.getCurrentOrders().containsKey(order.getOrderId()))
+		app.getCurrentOrders().remove(order.getOrderId());
 			
 		return "success";
 	}

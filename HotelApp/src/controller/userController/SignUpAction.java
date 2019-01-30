@@ -18,22 +18,8 @@ import hotel.User;
 public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 
 	private User user;
-	private int x,y;
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
+	private int locationId;
+	
 	
 	public User getUser() {
 		return user;
@@ -56,10 +42,6 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 	        addFieldError("password","Password must be greater than 5"); 
 	    if(user.getPhone()=="")  
 	        addFieldError("phone","PhoneNo  can't be blank");  
-	    if(x>100||x<0)  
-	        addFieldError("x","Enter x within 0 to 100");  
-	    if(y<0||y>100)  
-	        addFieldError("y","Enter y within 0 to 100");  
 	    if(!user.getUsername().matches(regex))
 	    	 addFieldError("username","Enter Proper Username");  
 	}  
@@ -68,7 +50,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 	public String execute() 
 	{
 		Application app=Application.getInstance();
-		int userId=app.userSignUp(user.getUsername(), user.getPassword(), user.getPhone(),x,y);
+		int userId=app.userSignUp(user.getUsername(), user.getPassword(), user.getPhone(),locationId);
 		
 		if(userId>0)
 		{	

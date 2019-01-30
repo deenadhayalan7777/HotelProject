@@ -9,7 +9,6 @@ function test(o,h){
 		  document.getElementById("hotelcontainer").innerHTML ="No Hotels";
 	  if(ordersize==0)
 		  document.getElementById("ordercontainer").innerHTML ="No Orders";
-	
 	  var st=document.getElementsByClassName("status");
 	  var bt=document.getElementsByClassName("pickupbtn");
 	  for(var i=0;i<hotelsize;i++)

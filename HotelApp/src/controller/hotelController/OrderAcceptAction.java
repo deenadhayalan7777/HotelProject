@@ -7,14 +7,11 @@ import java.util.Date;
 
 
 
-
-
-
-
 import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Application;
 import hotel.C;
+import hotel.Order;
 
 
 
@@ -34,7 +31,8 @@ public class OrderAcceptAction extends ActionSupport {
         app.setOrderStatus(orderId, C.ACCEPTED);
         app.setOrderDate(orderId,date);
         app.setOrderTimer(orderId);
-         
+        Order order=app.getOrder(orderId);
+        app.getCurrentOrders().put(orderId, order);
 	    return "success";
 		
 	}

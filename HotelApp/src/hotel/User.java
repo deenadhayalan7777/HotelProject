@@ -19,13 +19,12 @@ public class User implements Serializable{
 	{
 		
 	}
-	public User(int userId, String username, String password, String phone,int x,int y) {
+	public User(int userId, String username, String password, String phone) {
 		
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.phone = phone;
-		setLocation(new Location(x,y));
 		
 	}
 	public int getUserId() {

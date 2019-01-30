@@ -57,8 +57,9 @@ public class DaoAdapter {
 				int hotelId=rs.getInt(1);
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
-				Hotel hotel=new Hotel(hotelId,username,password,phone,rs.getInt(7),rs.getInt(8));
+				Hotel hotel=new Hotel(hotelId,username,password,phone);
 				hotel.setStatus(rs.getInt(6));
+				hotel.setLocation(getLocation(rs.getInt(7)));
 				return hotel;
 			}
 		} catch (SQLException e) {System.out.println(e);}
@@ -76,7 +77,7 @@ public class DaoAdapter {
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
 				int status=rs.getInt(6);
-				Hotel hotel=new Hotel(hotelId,username,password,phone,rs.getInt(7),rs.getInt(8));
+				Hotel hotel=new Hotel(hotelId,username,password,phone);
 				hotel.setStatus(status);
 				return hotel;
 			}
@@ -100,8 +101,8 @@ public class DaoAdapter {
 				int userId=rs.getInt(1);
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
-				User user=new User(userId,username,password,phone,rs.getInt(5),rs.getInt(6));
-				
+				User user=new User(userId,username,password,phone);
+				user.setLocation(getLocation(rs.getInt(5)));
 				return user;
 			 }
 		   } catch (SQLException e) {System.out.println(e);}
@@ -118,7 +119,8 @@ public class DaoAdapter {
 				String username=rs.getString(2);
 				String password=rs.getString(3);
 				String phone=rs.getString(4);
-				User user=new User(userId,username,password,phone,rs.getInt(5),rs.getInt(6));
+				User user=new User(userId,username,password,phone);
+				user.setLocation(getLocation(rs.getInt(5)));
 				
 				return user;
 			 }
@@ -140,8 +142,8 @@ public Agent getAgent(String username)
 	    	{int agentId=rs.getInt(1);
 			String password=rs.getString(3);
 			String phone=rs.getString(4);
-			Agent agent=new Agent(agentId,username,password,phone,rs.getInt(5),rs.getInt(6));
-			
+			Agent agent=new Agent(agentId,username,password,phone);
+			agent.setLocation(getLocation(rs.getInt(5)));
 			return agent;
 	    	}
 		} catch (SQLException e) {System.out.println(e);}
@@ -155,8 +157,8 @@ public Agent getAgent(int agentId)
 	    	{String username=rs.getString(2);
 			String password=rs.getString(3);
 			String phone=rs.getString(4);
-			Agent agent=new Agent(agentId,username,password,phone,rs.getInt(5),rs.getInt(6));
-			
+			Agent agent=new Agent(agentId,username,password,phone);
+			agent.setLocation(getLocation(rs.getInt(5)));
 			return agent;
 	    	}
 		} catch (SQLException e) {System.out.println(e);}
@@ -268,7 +270,7 @@ public Agent getAgent(int agentId)
 			  order.setDate(date);
 			  order.setRating(rating);
 			  order.setStatus(status);
-			  int timer=getOrderTimer(order);
+			  int timer=getOrderTime(orderId);
 			  order.setTimer(timer);
 			  order.setAgentId(agentId);
 			  order.setHotelname(getHotelDetail(hotelId).getUsername());
@@ -443,13 +445,15 @@ public void setItemStock(int itemId, int stock) {
 	dao.setItemStock(itemId,stock);
 }
 
-public void setUserLocation(Integer userId, int x, int y) {
-	dao.setUserLocation(userId, x, y);
+public void setLocation(int code, int id, int locationId) {
 	
-}
-
-public void setAgentLocation(Integer agentId, int x, int y) {
-	dao.setAgentLocation(agentId, x, y);
+	switch(code)
+	   {
+	   case C.HOTEL:dao.setHotelLocation(id,locationId);break;
+	   case C.USER: dao.setUserLocation(id,locationId);break;
+	   case C.AGENT:dao.setAgentLocation(id,locationId);break;
+	   
+	   }
 	
 }
 
@@ -482,5 +486,44 @@ public void setOrderTimer(int orderId, int timer) {
 	dao.setOrderTimer(orderId, timer);
 	
 }
+
+public Location getLocation(int locationId)
+{
+    Location location=null;
+    ResultSet rs;
+	try {
+		rs = dao.getLocation(locationId);
+		 while(rs.next())
+		 {
+			 location=new Location(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+		 }
+	   } catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+     
+    
+    return location;
+	
+}
+
+public Map<Integer, Location> getLocations() {
+	
+	Map<Integer, Location> locations=new HashMap<Integer,Location>();
+	try {
+		ResultSet rs=dao.getLocations();
+		while(rs.next())
+		{
+			Location location=new Location(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+		    locations.put(location.getLocationId(), location);
+		}
+	    } catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	
+	return locations;
+}
+
 
 }

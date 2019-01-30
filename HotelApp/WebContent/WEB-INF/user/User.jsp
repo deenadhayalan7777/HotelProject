@@ -34,7 +34,17 @@
       
     </ul>
     <ul class="navbar-nav ml-auto">
-      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <s:property value="#session.location"/> 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> 
       <li class="nav-item">
       <a href="logout" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
       </li>
@@ -44,8 +54,7 @@
 </nav>
 <div class="container" id="hotelcontainer">
  <c:set var="count" value="0" scope="page" />
-  <form action="selecthotelaction" method="get" align="center">
-  
+<form action="selecthotelaction" method="get" align="center">
   <div class="row">
   <div align="center" class="column">
   <table border="0" cellpadding="20">
@@ -61,10 +70,23 @@
   </table>
   </div>
   </div>
-  
+</form>
 </div>
 
-</form>
+<s:form action="location" method="post">
+<s:hidden name="userId"><s:property value=" #session.user.userId"/></s:hidden>
+<s:select label="Location" 
+		headerKey="-1" headerValue="#session.location"
+		list="#session.locations" 
+		name="locations" />
+<s:submit value="submit" name="submit" />		
+</s:form>
+
+<s:iterator value="#session.locations" status="stat">
+<s:hidden id="id%{#stat.index}" name="id" ><s:property value="locationId"/></s:hidden>
+<s:hidden id="name%{stat.index}" name="id" ><s:property value="name"/></s:hidden>
+</s:iterator>
+
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">

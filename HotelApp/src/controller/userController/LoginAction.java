@@ -4,6 +4,7 @@ package controller.userController;
 
 
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -14,7 +15,7 @@ import org.apache.struts2.dispatcher.SessionMap;
 import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Application;
-
+import hotel.Location;
 import hotel.User;
 
 public class LoginAction extends ActionSupport {
@@ -22,23 +23,7 @@ public class LoginAction extends ActionSupport {
 	
 	private String username;
 	private String password;
-	private int x,y;
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-	private SessionMap<String,Object> sessionMap;
+	
 	
 	public String getUsername() {
 		return username;
@@ -56,9 +41,6 @@ public class LoginAction extends ActionSupport {
 		this.password = password;
 	}
 
-	public void setSession(Map<String, Object> map) {  
-	    sessionMap=(SessionMap<String, Object>)map;  
-	}  
 	
 	public void validate() { 
 		String regex="[A-Za-z0-9]+";
@@ -66,10 +48,7 @@ public class LoginAction extends ActionSupport {
 	        addFieldError("username","Name can't be blank");  
 	    if(password=="")  
 	        addFieldError("password","Password can't be blank"); 
-	    if(x>100||x<0)  
-	        addFieldError("x","Enter x within 0 to 100");  
-	    if(y<0||y>100)  
-	        addFieldError("y","Enter y within 0 to 100");  
+	    
 	    if(!username.matches(regex))
 	    	 addFieldError("username","Enter Proper Username");  
 	}  
@@ -82,12 +61,13 @@ public class LoginAction extends ActionSupport {
 		 Integer  userId=app.userLogin(username, password);
 		 if(userId>0)
 		 {
-			 app.setUserLocation(userId,x,y);
+			 
 			 User user=app.getUser(userId);
 			 
+			 List<String> locations=app.getLocationNames();
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
-			 
-			
+			 ServletActionContext.getRequest().getSession().setAttribute("locations", locations);
+			 ServletActionContext.getRequest().getSession().setAttribute("location", user.getLocation().getName());
 			 
 			 return "success";
 			 

@@ -575,16 +575,15 @@ public void setItemStock(int itemId, int stock) {
     
 }
   
-public void setUserLocation(int userId,int x, int y) {
+public void setUserLocation(int userId,int placeId) {
 	
-	String query = " update user set x=?,y=? where userId=?; ";
+	String query = " update user set placeId=? where userId=?; ";
 
     
     PreparedStatement preparedStmt;
 	try {
 		preparedStmt = con.prepareStatement(query);
-		preparedStmt.setInt(1, x);
-	      preparedStmt.setInt(2, y);
+		preparedStmt.setInt(1, placeId);
 	      preparedStmt.setInt(3, userId);
 	      preparedStmt.execute();
 
@@ -596,17 +595,35 @@ public void setUserLocation(int userId,int x, int y) {
 }
    
 
-public void setAgentLocation(int agentId,int x, int y) {
+public void setAgentLocation(int agentId,int placeId) {
 	
-	String query = " update user set x=?,y=? where agentId=?; ";
+	String query = " update agent set placeId=? where agentId=?; ";
 
     
     PreparedStatement preparedStmt;
 	try {
 		preparedStmt = con.prepareStatement(query);
-		preparedStmt.setInt(1, x);
-	      preparedStmt.setInt(2, y);
-	      preparedStmt.setInt(3, agentId); 
+		preparedStmt.setInt(1,placeId );
+	      preparedStmt.setInt(2, agentId); 
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+
+public void setHotelLocation(int hotelId,int placeId) {
+	
+	String query = " update hotel set placeId=? where hotelId=?; ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setInt(1,placeId );
+	      preparedStmt.setInt(2, hotelId); 
 	      preparedStmt.execute();
 
 	} catch (SQLException e) {
@@ -654,6 +671,17 @@ public void setOrderDate(int orderId,String date) {
 		e.printStackTrace();
 	}
     
+}
+public ResultSet getLocations() throws SQLException {
+	Statement stmt = con.createStatement();
+	return stmt.executeQuery("select * from places");
+	 
+}
+
+public ResultSet getLocation(int placeId) throws SQLException {
+	Statement stmt = con.createStatement();
+	return stmt.executeQuery("select * from places where placeId="+placeId);
+	 
 }
 
 }

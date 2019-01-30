@@ -22,9 +22,17 @@ public class LoginAction extends ActionSupport {
 	
 	private String username;
 	private String password;
-	private int x;
-	private int y;
+	private int locationId;
 	
+	
+	public int getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(int locationId) {
+		this.locationId = locationId;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -47,10 +55,6 @@ public class LoginAction extends ActionSupport {
 	        addFieldError("username","Name can't be blank");  
 	    if(password=="")  
 	        addFieldError("password","Password can't be blank"); 
-	    if(x>100||x<0)  
-	        addFieldError("x","Enter x within 0 to 100");  
-	    if(y<0||y>100)  
-	        addFieldError("y","Enter y within 0 to 100");  
 	    if(!username.matches(regex))
 	    	 addFieldError("username","Enter Proper Username");  
 	}  
@@ -64,7 +68,7 @@ public class LoginAction extends ActionSupport {
 		 Integer  agentId=app.agentLogin(username, password);
 		 if(agentId>0)
 		 {
-			 app.setAgentLocation(agentId,x,y);
+			 app.setAgentLocation(agentId,locationId);
 			 Agent agent=app.getAgent(agentId);
 			 ServletActionContext.getRequest().getSession().setAttribute("agent", agent);
 			 
@@ -75,21 +79,6 @@ public class LoginAction extends ActionSupport {
 		return "failure";
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
 	
 	 
 	

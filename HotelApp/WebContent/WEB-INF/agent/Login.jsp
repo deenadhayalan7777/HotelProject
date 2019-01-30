@@ -20,10 +20,6 @@
 	<div class="form-group">
 	<s:password name ="password" cssClass="form-control" placeholder ="Password:"/>
 	</div>
-	<div class="form-group">
-	<s:textfield name ="x" cssClass="form-control" placeholder="x"/>
-	<s:textfield name ="y" cssClass="form-control" placeholder="y"/>
-	</div>
 	
 	<s:submit value="login" onclick="" cssClass="btn btn-success btn-md" align="center"/>
 	

@@ -3,8 +3,13 @@ package hotel;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 
@@ -12,13 +17,32 @@ public class Application {
 	
 	
 	private static Application app=null;
-	
+	private Map<Integer,Order> currentOrders;
 	DaoAdapter db;
 	
+	public Map<Integer, Order> getCurrentOrders() {
+		return currentOrders;
+	}
+
 	private Application()
 	{
 		 db=DaoAdapter.getInstance();
-		
+		 currentOrders=new HashMap<Integer,Order>();
+		 Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+			       @Override
+			       public void run() {
+			          for(Order order:currentOrders.values())
+			          {
+			        	  if(order.getTimer()!=0)
+			        	  {  
+			        		  int timer=order.getTimer()-1;
+			        		  order.setTimer(timer);
+			        		  db.setOrderTimer(order.getOrderId(),timer);
+			        	  }
+			          }
+			       }
+			    }, 0, 10000);
 		
 	}
 	
@@ -44,14 +68,15 @@ public class Application {
 		
 		 return userId;
 	}
-	public int userSignUp(String username,String password,String phone, int x, int y)
+	public int userSignUp(String username,String password,String phone, int locationId)
 	{   
 		User user=db.getUser(username);
 		int userId=-2;
 		if(user==null)
 		{synchronized(this){
 			int userCount=getUserCount()+1;
-			db.setUser(new User(userCount,username,cryptWithMD5(password),phone,x,y));
+			db.setUser(new User(userCount,username,cryptWithMD5(password),phone));
+			setUserLocation(userId,locationId);
 			userId=userCount;
 			userCount++;
 		    }
@@ -73,7 +98,7 @@ public class Application {
 		 }
 		return agentId;
 	}
-	public int agentSignUp(String username,String password,String phone,int x, int y)
+	public int agentSignUp(String username,String password,String phone,int locationId)
 	{   
 		Agent agent=db.getAgent(username);
 		int agentId=-2;
@@ -81,7 +106,8 @@ public class Application {
 		{
 			synchronized(this){
 				int agentCount=getAgentCount()+1;
-			db.setAgent(new Agent(agentCount,username,cryptWithMD5(password),phone,x,y));
+			db.setAgent(new Agent(agentCount,username,cryptWithMD5(password),phone));
+			setAgentLocation(agentId, locationId);
 			agentId=agentCount;
 			agentCount++;
 		    }
@@ -104,14 +130,15 @@ public class Application {
 		 }
 		return hotelId;
 	}
-	public int hotelSignUp(String username,String password,String phone,int x,int y)
+	public int hotelSignUp(String username,String password,String phone,int locationId)
 	{
 		Hotel hotel=db.getHotel(username);
 		int hotelId=-2;
 		if(hotel==null)
 		{synchronized(this){
 			int hotelCount=getHotelCount()+1;
-			db.setHotel(new Hotel(hotelCount,username,cryptWithMD5(password),phone,x,y));
+			db.setHotel(new Hotel(hotelCount,username,cryptWithMD5(password),phone));
+			setHotelLocation(hotelId,locationId);
 			hotelId=hotelCount;
 			hotelCount++;
 		    }
@@ -282,17 +309,34 @@ public class Application {
 		
 	}
 
-	public void setUserLocation(Integer userId, int x, int y) {
-		db.setUserLocation(userId,x,y);
+	public void setHotelLocation(int hotelId, int locationId) {
+		db.setLocation(C.HOTEL,hotelId,locationId);
+		
+	}
+	public void setUserLocation(int userId, int locationId) {
+		db.setLocation(C.USER,userId,locationId);
 		
 	}
 
-	public void setAgentLocation(Integer agentId, int x, int y) {
-		db.setAgentLocation(agentId,x,y);
+	public void setAgentLocation( int agentId, int locationId) {
+		db.setLocation(C.AGENT,agentId,locationId);
 	}
 	
+	public Map<Integer,Location> getLocations()
+	{
+		return db.getLocations();
+		
+	}
 	
-
+	public List<String> getLocationNames()
+	{
+		List<String> locations=new ArrayList<String>();
+		for(Location location:getLocations().values())
+			locations.add(location.getName());
+		return locations;
+		
+	}
+	
 	public void setOrderDate(int orderId, Date date) {
 		db.setOrderDate(orderId, date);
 		
