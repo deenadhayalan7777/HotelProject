@@ -2,8 +2,6 @@ package controller.agentController;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,11 +9,11 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import hotel.Agent;
 import hotel.Application;
-import hotel.Hotel;
+
 import hotel.Location;
-import hotel.Order;
-import hotel.User;
+
 
 
 public class LocationAction extends ActionSupport {
@@ -27,10 +25,10 @@ public class LocationAction extends ActionSupport {
 		
 		Application app=Application.getInstance();
 		HttpSession session=ServletActionContext.getRequest().getSession(); 
-		User user=(User) session.getAttribute("user");
+		Agent agent=(Agent) session.getAttribute("agent");
 		Location loc=app.getLocation(location);
-		app.setUserLocation(user.getUserId(), loc.getLocationId());
-		user.setLocation(loc);
+		app.setAgentLocation(agent.getAgentId(), loc.getLocationId());
+		agent.setLocation(loc);
 	    return "success";
 		
 	}
