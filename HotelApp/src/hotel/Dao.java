@@ -15,7 +15,7 @@ public class Dao {
 			//con=DriverManager.getConnection( "jdbc:mysql://localhost:3306/hotel","root","root1234");
 			System.out.println("Database connection established");
 			String query="create table if not exists HOTEL (hotelId int,username varchar(25) unique not null,"
-					+ "password varchar(50) not null,phone varchar(10) not null,rating int default 5,status int default 1,x int default 0, y int default 0, primary key(hotelId))";
+					+ "password varchar(50) not null,phone varchar(10) not null,rating int default 5,status int default 1,placeId int , primary key(hotelId),foreign key(placeId) references places(placeId) on delete set null)";
 
 			Statement stmt = con.createStatement();
 		    stmt.execute(query);
@@ -41,7 +41,7 @@ public class Dao {
 		    stmt.execute(query);
 		    
 		    query="create table if not exists user (userId int,username varchar(25) unique not null,"
-		    		+ "password varchar(50) not null,phone varchar(10) not null,x int default 0, y int default 0, primary key(userId))";
+		    		+ "password varchar(50) not null,phone varchar(10) not null,placeId int , primary key(userId),foreign key(placeId) references places(placeId) on delete set null)";
 		    
 		    stmt.execute(query);
 		    
@@ -50,7 +50,7 @@ public class Dao {
 		    stmt.execute(query);
 		    
 		    query="create table if not exists agent(agentId int,username varchar(25) unique not null,"
-		    		+ "password varchar(50) not null,phone varchar(10) not null,x int default 0, y int default 0, primary key(agentId))";
+		    		+ "password varchar(50) not null,phone varchar(10) not null,placeId int,  primary key(agentId),foreign key(placeId) references places(placeId) on delete set null)";
 		    stmt.execute(query);
 		   
 		    query=" create table if not exists agent_orders(agentId int,orderId int,"
@@ -60,6 +60,12 @@ public class Dao {
 		    query="create table if not exists order_time(orderId int,timer int default 0,foreign key(orderId) references orders(orderId))";
 		    stmt.execute(query);
 		    
+		    query="create table if not exists places(placeId int,name varchar(50) unique,x int default 0,y int default 0)";
+		    stmt.execute(query);
+		    
+		    query="create table if not exists path(source int,dest int,foreign key(source) references places(placeId) on delete cascade,foreign key(dest) references places(placeId) on delete cascade)";
+		    stmt.execute(query);
+		    
 		} catch (ClassNotFoundException e) {
 			
 			e.printStackTrace();
@@ -67,10 +73,10 @@ public class Dao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -688,6 +694,85 @@ public ResultSet getLocation(String placeName) throws SQLException {
 	Statement stmt = con.createStatement();
 	return stmt.executeQuery("select * from places where name='"+placeName+"'");
 	 
+}
+
+public void deleteLocations() {
+	
+	String query = " truncate table places ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		  preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+
+public void deletePaths() {
+	
+	String query = " truncate table path ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		  preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+
+public void addLocation(String name,int x,int y) {
+	
+	String query = " insert into places(name,x,y) values (?,?,?) ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setString(1, name);
+	      preparedStmt.setInt(2, x);
+	      preparedStmt.setInt(3, y);
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+
+public void addPath(int source,int dest) {
+	
+	String query = " insert into path values (?,?) ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		preparedStmt.setInt(1, source);
+	      preparedStmt.setInt(2, dest);
+	     
+	      preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+public ResultSet getAllUsersCurrentOrders() throws SQLException {
+	 Statement stmt=con.createStatement();
+	   return stmt.executeQuery(" select orders.orderId from user_orders inner join orders on user_orders.orderId=orders.orderId where status <=2  ");
+	   
 }
 
 }

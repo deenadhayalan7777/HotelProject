@@ -103,13 +103,7 @@
   
 </form>
 </div>
-<s:form action="location" method="post">
-<s:select label="Location" 
-		headerKey="-1" headerValue="%{#session.agent.location.name}"
-		list="#session.locations" 
-		name="location" />
-<s:submit value="submit" name="submit" />		
-</s:form>
+
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">

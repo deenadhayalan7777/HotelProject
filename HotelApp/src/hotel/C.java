@@ -43,4 +43,7 @@ public static final	int ORDER=4;
 public static final	int CHECKING=5;
 public static final	int WAITING=0;
 
+public static final	String pathFile="path.text";
+public static final	String placeFile="place.text";
+
 }

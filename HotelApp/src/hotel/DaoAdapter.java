@@ -487,6 +487,24 @@ public void setOrderTimer(int orderId, int timer) {
 	
 }
 
+public void addLocation(String name,int x,int y)
+{
+	dao.addLocation(name, x, y);
+}
+
+public void addPath(int source,int dest)
+{
+	dao.addPath( source, dest);
+}
+
+public void deleteLocations()
+{
+	dao.deleteLocations();
+}
+public void deletePaths()
+{
+	dao.deletePaths();
+}
 public Location getLocation(int locationId)
 {
     Location location=null;
@@ -525,6 +543,26 @@ public Map<Integer, Location> getLocations() {
 	}
 	
 	return locations;
+}
+
+public Map<Integer, Order> getAllUsersCurrentOrders() {
+	
+	Map<Integer,Order> orders=new HashMap<Integer,Order>();
+	   try {
+		   ResultSet rs =dao.getAllUsersCurrentOrders();
+	 	   
+			while(rs.next())  
+			{ 
+			  Order order=getOrder(rs.getInt(1));
+			  if(order!=null)
+			  orders.put(order.getOrderId(), order);
+			  else
+				  System.out.println("order is null");
+			}
+			
+		} catch (SQLException e) {System.out.println(e);} 
+	  
+	   return orders;
 }
 
 

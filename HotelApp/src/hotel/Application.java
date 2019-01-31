@@ -1,6 +1,10 @@
 package hotel;
 
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -27,25 +31,19 @@ public class Application {
 	private Application()
 	{
 		 db=DaoAdapter.getInstance();
-		 currentOrders=new HashMap<Integer,Order>();
-		 Timer timer = new Timer();
-			timer.schedule(new TimerTask() {
-			       @Override
-			       public void run() {
-			          for(Order order:currentOrders.values())
-			          {
-			        	  if(order.getTimer()!=0)
-			        	  {  
-			        		  int timer=order.getTimer()-1;
-			        		  order.setTimer(timer);
-			        		  db.setOrderTimer(order.getOrderId(),timer);
-			        	  }
-			          }
-			       }
-			    }, 0, 10000);
+		 currentOrders=getAllUsersCurrentOrders();
+		 startTimer();
+		 populateLocations();
+		 populatePaths();
 		
 	}
 	
+	
+	private Map<Integer, Order> getAllUsersCurrentOrders() {
+		
+		return db.getAllUsersCurrentOrders();
+	}
+
 	public static Application getInstance()
 	{
 		if(app==null)
@@ -372,5 +370,81 @@ public class Application {
 		}
 		
 	}
+	
+	public void startTimer()
+	{
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+		       @Override
+		       public void run() {
+		          for(Order order:currentOrders.values())
+		          {
+		        	  if(order.getTimer()!=0)
+		        	  {  
+		        		  int timer=order.getTimer()-1;
+		        		  order.setTimer(timer);
+		        		  db.setOrderTimer(order.getOrderId(),timer);
+		        	  }
+		          }
+		       }
+		    }, 0, 10000);
+	}
+	
+private void populatePaths() {
+		
+		
+		String pathText=getStringFromFile(C.pathFile);
+		if(pathText!=null)
+		{   
+			db.deletePaths();
+			String[] paths = pathText.split(",");
+			for(String path:paths)
+			{
+				String[] p=path.split(" ");
+				int source=Integer.parseInt(p[0]);
+				int dest=Integer.parseInt(p[1]);
+				db.addPath(source, dest);
+			}
+		}
+
+	}
+
+	private String getStringFromFile(String fileName) {
+		
+		String text="";
+		try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+		    String line;
+		    while ((line = br.readLine()) != null) 
+              text+=line; 
+            br.close();
+
+		   } catch (IOException e) {
+		    System.out.println("ERROR: unable to read file " + fileName);
+		    e.printStackTrace();   
+		    }
+		return text;
+	}
+
+	private void populateLocations() {
+		
+		String placeText=getStringFromFile(C.placeFile);
+		if(placeText!=null)
+		{   
+			db.deleteLocations();
+			String[] places = placeText.split(",");
+			for(String place:places)
+			{
+				String[] p=place.split(" ");
+				String name=p[0];
+				int x=Integer.parseInt(p[1]);
+				int y=Integer.parseInt(p[2]);
+				db.addLocation(name, x, y);
+			}
+		}
+
+		
+	}
+
 	
 }
