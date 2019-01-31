@@ -2,6 +2,7 @@ package controller.agentController;
 
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -70,8 +71,9 @@ public class LoginAction extends ActionSupport {
 		 {
 			 app.setAgentLocation(agentId,locationId);
 			 Agent agent=app.getAgent(agentId);
+			 List<String> locations=app.getLocationNames();
 			 ServletActionContext.getRequest().getSession().setAttribute("agent", agent);
-			 ServletActionContext.getRequest().getSession().setAttribute("locations", app.getLocationNames());
+			 ServletActionContext.getRequest().getSession().setAttribute("locations", locations);
 				
 			 
 			 return "success";

@@ -75,32 +75,7 @@
   </div>
 </form>
 </div>
-         
-         <c:set var="id" value="1" scope="page" />
-         <s:iterator value="#session.locations" status="stat">
-         <td><s:property /></td>
-         <c:set var="id" value="${id + 1}" scope="page"/>
-         </s:iterator>
-<s:form action="location" method="get">
-<s:select label="Location"
-        name="location"
-        list="#session.locations"
-        listKey="locationId"
-        listValue="name"
-        headerKey="-1"
-        headerValue="%{#session.user.location.name}"
-       
-        value="%{#session.locations.locationId}"
- />
-
-<s:submit value="change" cssClass="btn btn-success btn-md" align="center"/>
-</s:form>
-
-<s:iterator value="#session.locations" status="stat">
-<s:hidden id="id%{#stat.index}" name="id" value="%{locationId}"></s:hidden>
-<s:hidden id="name%{stat.index}" name="id" ><s:property value="%{name}"/></s:hidden>
-</s:iterator>
-
+ 
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">
