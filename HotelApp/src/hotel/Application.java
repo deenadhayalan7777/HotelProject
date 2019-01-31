@@ -437,13 +437,15 @@ private void populatePaths() {
 		{   
 			db.deleteLocations();
 			String[] places = placeText.split(",");
+			int i=1;
 			for(String place:places)
 			{
 				String[] p=place.split(" ");
 				String name=p[0];
 				int x=Integer.parseInt(p[1]);
 				int y=Integer.parseInt(p[2]);
-				db.addLocation(name, x, y);
+				db.addLocation(i,name, x, y);
+				i++;
 			}
 		}
 

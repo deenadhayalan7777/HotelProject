@@ -730,17 +730,18 @@ public void deletePaths() {
     
 }
 
-public void addLocation(String name,int x,int y) {
+public void addLocation(int id, String name,int x,int y) {
 	
-	String query = " insert into places(name,x,y) values (?,?,?) ";
+	String query = " insert into places values (?,?,?,?) ";
 
     
     PreparedStatement preparedStmt;
 	try {
 		preparedStmt = con.prepareStatement(query);
-		preparedStmt.setString(1, name);
-	      preparedStmt.setInt(2, x);
-	      preparedStmt.setInt(3, y);
+		 preparedStmt.setInt(1, id);
+		preparedStmt.setString(2, name);
+	      preparedStmt.setInt(3, x);
+	      preparedStmt.setInt(4, y);
 	      preparedStmt.execute();
 
 	} catch (SQLException e) {

@@ -487,9 +487,9 @@ public void setOrderTimer(int orderId, int timer) {
 	
 }
 
-public void addLocation(String name,int x,int y)
+public void addLocation(int id,String name,int x,int y)
 {
-	dao.addLocation(name, x, y);
+	dao.addLocation(id,name, x, y);
 }
 
 public void addPath(int source,int dest)
