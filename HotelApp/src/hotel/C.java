@@ -44,6 +44,6 @@ public static final	int CHECKING=5;
 public static final	int WAITING=0;
 
 public static final	String pathFile="path.txt";
-public static final	String placeFile="/webapps/HotelApp/place.txt";
+public static final	String placeFile="place.txt";
 
 }

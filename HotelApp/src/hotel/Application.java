@@ -392,9 +392,6 @@ public class Application {
 	
 private void populatePaths() {
 		
-	
-		String fileName=System.getProperty("catalina.base")+C.pathFile;
-		System.out.println(fileName);
 		String pathText=getStringFromFile(C.pathFile);
 		if(pathText!=null)
 		{   
@@ -430,9 +427,7 @@ private void populatePaths() {
 
 	private void populateLocations() {
 		
-		String fileName=System.getProperty("catalina.base")+C.placeFile;
-		System.out.println(fileName);
-		String placeText=getStringFromFile(fileName);
+		String placeText=getStringFromFile(C.placeFile);
 		if(placeText!=null)
 		{   
 			db.deleteLocations();
@@ -449,7 +444,6 @@ private void populatePaths() {
 			}
 		}
 
-		
 	}
 
 	
