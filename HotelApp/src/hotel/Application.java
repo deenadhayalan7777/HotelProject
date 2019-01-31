@@ -395,7 +395,7 @@ private void populatePaths() {
 	
 		String fileName=System.getProperty("catalina.base")+C.pathFile;
 		System.out.println(fileName);
-		String pathText=getStringFromFile(fileName);
+		String pathText=getStringFromFile(C.pathFile);
 		if(pathText!=null)
 		{   
 			db.deletePaths();
