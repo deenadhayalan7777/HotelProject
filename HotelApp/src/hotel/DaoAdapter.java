@@ -78,6 +78,7 @@ public class DaoAdapter {
 				String phone=rs.getString(4);
 				int status=rs.getInt(6);
 				Hotel hotel=new Hotel(hotelId,username,password,phone);
+				hotel.setLocation(getLocation(rs.getInt(7)));
 				hotel.setStatus(status);
 				return hotel;
 			}
