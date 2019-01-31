@@ -33,8 +33,7 @@ public class RateOrderAction extends ActionSupport{
 	{
 		
 		Application app=Application.getInstance();
-		HttpSession session=ServletActionContext.getRequest().getSession(); 
-		User user=(User) session.getAttribute("user");
+		
 		
 		app.setOrderRating(orderId, rating);
 		app.setOrderStatus(orderId, C.RATED);

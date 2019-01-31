@@ -64,6 +64,10 @@
 		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/user/User.jsp</result>  
 	</action>
+	<action name="location" class="controller.userController.LocationAction">  
+		<result name="success" type="redirectAction">home</result> 
+		<result name="failure">/user/User.jsp</result>  
+	</action>
 	<action name="rateorderaction" class="controller.userController.RateOrderAction">  
 		<result name="success" type="redirectAction">home</result>
 		<result name="failure">/user/User.jsp</result>  

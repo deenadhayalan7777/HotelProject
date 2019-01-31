@@ -336,7 +336,10 @@ public class Application {
 		return locations;
 		
 	}
-	
+	public Location getLocation(Object obj)
+	{
+		return db.getLocation(obj);
+	}
 	public void setOrderDate(int orderId, Date date) {
 		db.setOrderDate(orderId, date);
 		

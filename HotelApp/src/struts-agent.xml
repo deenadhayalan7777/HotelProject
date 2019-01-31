@@ -54,7 +54,10 @@
 		<result name="failure" type="redirectAction">signup</result>  
 		</action>
 	
-	    
+	    <action name="location" class="controller.agentController.LocationAction">  
+		<result name="success" type="redirectAction">home</result> 
+		<result name="failure">/agent/SignUp.jsp</result>  
+		</action>
 		
 		<action name="deliveryaction" class="controller.agentController.DeliveryAction">  
 		<result name="success" type="redirectAction">home</result> 

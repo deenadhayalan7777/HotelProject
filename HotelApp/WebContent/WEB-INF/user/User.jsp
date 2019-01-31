@@ -74,11 +74,10 @@
 </div>
 
 <s:form action="location" method="post">
-<s:hidden name="userId"><s:property value=" #session.user.userId"/></s:hidden>
 <s:select label="Location" 
-		headerKey="-1" headerValue="%{#session.location}"
+		headerKey="-1" headerValue="%{#session.user.location.name}"
 		list="#session.locations" 
-		name="locations" />
+		name="location" />
 <s:submit value="submit" name="submit" />		
 </s:form>
 

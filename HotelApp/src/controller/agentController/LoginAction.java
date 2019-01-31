@@ -71,6 +71,8 @@ public class LoginAction extends ActionSupport {
 			 app.setAgentLocation(agentId,locationId);
 			 Agent agent=app.getAgent(agentId);
 			 ServletActionContext.getRequest().getSession().setAttribute("agent", agent);
+			 ServletActionContext.getRequest().getSession().setAttribute("locations", app.getLocationNames());
+				
 			 
 			 return "success";
 			 

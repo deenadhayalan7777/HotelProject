@@ -684,4 +684,10 @@ public ResultSet getLocation(int placeId) throws SQLException {
 	 
 }
 
+public ResultSet getLocation(String placeName) throws SQLException {
+	Statement stmt = con.createStatement();
+	return stmt.executeQuery("select * from places where name='"+placeName+"'");
+	 
+}
+
 }
