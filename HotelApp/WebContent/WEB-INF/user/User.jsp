@@ -73,7 +73,7 @@
 </form>
 </div>
 
-<s:form action="location" method="post">
+<s:form action="location" method="get">
 <s:select label="Location" 
 		headerKey="-1" headerValue="%{#session.user.location.name}"
 		list="#session.locations" 

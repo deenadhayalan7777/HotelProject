@@ -29,7 +29,7 @@ public class LocationAction extends ActionSupport {
 		HttpSession session=ServletActionContext.getRequest().getSession(); 
 		User user=(User) session.getAttribute("user");
 		Location loc=app.getLocation(location);
-		if(location==null)
+		if(loc==null)
 			System.out.println("Location null");
 		else
 		{app.setUserLocation(user.getUserId(), loc.getLocationId());
