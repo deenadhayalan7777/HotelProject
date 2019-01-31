@@ -698,7 +698,7 @@ public ResultSet getLocation(String placeName) throws SQLException {
 
 public void deleteLocations() {
 	
-	String query = " truncate table places ";
+	String query = " delete from places ";
 
     
     PreparedStatement preparedStmt;
