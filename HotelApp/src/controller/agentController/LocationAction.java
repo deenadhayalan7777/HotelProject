@@ -18,7 +18,7 @@ import hotel.Location;
 
 public class LocationAction extends ActionSupport {
 
-	private String location;
+	private int id;
 	
 	public String execute() 
 	{
@@ -26,23 +26,23 @@ public class LocationAction extends ActionSupport {
 		Application app=Application.getInstance();
 		HttpSession session=ServletActionContext.getRequest().getSession(); 
 		Agent agent=(Agent) session.getAttribute("agent");
-		Location loc=app.getLocation(location);
+		Location loc=app.getLocation(id);
 		app.setAgentLocation(agent.getAgentId(), loc.getLocationId());
 		agent.setLocation(loc);
 	    return "success";
 		
 	}
 
-
-	public String getLocation() {
-		return location;
+	public int getId() {
+		return id;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
+	
 	
 	 
 	
