@@ -584,7 +584,7 @@ public void setUserLocation(int userId,int placeId) {
 	try {
 		preparedStmt = con.prepareStatement(query);
 		preparedStmt.setInt(1, placeId);
-	      preparedStmt.setInt(3, userId);
+	      preparedStmt.setInt(2, userId);
 	      preparedStmt.execute();
 
 	} catch (SQLException e) {

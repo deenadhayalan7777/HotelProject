@@ -78,7 +78,7 @@
 		headerKey="-1" headerValue="%{#session.user.location.name}"
 		list="#session.locations" 
 		name="location" />
-<s:submit value="submit" name="submit" />		
+<s:submit label="change" />		
 </s:form>
 
 <s:iterator value="#session.locations" status="stat">
