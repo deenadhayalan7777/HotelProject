@@ -43,8 +43,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
          <c:set var="id" value="1" scope="page" />
          <s:iterator value="#session.locations" status="stat">
-         <a class="dropdown-item" href="location?id=${id}"><s:property value="name"/></a>
-         <c:set var="count" value="${count + 1}" scope="page"/>
+         <a class="dropdown-item" href="location?id=${id}"><s:property /></a>
+         <c:set var="id" value="${id + 1}" scope="page"/>
          </s:iterator>         
         </div>
       </li> 
@@ -75,7 +75,12 @@
   </div>
 </form>
 </div>
-
+         
+         <c:set var="id" value="1" scope="page" />
+         <s:iterator value="#session.locations" status="stat">
+         <td><s:property /></td>
+         <c:set var="id" value="${id + 1}" scope="page"/>
+         </s:iterator>
 <s:form action="location" method="get">
 <s:select label="Location"
         name="location"
