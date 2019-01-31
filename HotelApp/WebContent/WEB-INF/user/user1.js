@@ -4,7 +4,7 @@
 
 function test(s){
 	 
-	  size=parseInt(s,h);
+	  size=parseInt(s);
 	  if(size==0)
 		  document.getElementById("hotelcontainer").innerHTML ="No Hotels";
 	  
