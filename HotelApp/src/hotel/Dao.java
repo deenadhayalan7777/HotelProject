@@ -713,6 +713,24 @@ public void deleteLocations() {
     
 }
 
+public void setAllHotelLocation() {
+	
+	String query = " update hotel set placeId=1 where hotelId>0 ";
+
+    
+    PreparedStatement preparedStmt;
+	try {
+		preparedStmt = con.prepareStatement(query);
+		  preparedStmt.execute();
+
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+    
+}
+
+
 public void deletePaths() {
 	
 	String query = " truncate table path ";

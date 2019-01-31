@@ -27,9 +27,8 @@ public class OrderAcceptAction extends ActionSupport {
 	{
 		
 		Application app=Application.getInstance();
-		 Date date=new Date();
+		
         app.setOrderStatus(orderId, C.ACCEPTED);
-        app.setOrderDate(orderId,date);
         app.setOrderTimer(orderId);
         Order order=app.getOrder(orderId);
         app.getCurrentOrders().put(orderId, order);

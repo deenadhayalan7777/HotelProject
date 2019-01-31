@@ -366,6 +366,7 @@ public class Application {
 			Location hotelLocation=getHotel(order.getHotelId()).getLocation();
 			int deliverTime=getUser(order.getUserId()).getLocation().getDistance(hotelLocation);
 			db.setOrderTimer(orderId, deliverTime);
+			currentOrders.get(orderId).setTimer(deliverTime);
 			
 		}
 		
@@ -387,7 +388,7 @@ public class Application {
 		        	  }
 		          }
 		       }
-		    }, 0, 10000);
+		    }, 0, 60000);
 	}
 	
 private void populatePaths() {
@@ -447,6 +448,7 @@ private void populatePaths() {
 				db.addLocation(i,name, x, y);
 				i++;
 			}
+			db.setAllHotelLocation();
 		}
 
 		

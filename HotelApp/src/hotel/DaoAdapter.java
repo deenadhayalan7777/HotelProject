@@ -565,5 +565,9 @@ public Map<Integer, Order> getAllUsersCurrentOrders() {
 	   return orders;
 }
 
+public void setAllHotelLocation()
+{
+	dao.setAllHotelLocation();
+}
 
 }

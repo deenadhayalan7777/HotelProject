@@ -54,9 +54,8 @@ public class PickUpAction extends ActionSupport{
 		{
 			app.addAgentOrder(agentId, orderId);
 			app.setOrderStatus(orderId, C.ASSIGNED);
-			Date date=new Date();
-			app.setOrderDate(orderId, date);
 			app.setOrderTimer(orderId);
+		
 		}
 		
 		
