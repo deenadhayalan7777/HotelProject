@@ -20,7 +20,7 @@ import hotel.User;
 
 public class LocationAction extends ActionSupport {
 
-	private String location;
+	private int location;
 	
 	public String execute() 
 	{
@@ -39,15 +39,16 @@ public class LocationAction extends ActionSupport {
 		
 	}
 
-
-	public String getLocation() {
+	public int getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(int location) {
 		this.location = location;
 	}
 
+
+	
 
 	
 	 

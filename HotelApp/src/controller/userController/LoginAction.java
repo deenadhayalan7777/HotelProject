@@ -4,6 +4,7 @@ package controller.userController;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +67,7 @@ public class LoginAction extends ActionSupport {
 			 
 			 List<String> locations=app.getLocationNames();
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
-			 ServletActionContext.getRequest().getSession().setAttribute("locations", locations);
+			 ServletActionContext.getRequest().getSession().setAttribute("locations", new ArrayList<Location>(app.getLocations().values()));
 			
 			 return "success";
 			 

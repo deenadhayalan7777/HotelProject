@@ -74,11 +74,20 @@
 </div>
 
 <s:form action="location" method="get">
-<s:select label="Location" 
-		headerKey="-1" headerValue="%{#session.user.location.name}"
-		list="#session.locations" 
-		name="location" />
-<s:submit label="change" />		
+<s:select label="Location"
+        name="location"
+        list="#session.locations"
+        listKey="locationId"
+        listValue="name"
+        headerKey="-1"
+        headerValue="%{#session.user.location.name}"
+        multiple="true"
+        size="3"
+        required="true"
+        value="%{#session.locations.locationId}"
+ />
+
+<s:submit value="change" cssClass="btn btn-success btn-md" align="center"/>
 </s:form>
 
 <s:iterator value="#session.locations" status="stat">
