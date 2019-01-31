@@ -34,7 +34,7 @@ public static final	int ASSIGNED=2;
 public static final	int DELIVERED=3;
 public static final	int RATED=4;
 public static final int ORDER_LIMIT=2;
-public static final	int DELIVERY=4;
+public static final	int DELIVERY=4; 
 public static final	int LOGOUT=5;
 public static final	int HOTEL=1;
 public static final	int USER=2;
@@ -43,7 +43,7 @@ public static final	int ORDER=4;
 public static final	int CHECKING=5;
 public static final	int WAITING=0;
 
-public static final	String pathFile="HotelApp/path.text";
-public static final	String placeFile="HotelApp/place.text";
+public static final	String pathFile="/WEB-INF/path.text";
+public static final	String placeFile="/WEB-INF/place.text";
 
 }
