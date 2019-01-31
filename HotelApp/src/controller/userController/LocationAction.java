@@ -20,7 +20,7 @@ import hotel.User;
 
 public class LocationAction extends ActionSupport {
 
-	private int location;
+	private int id;
 	
 	public String execute() 
 	{
@@ -28,23 +28,25 @@ public class LocationAction extends ActionSupport {
 		Application app=Application.getInstance();
 		HttpSession session=ServletActionContext.getRequest().getSession(); 
 		User user=(User) session.getAttribute("user");
-		Location loc=app.getLocation(location);
+		Location loc=app.getLocation(id);
 		if(loc==null)
 			System.out.println("Location null");
 		else
-		{app.setUserLocation(user.getUserId(), loc.getLocationId());
-		user.setLocation(loc);
-		}
+		{ app.setUserLocation(user.getUserId(), loc.getLocationId());
+		  user.setLocation(loc);
+		 }
 	    return "success";
 		
 	}
 
-	public int getLocation() {
-		return location;
+	
+
+	public int getId() {
+		return id;
 	}
 
-	public void setLocation(int location) {
-		this.location = location;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

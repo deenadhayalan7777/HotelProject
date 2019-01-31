@@ -65,9 +65,9 @@ public class LoginAction extends ActionSupport {
 			 
 			 User user=app.getUser(userId);
 			 
-			 List<String> locations=app.getLocationNames();
+			Map<Integer,Location> locations=app.getLocations();
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
-			 ServletActionContext.getRequest().getSession().setAttribute("locations", new ArrayList<Location>(app.getLocations().values()));
+			 ServletActionContext.getRequest().getSession().setAttribute("locations", locations);
 			
 			 return "success";
 			 

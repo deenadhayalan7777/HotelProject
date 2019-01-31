@@ -487,16 +487,14 @@ public void setOrderTimer(int orderId, int timer) {
 	
 }
 
-public Location getLocation(Object locationId)
+public Location getLocation(int locationId)
 {
     Location location=null;
     ResultSet rs;
     
 	try {
-		if(locationId instanceof String)
-		 rs = dao.getLocation((String)locationId);
-		else
-		 rs=dao.getLocation((int)locationId);	
+		
+		 rs=dao.getLocation(locationId);	
 		 while(rs.next())
 		 {
 			 location=new Location(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4));

@@ -12,9 +12,7 @@ public Location(int locationId, String name,int x, int y) {
 	this.locationId = locationId;
 	this.name = name;
 }
-public Location()
-{
-}
+
 public int getX() {
 	return x;
 }
