@@ -22,6 +22,7 @@ public class Order implements Serializable {
     private String hotelname;
     private String agentname;
     private int timer;
+    private List<Integer> path;
     
 	public Order(int orderId,List<ItemQuantity> itemsList, int total,String phoneNo,int discount,int hotelId,int userId) {
 		
@@ -36,6 +37,7 @@ public class Order implements Serializable {
 		setStatus(C.WAITING);
 		date= new Date();
 		timer=0;
+		setPath(null);
 	}
 	
 	
@@ -155,6 +157,16 @@ public class Order implements Serializable {
 
 	public void setTimer(int timer) {
 		this.timer = timer;
+	}
+
+
+	public List<Integer> getPath() {
+		return path;
+	}
+
+
+	public void setPath(List<Integer> path) {
+		this.path = path;
 	}
     
     

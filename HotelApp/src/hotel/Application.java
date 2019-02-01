@@ -8,20 +8,24 @@ import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Timer;
 import java.util.TimerTask;
-
-
 
 public class Application {
 	
 	
 	private static Application app=null;
 	private Map<Integer,Order> currentOrders;
+	private Map<Integer,List<Node>> map;
+	private Map<Integer,Location> locations;
+	
+
 	DaoAdapter db;
 	
 	public Map<Integer, Order> getCurrentOrders() {
@@ -35,7 +39,8 @@ public class Application {
 		 startTimer();
 		 populateLocations();
 		 populatePaths();
-		
+		 locations=db.getLocations();
+		 map=computeMap();
 	}
 	
 	
@@ -322,7 +327,7 @@ public class Application {
 	
 	public Map<Integer,Location> getLocations()
 	{
-		return db.getLocations();
+		return locations;
 		
 	}
 	
@@ -364,10 +369,13 @@ public class Application {
 		if(order.getStatus()==C.ASSIGNED)
 		{
 			Location hotelLocation=getHotel(order.getHotelId()).getLocation();
-			int deliverTime=getUser(order.getUserId()).getLocation().getDistance(hotelLocation);
+		    Location userLocation=getUser(order.getUserId()).getLocation();
+		    List<Integer> path=getPath(hotelLocation.getLocationId(),userLocation.getLocationId());
+		    printPath(path);
+		    int deliverTime=getPathDistance(path);
 			db.setOrderTimer(orderId, deliverTime);
 			currentOrders.get(orderId).setTimer(deliverTime);
-			
+		
 		}
 		
 	}
@@ -391,7 +399,7 @@ public class Application {
 		    }, 0, 60000);
 	}
 	
-private void populatePaths() {
+  private void populatePaths() {
 		
 	
 		String fileName=System.getProperty("catalina.base")+C.conf+C.pathFile;
@@ -453,6 +461,97 @@ private void populatePaths() {
 
 		
 	}
-
 	
+	
+	public Map<Integer,List<Node>> computeMap()
+	{
+		Map<Integer,List<Node>> map= new HashMap<Integer,List<Node>>();
+		Map<Integer,Location> locations=getLocations();
+		for(Location location:locations.values())
+		{
+			Node sourceNode=new Node(location.getLocationId(),null,0);
+			List<Node> nodes=new ArrayList<Node>();
+			List<Integer> adjacentList=db.getAdjacentList(location.getLocationId());
+		    for(int id:adjacentList)
+		    {
+		    	int distance= location.getDistance(locations.get(id));
+		    	nodes.add(new Node(id,sourceNode,distance));
+		    }
+		    map.put(location.getLocationId(), nodes);
+		}
+		
+		return map;
+		
+	}
+   
+	public List<Integer> getPath(int source,int dest)
+	{
+		
+		List<Integer> path=new ArrayList<Integer>();
+		Comparator<Node> comparator = (n1, n2) -> {
+            return n1.getDistance() - n2.getDistance();
+        };
+        
+        PriorityQueue<Node> pq = new PriorityQueue<>(comparator);
+        Node sourceNode=new Node(source,null,0);
+        pq.add(sourceNode);
+	    Node destNode=sourceNode;
+		while(!pq.isEmpty())
+		{
+			Node currentNode=pq.remove();
+			if(currentNode.getId()==dest)
+			{
+				destNode=currentNode;
+				break;
+			}
+		  List<Node> adjNodes=map.get(currentNode.getId());
+		  for(Node node:adjNodes)
+		  {  
+			 node.setSource(currentNode); 
+			 int distance=node.getDistance()+currentNode.getDistance();
+			 node.setDistance(distance);
+			 pq.add(node);
+		  }
+		 
+		}
+		while(destNode.getSource()!=null)
+		{
+        	path.add(destNode.getId());
+			Node previousNode=destNode.getSource();
+			destNode=previousNode;
+		}
+		
+		path.add(source);
+		List<Integer> p=new ArrayList<Integer>();
+		for(int i=path.size()-1;i>=0;i--)
+		{
+			p.add(path.get(i));
+		}
+	
+		return p;
+	
+	}
+	
+	public int getPathDistance(List<Integer> path)
+	{
+		int distance=0;
+		
+		for(int i=0;i<path.size()-1;i++)
+		{
+			Location source=getLocations().get(path.get(i));
+			Location dest=getLocations().get(path.get(i+1));
+			distance+=source.getDistance(dest);
+		}
+		
+		return distance;
+		
+	}
+	
+	public void printPath(List<Integer> path)
+	{
+		System.out.println("path is ");
+		for(int i:path)
+			System.out.print("\t"+i);
+	}
+
 }

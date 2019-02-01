@@ -571,4 +571,28 @@ public void setAllHotelLocation()
 	dao.setAllHotelLocation();
 }
 
+public List<Integer> getAdjacentList(int id)
+{
+	List<Integer> list=new ArrayList<Integer>();
+	try {
+		ResultSet rs=dao.getDestinations(id);
+		while(rs.next())
+		{
+			list.add(rs.getInt(1));
+	    }
+		
+		rs=dao.getSources(id);
+		while(rs.next())
+		{
+			list.add(rs.getInt(1));
+	    }
+	   } catch (SQLException e) {
+		
+		e.printStackTrace();
+	  }
+	
+	
+	return list;
+}
+
 }

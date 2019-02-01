@@ -794,4 +794,17 @@ public ResultSet getAllUsersCurrentOrders() throws SQLException {
 	   
 }
 
+public ResultSet getDestinations(int source) throws SQLException
+{
+	 Statement stmt=con.createStatement();
+	   return stmt.executeQuery(" select dest from path where source="+source);
+}
+
+public ResultSet getSources(int dest) throws SQLException
+{
+	 Statement stmt=con.createStatement();
+	 return stmt.executeQuery(" select source from path where dest="+dest);
+ 
+}
+
 }
