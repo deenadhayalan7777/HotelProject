@@ -224,7 +224,7 @@ public Agent getAgent(int agentId)
 	   try {
 		  
 		   
-		   DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+		   DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		   String strDate = dateFormat.format(order.getDate());
 		dao.setOrder(order.getOrderId(), order.getTotal(), order.getDiscount(),order.getRating(), strDate, order.getStatus());
 		dao.addUserOrder(order.getUserId(), order.getOrderId());
