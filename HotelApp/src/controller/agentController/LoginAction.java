@@ -69,7 +69,7 @@ public class LoginAction extends ActionSupport {
 		 Integer  agentId=app.agentLogin(username, password);
 		 if(agentId>0)
 		 {
-			 app.setAgentLocation(agentId,locationId);
+			 
 			 Agent agent=app.getAgent(agentId);
 			 List<String> locations=app.getLocationNames();
 			 ServletActionContext.getRequest().getSession().setAttribute("agent", agent);
