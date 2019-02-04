@@ -572,7 +572,7 @@ public class Application {
 		int x=0,y=0, distance=0;
 		int timer=order.getTimer();
 	
-		for(int i=path.size()-1;i>0;i++)
+		for(int i=path.size()-1;i>0;i--)
 		{
 			Location source=getLocations().get(path.get(i));
 			Location dest=getLocations().get(path.get(i-1));
