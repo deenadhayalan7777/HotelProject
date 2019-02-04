@@ -108,7 +108,7 @@ public class MapAction extends ActionSupport{
 		Hotel hotel=app.getHotel(order.getHotelId());
 		Agent agent=app.getAgent(order.getAgentId());
 		userJson="{name: "+ user.getUsername()+ ",x:"+user.getLocation().getX()+10 +",y:"+ user.getLocation().getY()+10+"}";
-		agentJson="{name: "+ agent.getUsername()+ ",x:"+agent.getLocation().getX()+10 +",y:"+ agent.getLocation().getY()+10+"}";
+		agentJson="{name: "+ agent.getUsername()+ ",x:"+hotel.getLocation().getX()+20 +",y:"+ hotel.getLocation().getY()+20+"}";
 		hotelJson="{name: "+ hotel.getUsername()+ ",x:"+hotel.getLocation().getX()+10 +",y:"+ hotel.getLocation().getY()+10+"}";
 		placeJson=gson.toJson(new ArrayList<Location>(app.getLocations().values()));
 		pathJson=gson.toJson(app.getPaths());
