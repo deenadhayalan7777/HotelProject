@@ -577,14 +577,14 @@ public class Application {
 			Location source=getLocations().get(path.get(i));
 			Location dest=getLocations().get(path.get(i-1));
 			distance+=source.getDistance(dest);
-			
+			System.out.println(distance);
 			if(timer==0)
 			{
 				x=source.getX();
 				y=source.getY();
 				break;
 			}
-			if(distance >=order.getTimer())
+			if(distance >=timer)
 			{
 				x=(source.getX()+dest.getX())/2;
 				y=(source.getY()+dest.getY())/2;
