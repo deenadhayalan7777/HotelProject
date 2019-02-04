@@ -567,7 +567,7 @@ public class Application {
  public Location getAgentCurrentLocation(int orderId)
 	{
 		Order order=currentOrders.get(orderId);
-		Agent agent=getAgent(order.getAgentId());
+		
 		List<Integer> path=order.getPath();
 		int x=0,y=0, distance=0;
 		int timer=order.getTimer();
@@ -592,7 +592,7 @@ public class Application {
 			}
 			
 		}
-		return new Location(agent.getAgentId(),agent.getUsername(),x,y);
+		return new Location(1,"",x,y);
 	}
 	
 	public void printPath(List<Integer> path)

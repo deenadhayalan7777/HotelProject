@@ -151,19 +151,19 @@ public Agent getAgent(String username)
 	 return null;
 }
 public Agent getAgent(int agentId)
-{ 
+{ Agent agent=null;
 	    try {
 	    	ResultSet rs=dao.getAgent(agentId);
 	    	while(rs.next())
 	    	{String username=rs.getString(2);
 			String password=rs.getString(3);
 			String phone=rs.getString(4);
-			Agent agent=new Agent(agentId,username,password,phone);
+			agent=new Agent(agentId,username,password,phone);
 			agent.setLocation(getLocation(rs.getInt(5)));
-			return agent;
+			
 	    	}
 		} catch (SQLException e) {System.out.println(e);}
-	 return null;
+	 return agent;
 }  
  
   
