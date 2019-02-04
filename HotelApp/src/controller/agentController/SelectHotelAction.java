@@ -22,14 +22,15 @@ public class SelectHotelAction extends ActionSupport {
 
 	private int sno;
 	private int size;
-	
+	private int hotelId;
 	public String execute()
 	{
 		
 		Application app=Application.getInstance();
 		    HotelDetail hdetail=new ArrayList<HotelDetail>(app.getHotelList().values()).get(sno);
 		    size=0;
-		    Map<Integer,Order> orders=app.getHotelCurrentOrders(hdetail.getHotelId());
+		    hotelId=hdetail.getHotelId();
+		    Map<Integer,Order> orders=app.getHotelCurrentOrders(hotelId);
 			for(Order order:orders.values())
 			{
 				if(order.getStatus()==C.ACCEPTED && order.getTimer()==0)
@@ -64,6 +65,18 @@ public class SelectHotelAction extends ActionSupport {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+
+
+	public int getHotelId() {
+		return hotelId;
+	}
+
+
+
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
 	}
 
 	
