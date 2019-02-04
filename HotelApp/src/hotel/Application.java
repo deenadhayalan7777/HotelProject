@@ -506,6 +506,7 @@ public class Application {
         
         PriorityQueue<Node> pq = new PriorityQueue<>(comparator);
         Node sourceNode=new Node(source,null,0);
+        sourceNode.visited=true;
         pq.add(sourceNode);
 	    Node destNode=sourceNode;
 		while(!pq.isEmpty())
@@ -519,10 +520,13 @@ public class Application {
 		  List<Node> adjNodes=map.get(currentNode.getId());
 		  for(Node node:adjNodes)
 		  {  
-			 node.setSource(currentNode); 
-			 int distance=node.getDistance()+currentNode.getDistance();
-			 node.setDistance(distance);
-			 pq.add(node);
+			  if(!node.visited)
+			  { node.setSource(currentNode); 
+			  int distance=node.getDistance()+currentNode.getDistance();
+			  node.setDistance(distance);
+			  node.visited=true;
+			  pq.add(node);
+			  }
 		  }
 		 
 		}
