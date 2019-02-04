@@ -104,11 +104,12 @@ public class MapAction extends ActionSupport{
 		HttpSession session=ServletActionContext.getRequest().getSession(); 
 		User user=(User) session.getAttribute("user");
 		Gson gson = new Gson();
-		Order order=app.getCurrentOrders().get(orderId);
+		Order order=app.getOrder(orderId);
 		Hotel hotel=app.getHotel(order.getHotelId());
 		Agent agent=app.getAgent(order.getAgentId());
 		if(agent!=null)
 		{
+			System.out.println("Agent is null");
 		agentJson=gson.toJson(app.getAgentCurrentLocation(orderId));
 		}
 		else
@@ -119,14 +120,10 @@ public class MapAction extends ActionSupport{
 		  
 		placeJson=gson.toJson(new ArrayList<Location>(app.getLocations().values()));
 		pathJson=gson.toJson(app.getPaths());
-		orderPath=gson.toJson(order.getPath());
 		
-		System.out.println(userJson);
+		
+		
 		System.out.println(agentJson);
-		System.out.println(hotelJson);
-		System.out.println(placeJson);
-		System.out.println(pathJson);
-		System.out.println(orderPath);
 		
 		return "success";
 	}

@@ -528,6 +528,7 @@ public class Application {
 		}
 		while(destNode.getSource()!=null)
 		{
+			System.out.println(destNode.getId());
         	path.add(destNode.getId());
 			Node previousNode=destNode.getSource();
 			destNode=previousNode;
@@ -559,7 +560,7 @@ public class Application {
 		
 	}
 	
-	public Location getAgentCurrentLocation(int orderId)
+ public Location getAgentCurrentLocation(int orderId)
 	{
 		Order order=currentOrders.get(orderId);
 		Agent agent=getAgent(order.getAgentId());
