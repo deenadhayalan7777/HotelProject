@@ -50,7 +50,8 @@ function pickUpOrders(hotelId,size)
 
 function test(s){
 	  
-	
+	if(parseInt(s)==0)
+	document.getElementById("mydiv").innerHTML = "No orders";
 	 
 	
 	 

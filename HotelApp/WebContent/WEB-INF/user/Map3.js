@@ -51,7 +51,7 @@ function test(placeJson,pathJson,hotelJson,userJson,agentJson)
 	
 	nodesdata.push({shape: 'image', image: hotelImage,label:hotel.name,x:(parseInt(hotel.x)+20),y:(parseInt(hotel.y)+20)});
 	nodesdata.push({shape: 'image', image: userImage,label:user.name,x:(parseInt(user.x)+20),y:(parseInt(user.y)+20)});
-	nodesdata.push({shape: 'image', image: agentImage,label:agent.name,x:(parseInt(agent.x)+20),y:(parseInt(agent.y)+20)});
+	nodesdata.push({shape: 'image', image: agentImage,label:'Agent',x:(parseInt(agent.x)),y:(parseInt(agent.y))});
 	
 	/*for(var i=0;i<path.length-1;i++)
 		{
@@ -60,28 +60,7 @@ function test(placeJson,pathJson,hotelJson,userJson,agentJson)
 	var nodes=new vis.DataSet(nodesdata);
 	var edges=new vis.DataSet(edgesdata);
 	var red='#f44242';
-	/*var nodes = new vis.DataSet([
-    {id: 1, label: 'A',x:0,y:0},
-    {id: 2, label: 'B',x:100,y:150},
-    {id: 3, label: 'C',x:200,y:100},
-    {id: 4, label: 'D',x:120,y:300},
-    {id:5,shape: 'image', image: hotelImage,label:'saravana',x:20,y:20},
-    {id:6,shape: 'image', image: userImage,label:'deena',x:210,y:110},
-    {id:7,shape: 'image', image: agentImage,label:'ram',x:60,y:85},
-   
-  ]);
-
-  // create an array with edges
-  var edges = new vis.DataSet([
-    
-    {from: 1, to: 2, width: 1},
-    {from: 2, to: 4, width: 3,color:'red'},
-    {from: 4, to: 3, width: 1},
-    {from: 3, to: 1, width: 1},
-  ]);*/
-
-  
-  // create a network
+	
   var container = document.getElementById('mynetwork');
   var data = {
     nodes: nodes,

@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Order</title>
-<script src="/HotelApp/agent/PickUp1.js"></script>
+<script src="/HotelApp/agent/PickUp2.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
-<body onload = "test('<s:property value ="orders.size()"/>')" >
+<body onload = "test('<s:property value ="size"/>')" >
 <h4 align="left" style="color:green"> <s:property value=" #session.user.username"/></h4> 
  
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -42,7 +42,7 @@
 
   </div>
 </nav>
-  
+  <div class="caontainer" id="mydiv">
  
   <p >Available Orders: <s:property value="size"/>  </p>
 <s:form name="myForm" action="pickupaction"   method="post" >
@@ -50,7 +50,7 @@
 <input id="number" name="number" type="text" value=""/>
  <input  type="button" onclick="pickUpOrders('<s:property value="hotelId"/>','<s:property value="size"/>')"  value="PICKUP ORDERS"/>
 </s:form>
- 
+ </div>
 <br><br><br>
 <s:if test="hasActionErrors()">
    

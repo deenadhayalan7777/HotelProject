@@ -17,7 +17,7 @@
 	<s:textfield name ="username" cssClass="form-control" placeholder="username"/>
 	</div>
 	<div class="form-group">
-	<s:password name ="password" cssClass="form-control" placeholder ="Password:"/>
+	<s:password name ="password" cssClass="form-control" placeholder ="Password"/>
 	</div>
 	
 	<s:submit value="login" cssClass="btn btn-success btn-md" align="center"/>

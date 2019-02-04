@@ -498,6 +498,7 @@ public class Application {
    
 	public List<Integer> getPath(int source,int dest)
 	{
+		System.out.println("source:"+source +" dest:"+dest);
 		
 		List<Integer> path=new ArrayList<Integer>();
 		Comparator<Node> comparator = (n1, n2) -> {
