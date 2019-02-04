@@ -408,7 +408,7 @@ public class Application {
 		        	  }
 		          }
 		       }
-		    }, 0, 60000);
+		    }, 0, 10000);
 	}
 	
   private void populatePaths() {
