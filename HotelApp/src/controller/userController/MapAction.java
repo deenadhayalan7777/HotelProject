@@ -106,18 +106,17 @@ public class MapAction extends ActionSupport{
 		Gson gson = new Gson();
 		Order order=app.getCurrentOrders().get(orderId);
 		Hotel hotel=app.getHotel(order.getHotelId());
-		Agent agent=app.getAgent(order.getAgentId());
-		userJson="{name: "+ user.getUsername()+ ",x:"+user.getLocation().getX()+10 +",y:"+ user.getLocation().getY()+10+"}";
+		//Agent agent=app.getAgent(order.getAgentId());
+		
+		userJson=gson.toJson(new Location(1, user.getUsername(),user.getLocation().getX()+10,user.getLocation().getY()+10));
+		agentJson=gson.toJson(new Location(1, user.getUsername(),hotel.getLocation().getX()+10,hotel.getLocation().getY()+10));
+		hotelJson=gson.toJson(new Location(1, hotel.getUsername(),hotel.getLocation().getX()+10,hotel.getLocation().getY()+10));
+		  
 		if(hotel!=null)
 		{agentJson="{name: "+order.getAgentId()+ ",x:"+hotel.getLocation().getX()+20 +",y:"+ hotel.getLocation().getY()+20+"}";
 		hotelJson="{name: "+ hotel.getUsername()+ ",x:"+hotel.getLocation().getX()+10 +",y:"+ hotel.getLocation().getY()+10+"}";
 		}
-		else
-		{
-			System.out.println("Hotel is null");
-			
-			
-		}
+		
 		placeJson=gson.toJson(new ArrayList<Location>(app.getLocations().values()));
 		pathJson=gson.toJson(app.getPaths());
 		orderPath=gson.toJson(order.getPath());
