@@ -504,7 +504,7 @@ public class Application {
 		Comparator<Node> comparator = (n1, n2) -> {
             return n1.getDistance() - n2.getDistance();
         };
-        
+        Map<Integer,List<Node>> map=computeMap();
         PriorityQueue<Node> pq = new PriorityQueue<>(comparator);
         Node sourceNode=new Node(source,null,0);
         sourceNode.visited=true;
