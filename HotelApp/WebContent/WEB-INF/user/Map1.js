@@ -24,7 +24,7 @@ class edge{
 }
 
 
-function test(placeJson,pathJson,orderPath,hotelJson,userJson,agentJson)
+function test(placeJson,pathJson,hotelJson,userJson,agentJson)
 {
 	
 	
@@ -36,7 +36,7 @@ function test(placeJson,pathJson,orderPath,hotelJson,userJson,agentJson)
 	var hotel=JSON.parse(hotelJson);
 	var user=JSON.parse(userJson);
 	var agent=JSON.parse(agentJson);
-	var path=JSON.parse(orderPath);
+	//var path=JSON.parse(orderPath);
 	var nodesdata=[];
 	var edgesdata=[];
 	
@@ -53,10 +53,10 @@ function test(placeJson,pathJson,orderPath,hotelJson,userJson,agentJson)
 	nodesdata.push({shape: 'image', image: userImage,label:user.name,x:user.x,y:user.y});
 	nodesdata.push({shape: 'image', image: agentImage,label:agent.name,x:agent.x,y:agent.y});
 	
-	for(var i=0;i<path.length-1;i++)
+	/*for(var i=0;i<path.length-1;i++)
 		{
 		edgesdata.push({to:path[i],from:path[i+1],width:3});
-		}
+		}*/
 	var nodes=new vis.DataSet(nodesdata);
 	var edges=new vis.DataSet(edgesdata);
 	var red='#f44242';
