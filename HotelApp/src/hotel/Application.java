@@ -386,6 +386,7 @@ public class Application {
 			db.setOrderTimer(orderId, deliverTime);
 			currentOrders.get(orderId).setTimer(deliverTime);
 			currentOrders.get(orderId).setPath(path);
+			currentOrders.get(orderId).setAgentId(order.getAgentId());
 		
 		}
 		

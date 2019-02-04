@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="/HotelApp/user/MyOrders1.js"></script>
+<script src="/HotelApp/user/MyOrders2.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
@@ -87,7 +87,7 @@
 </s:form>
 
 <s:form name="myForm" action="map"   method="get" >
-<s:hidden name="orderId" id="orderId" value='0'/>
+<s:hidden name="orderId" id="orderId1" value='0'/>
 </s:form>
 </div>
 

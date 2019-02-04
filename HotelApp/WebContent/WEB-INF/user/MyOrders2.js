@@ -86,7 +86,7 @@ function rateOrder(orderId,status)
 function trackOrder(orderId,status)
 {
 	
-	document.getElementById("orderId").value=parseInt(orderId);
+	document.getElementById("orderId1").value=parseInt(orderId);
 	document.forms[1].submit();
 	
 }
