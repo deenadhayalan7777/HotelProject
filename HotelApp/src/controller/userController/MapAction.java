@@ -106,15 +106,9 @@ public class MapAction extends ActionSupport{
 		Gson gson = new Gson();
 		Order order=app.getOrder(orderId);
 		Hotel hotel=app.getHotel(order.getHotelId());
-		Agent agent=app.getAgent(order.getAgentId());
-		if(agent!=null)
-		{
-			System.out.println("Agent is null");
+		
 		agentJson=gson.toJson(app.getAgentCurrentLocation(orderId));
-		}
-		else
-			agentJson=gson.toJson(new Location(1, user.getUsername(),hotel.getLocation().getX(),hotel.getLocation().getY()));
-			
+		
 		userJson=gson.toJson(new Location(1, user.getUsername(),user.getLocation().getX(),user.getLocation().getY()));
 		hotelJson=gson.toJson(new Location(1, hotel.getUsername(),hotel.getLocation().getX(),hotel.getLocation().getY()));
 		  
