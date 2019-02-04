@@ -33,42 +33,24 @@ function printList()
 	
 	document.getElementById("box").innerHTML = html;
 }
-function pickUpOrders()
+function pickUpOrders(hotelId,size)
 {
-	var orderString=JSON.stringify(orderslist);
-	document.getElementById("orderslist").value=orderString;
+	var number=document.getElementById("number").value;
+	var rate=parseInt(number);
+	if(rate>parseInt(size))
+		{alert("Requested number of orders not available in hotel");
+		 document.getElementById(status).value="";
+		 return false;
+		}
+	
+	document.getElementById("hotelId").value=parseInt(hotelId);
 	document.forms[0].submit();
 	
 }
 
 function test(s){
 	  
-	 var size=parseInt(s);
-	 var st=document.getElementsByClassName("status");
-	 var ti=document.getElementsByClassName("timer");
-	 var bt=document.getElementsByClassName("pickupbtn");
-	 var rh=document.getElementsByClassName("rowh");
-	 for(var i=0;i<size;i++)
-		 {
-		   var status=st[i].innerHTML;
-		   var timer=ti[i].innerHTML;
-		   ti[i].innerHTML="";
-		   st[i].innerHTML="";
-		   
-		   if(status==1)
-			   {
-			     if(timer!=0)
-			    	 {
-			    	 bt[i].innerHTML=" <span class=\"badge badge-danger \">"+timer+"</span>";
-			    	 }
-			     
-			   }
-		   else
-			   {
-			   bt[i].innerHTML=" <span class=\"badge badge-secondary \">WAITING</span>";
-			   }
-		  
-		 }
+	
 	 
 	
 	 

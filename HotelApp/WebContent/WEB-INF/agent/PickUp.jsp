@@ -43,36 +43,12 @@
   </div>
 </nav>
   
-  <br>Hotel Menu<br>
-  <table border="0" cellpadding="20">
-            <tr>
-                <th>HOTEL NAME</th>
-                <th>USER PHONE</th>
-                <th>TOTAL</th>
-                <th>DATE</th>
-               
-            </tr>
-            <s:iterator value="orders">  
-			<tr class="rowh">
-			<td><s:property value="hotelname"/></td>
-			<td><s:property value="phoneNo"/></td>  
-			<td><s:property value="total"/></td>  
-			<td><s:property value="date"/></td>  
-		    <td  class="pickupbtn"> <button class="btn btn-primary" onclick="addOrder('<s:property value="orderId"/>')">ADD</button></td>
-			<td class="status"><s:property value="status"/></td> 
-			<td class="timer"><s:property value="timer"/></td> 
-			</tr>   
-			</s:iterator>
-</table>
  
-
-  
-  <p id="box" > </p>
+  <p >Available Orders: <s:property value="size"/>  </p>
 <s:form name="myForm" action="pickupaction"   method="post" >
-
-<s:hidden name="orderslist" id="orderslist" value="orders" />
-
- <input  type="button" onclick="pickUpOrders()"  value="PICKUP ORDERS"/>
+<s:hidden name="hotelId" id="hotelId" value=" " />
+<input id="number" name="number" type="text" value=""/>
+ <input  type="button" onclick="pickUpOrders('<s:property value="hotelId"/>','<s:property value="size"/>')"  value="PICKUP ORDERS"/>
 </s:form>
  
 <br><br><br>

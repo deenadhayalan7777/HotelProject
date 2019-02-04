@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +26,7 @@ import hotel.User;
 public class PickUpAction extends ActionSupport{
 
 	private int hotelId;
-	private String orderslist;
+	private int number;
 	
 	
 
@@ -46,16 +47,21 @@ public class PickUpAction extends ActionSupport{
 		HttpSession session=ServletActionContext.getRequest().getSession(); 
 	    Agent agent=(Agent) session.getAttribute("agent");
 	    int agentId=agent.getAgentId();
-		Gson gson = new Gson();
+	    Map<Integer,Order> orders=app.getHotelCurrentOrders(hotelId);
 		
-		List<Integer> orders=gson.fromJson(orderslist, new TypeToken<ArrayList<Integer>>(){}.getType());
 		
-		for(int orderId:orders)
+		
+		for(Order order:orders.values())
 		{
+			if(order.getStatus()==C.ACCEPTED && order.getTimer()==0 && number>0)
+			{
+			int orderId=order.getOrderId();
 			app.addAgentOrder(agentId, orderId);
 			app.setOrderStatus(orderId, C.ASSIGNED);
 			app.setOrderTimer(orderId);
-		
+			number--;
+			}
+			
 		}
 		
 		
@@ -63,12 +69,18 @@ public class PickUpAction extends ActionSupport{
 	}
 
 
-	public String getOrderslist() {
-		return orderslist;
+	public int getNumber() {
+		return number;
 	}
 
 
-	public void setOrderslist(String orderslist) {
-		this.orderslist = orderslist;
+	public void setNumber(int number) {
+		this.number = number;
 	}
+
+
+	
+
+
+	
 }
