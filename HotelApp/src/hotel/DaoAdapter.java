@@ -546,6 +546,25 @@ public Map<Integer, Location> getLocations() {
 	return locations;
 }
 
+public List< Path> getPaths() {
+	
+	List<Path> paths=new ArrayList<Path>();
+	try {
+		ResultSet rs=dao.getLocations();
+		while(rs.next())
+		{
+			Path path=new Path(rs.getInt(1),rs.getInt(2));
+		    paths.add(path);
+		}
+	    } catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	
+	return paths;
+}
+
+
 public Map<Integer, Order> getAllUsersCurrentOrders() {
 	
 	Map<Integer,Order> orders=new HashMap<Integer,Order>();

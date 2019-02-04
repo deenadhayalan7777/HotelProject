@@ -24,7 +24,15 @@ public class Application {
 	private Map<Integer,Order> currentOrders;
 	private Map<Integer,List<Node>> map;
 	private Map<Integer,Location> locations;
-	
+	private List<Path> paths;
+
+	public List<Path> getPaths() {
+		return paths;
+	}
+
+	public void setPaths(List<Path> paths) {
+		this.paths = paths;
+	}
 
 	DaoAdapter db;
 	
@@ -40,6 +48,7 @@ public class Application {
 		 populateLocations();
 		 populatePaths();
 		 locations=db.getLocations();
+		 paths=db.getPaths();
 		 map=computeMap();
 	}
 	
@@ -373,8 +382,10 @@ public class Application {
 		    List<Integer> path=getPath(hotelLocation.getLocationId(),userLocation.getLocationId());
 		    printPath(path);
 		    int deliverTime=getPathDistance(path);
+		    db.setLocation(C.AGENT,order.getAgentId(),hotelLocation.getLocationId());
 			db.setOrderTimer(orderId, deliverTime);
 			currentOrders.get(orderId).setTimer(deliverTime);
+			currentOrders.get(orderId).setPath(path);
 		
 		}
 		

@@ -55,7 +55,10 @@
 		<result name="rateOrder">/user/RateOrder.jsp</result>
 		<result name="input">/user/input.jsp</result>
 	</action>
-	
+	<action name="map" class="controller.userController.MyOrderAction" >  
+		<result name="success">/user/Map.jsp</result> 
+		<result name="input">/user/input.jsp</result>
+	</action>
 	<action name="selecthotelaction" class="controller.userController.SelectHotelAction" >  
 		<result name="success">/user/Order.jsp</result> 
 		<result name="input">/user/input.jsp</result>
@@ -68,6 +71,8 @@
 		<result name="success" type="redirectAction">home</result> 
 		<result name="failure">/user/User.jsp</result>  
 	</action>
+	
+	
 	<action name="rateorderaction" class="controller.userController.RateOrderAction">  
 		<result name="success" type="redirectAction">home</result>
 		<result name="failure">/user/User.jsp</result>  

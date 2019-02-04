@@ -678,6 +678,13 @@ public void setOrderDate(int orderId,String date) {
 	}
     
 }
+
+public ResultSet getPaths() throws SQLException {
+	Statement stmt = con.createStatement();
+	return stmt.executeQuery("select * from path");
+	 
+}
+
 public ResultSet getLocations() throws SQLException {
 	Statement stmt = con.createStatement();
 	return stmt.executeQuery("select * from places");
@@ -806,5 +813,6 @@ public ResultSet getSources(int dest) throws SQLException
 	 return stmt.executeQuery(" select source from path where dest="+dest);
  
 }
+
 
 }
