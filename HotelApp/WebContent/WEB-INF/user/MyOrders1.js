@@ -8,7 +8,7 @@ function test(c,s)
 	
 	 var st=document.getElementsByClassName("status");
 	 var ti=document.getElementsByClassName("timer");
-	
+	 var track=document.getElementsByClassName("track");
 	 for(var i=0;i<parseInt(c);i++)
 		 {
 		   var status=st[i].innerHTML;
@@ -18,16 +18,18 @@ function test(c,s)
 		  
 		   if(status==0){
 			   st[i].innerHTML="WAITING";
-			   
+			   track[i].innerHTML="";
 		         }
 		   else if(status==1){
 			   if(timer==0)
 		    	 {
 				   st[i].innerHTML="FOOD PREPARED, WAITING FOR AGENT";
+				   track[i].innerHTML="";
 		    	 }
 			   else
 				   {
 				   st[i].innerHTML="PREPARING FOOD";
+				   track[i].innerHTML="";
 				   }
 			  
 			   
@@ -78,5 +80,13 @@ function rateOrder(orderId,status)
 	document.getElementById("rating").value=rating;
 	document.getElementById("orderId").value=parseInt(orderId);
 	document.forms[0].submit();
+	
+}
+
+function trackOrder(orderId,status)
+{
+	
+	document.getElementById("orderId").value=parseInt(orderId);
+	document.forms[1].submit();
 	
 }

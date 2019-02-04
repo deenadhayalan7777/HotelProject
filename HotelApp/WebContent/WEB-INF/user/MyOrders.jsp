@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="/HotelApp/user/MyOrders.js"></script>
+<script src="/HotelApp/user/MyOrders1.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
@@ -60,6 +60,7 @@
 			<td class="status" ><s:property  value="status"/></td> 
 			<td > <span class="badge badge-warning"><s:property  value="timer"/></span></td> 
 			<td class="timer" ><s:property  value="timer"/></td> 
+			<td class="track"><button  type="button" class="btn btn-outline-warning" onclick="trackOrder('<s:property value="orderId"/>','<s:property value="%{#stat.index}" />')"> TRACK ORDER </button></td>
 			</tr>   
 			</s:iterator>
 </table>
@@ -82,6 +83,10 @@
 </table>
  <s:form name="myForm" action="rateorderaction"   method="post" >
 <s:hidden name="rating" id="rating" value='0' />
+<s:hidden name="orderId" id="orderId" value='0'/>
+</s:form>
+
+<s:form name="myForm" action="map"   method="get" >
 <s:hidden name="orderId" id="orderId" value='0'/>
 </s:form>
 </div>
