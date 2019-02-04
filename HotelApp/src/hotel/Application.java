@@ -559,6 +559,37 @@ public class Application {
 		
 	}
 	
+	public Location getAgentCurrentLocation(int orderId)
+	{
+		Order order=currentOrders.get(orderId);
+		Agent agent=getAgent(order.getAgentId());
+		List<Integer> path=order.getPath();
+		int x=0,y=0, distance=0;
+		int timer=order.getTimer();
+	
+		for(int i=path.size()-1;i>0;i++)
+		{
+			Location source=getLocations().get(path.get(i));
+			Location dest=getLocations().get(path.get(i-1));
+			distance+=source.getDistance(dest);
+			
+			if(timer==0)
+			{
+				x=source.getX();
+				y=source.getY();
+				break;
+			}
+			if(distance >=order.getTimer())
+			{
+				x=(source.getX()+dest.getX())/2;
+				y=(source.getY()+dest.getY())/2;
+				break;
+			}
+			
+		}
+		return new Location(agent.getAgentId(),agent.getUsername(),x,y);
+	}
+	
 	public void printPath(List<Integer> path)
 	{
 		System.out.println("path is ");

@@ -28,9 +28,9 @@ function test(placeJson,pathJson,hotelJson,userJson,agentJson)
 {
 	
 	
-	var hotelImage='file:///Users/deena-pt2364/Desktop/tomcat/apache-tomcat-9.0.14/webapps/HotelApp/conf/hotel.jpeg';
-	var userImage='file:///Users/deena-pt2364/Desktop/tomcat/apache-tomcat-9.0.14/webapps/HotelApp/conf/user.jpeg';
-	var agentImage='file:///Users/deena-pt2364/Desktop/tomcat/apache-tomcat-9.0.14/webapps/HotelApp/conf/agent.jpeg';
+	var hotelImage='/HotelApp/conf/hotel.jpeg';
+	var agentImage='/HotelApp/conf/agent.jpeg';
+	var userImage='/HotelApp/conf/user.jpeg';
 	var pl=JSON.parse(placeJson);
 	var pa=JSON.parse(pathJson);
 	var hotel=JSON.parse(hotelJson);
@@ -49,9 +49,9 @@ function test(placeJson,pathJson,hotelJson,userJson,agentJson)
 	  edgesdata.push({to:pa[i].dest,from:pa[i].source,width:1});
 	}
 	
-	nodesdata.push({shape: 'image', image: hotelImage,label:hotel.name,x:hotel.x,y:hotel.y});
-	nodesdata.push({shape: 'image', image: userImage,label:user.name,x:user.x,y:user.y});
-	nodesdata.push({shape: 'image', image: agentImage,label:agent.name,x:agent.x,y:agent.y});
+	nodesdata.push({shape: 'image', image: hotelImage,label:hotel.name,x:(parseInt(hotel.x)+20),y:(parseInt(hotel.y)+20)});
+	nodesdata.push({shape: 'image', image: userImage,label:user.name,x:(parseInt(user.x)+20),y:(parseInt(user.y)+20)});
+	nodesdata.push({shape: 'image', image: agentImage,label:agent.name,x:(parseInt(agent.x)+20),y:(parseInt(agent.y)+20)});
 	
 	/*for(var i=0;i<path.length-1;i++)
 		{
