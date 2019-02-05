@@ -22,7 +22,7 @@
 	<s:password name ="password" cssClass="form-control" placeholder ="Password"/>
 	</div>
 	<div class="form-group">
-	<s:password name ="phone" cssClass="form-control" placeholder ="Phone"/>
+	<s:textfield name ="phone" cssClass="form-control" placeholder ="Phone"/>
 	</div>
 	 <div class="form-group" >
 	 <select name="id" >

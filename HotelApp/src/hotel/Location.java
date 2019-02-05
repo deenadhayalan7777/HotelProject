@@ -37,7 +37,7 @@ public Location(int x, int y) {
 
 public int getDistance(Location p)
 {
-   return (Math.abs(p.getX()-x)+Math.abs(p.getY()-y))/10;
+   return (int) Math.round(Math.hypot(Math.abs(p.getX()-x),Math.abs(p.getY()-y)))/10;
   
 }
 
