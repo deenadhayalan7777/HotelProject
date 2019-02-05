@@ -42,7 +42,7 @@ public class DaoAdapter {
 	public void setHotel(Hotel hotel)  
 	{
        try {
-		dao.setHotel(hotel.getHotelId(),hotel.getUsername(),hotel.getPassword(),hotel.getPhone(),hotel.getRating(),hotel.getLocation().getX(),hotel.getLocation().getY());
+		dao.setHotel(hotel.getHotelId(),hotel.getUsername(),hotel.getPassword(),hotel.getPhone(),hotel.getRating(),hotel.getLocation().getLocationId());
 	       } catch (SQLException e) {System.out.println(e);}
 	}
    
@@ -89,7 +89,7 @@ public class DaoAdapter {
   public void setUser(User user )  
 	{
 	  try {
-			dao.setUser(user.getUserId(), user.getUsername(), user.getPassword(),user.getPhone(),user.getLocation().getX(),user.getLocation().getY());
+			dao.setUser(user.getUserId(), user.getUsername(), user.getPassword(),user.getPhone());
 	      } catch (SQLException e) {System.out.println(e);}
 	}
   public User getUser(String username)
@@ -132,7 +132,7 @@ public class DaoAdapter {
   public void setAgent(Agent agent ) 
 	{
 	  try {
-			dao.setAgent(agent.getAgentId(),agent.getUsername() , agent.getPassword(), agent.getPhone(),agent.getLocation().getX(),agent.getLocation().getY());
+			dao.setAgent(agent.getAgentId(),agent.getUsername() , agent.getPassword(), agent.getPhone());
 	      } catch (SQLException e) {System.out.println(e);}
 	}
 public Agent getAgent(String username)

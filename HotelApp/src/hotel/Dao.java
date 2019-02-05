@@ -90,10 +90,10 @@ public class Dao {
 		return dao;
 	}
 	
-	public void setHotel(int hotelId,String username,String password,String phone,float rating,int x,int y) throws SQLException 
+	public void setHotel(int hotelId,String username,String password,String phone,float rating,int x) throws SQLException 
 	{
-        String query = " insert into hotel(hotelId,username,password,phone,rating,x,y)"
-			        + " values (?,?,?,?,?,?,?)";
+        String query = " insert into hotel(hotelId,username,password,phone,rating,placeId)"
+			        + " values (?,?,?,?,?,?)";
 
 			     
 			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -104,7 +104,6 @@ public class Dao {
 			      preparedStmt.setString (4,phone);
 			      preparedStmt.setFloat(5, rating);
 			      preparedStmt.setInt(6, x);
-			      preparedStmt.setInt(7, y);
 			      preparedStmt.execute();
 
 	}
@@ -131,10 +130,10 @@ public class Dao {
 		return stmt.executeQuery(" select * from hotel where hotelId= "+hotelId);
   }
   
-  public void setUser(int userId,String username,String password,String phone ,int x,int y) throws SQLException 
+  public void setUser(int userId,String username,String password,String phone) throws SQLException 
 	{
-      String query = " insert into user(userId,username,password,phone,x,y)"
-			        + " values (?,?,?,?,?,?)";
+      String query = " insert into user(userId,username,password,phone)"
+			        + " values (?,?,?,?,?)";
 
 			     
 			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -143,9 +142,8 @@ public class Dao {
 			      preparedStmt.setString (2,username);
 			      preparedStmt.setString (3,password);
 			      preparedStmt.setString (4,phone);
-			      preparedStmt.setInt(5, x);
-	 			    preparedStmt.setInt(6, y);
-			      preparedStmt.execute();
+			     
+	 			  preparedStmt.execute();
 
 	}
   
@@ -156,10 +154,10 @@ public class Dao {
   }
   
  
-  public void setAgent(int agentId,String username,String password,String phone,int x,int y ) throws SQLException 
+  public void setAgent(int agentId,String username,String password,String phone) throws SQLException 
  	{
-       String query = " insert into agent(agentId,username,password,phone,x,y)"
- 			        + " values (?,?,?,?,?,?)";
+       String query = " insert into agent(agentId,username,password,phone)"
+ 			        + " values (?,?,?,?,?)";
 
  			     
  			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -168,8 +166,7 @@ public class Dao {
  			      preparedStmt.setString (2,username);
  			      preparedStmt.setString (3,password);
  			      preparedStmt.setString (4,phone);
- 			     preparedStmt.setInt(5, x);
- 			    preparedStmt.setInt(6, y);
+ 			     
  			      preparedStmt.execute();
 
  	}

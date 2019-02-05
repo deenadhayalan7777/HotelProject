@@ -24,12 +24,7 @@
 	<div class="form-group">
 	<s:password name ="phone" cssClass="form-control" placeholder ="Phone"/>
 	</div>
-	<div class="form-group">
-	<s:textfield name ="x" cssClass="form-control" placeholder="x"/>
-	<s:textfield name ="y" cssClass="form-control" placeholder="y"/>
-	</div>
-	 
-	 <div>
+	 <div class="form-group" >
 	 <select name="id" >
 	 <c:set var="id" value="1" scope="page" />
      <s:iterator value="#session.locations" status="stat">
