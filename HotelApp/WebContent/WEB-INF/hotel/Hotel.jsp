@@ -41,7 +41,9 @@
       
     </ul>
     <ul class="navbar-nav ml-auto">
-    
+    <li class="nav-item">
+      <a href="#" id="status" class="btn btn-outline-success my-2 my-sm-0"><s:property value=" #session.hotel.location.name"/></a>
+      </li>
     <li class="nav-item">
       <a href="status" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
       </li>

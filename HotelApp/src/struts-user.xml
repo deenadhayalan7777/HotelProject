@@ -65,7 +65,7 @@
 	</action>
 	<action name="orderaction" class="controller.userController.OrderAction">  
 		<result name="success" type="redirectAction">myorders</result> 
-		<result name="failure">/user/User.jsp</result>  
+		<result name="failure" type="redirectAction">myorders</result> 
 	</action>
 	<action name="location" class="controller.userController.LocationAction">  
 		<result name="success" type="redirectAction">home</result> 
