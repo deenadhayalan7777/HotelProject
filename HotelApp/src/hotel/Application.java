@@ -80,7 +80,7 @@ public class Application {
 		
 		 return userId;
 	}
-	public int userSignUp(String username,String password,String phone, int locationId)
+	public int userSignUp(String username,String password,String phone)
 	{   
 		User user=db.getUser(username);
 		int userId=-2;
@@ -88,7 +88,6 @@ public class Application {
 		{synchronized(this){
 			int userCount=getUserCount()+1;
 			db.setUser(new User(userCount,username,cryptWithMD5(password),phone));
-			setUserLocation(userId,locationId);
 			userId=userCount;
 			userCount++;
 		    }
@@ -110,7 +109,7 @@ public class Application {
 		 }
 		return agentId;
 	}
-	public int agentSignUp(String username,String password,String phone,int locationId)
+	public int agentSignUp(String username,String password,String phone)
 	{   
 		Agent agent=db.getAgent(username);
 		int agentId=-2;
@@ -119,7 +118,7 @@ public class Application {
 			synchronized(this){
 				int agentCount=getAgentCount()+1;
 			db.setAgent(new Agent(agentCount,username,cryptWithMD5(password),phone));
-			setAgentLocation(agentId, locationId);
+			
 			agentId=agentCount;
 			agentCount++;
 		    }

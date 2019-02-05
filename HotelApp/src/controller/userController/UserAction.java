@@ -41,9 +41,9 @@ public class UserAction extends ActionSupport {
 		
 		Application app=Application.getInstance();
 		
-		 hotels=new ArrayList<HotelDetail>(app.getHotelList().values());
-		 
-		 
+		List<String> locations=app.getLocationNames();
+		ServletActionContext.getRequest().getSession().setAttribute("locations", locations);
+		hotels=new ArrayList<HotelDetail>(app.getHotelList().values());
 		
 	    return "success";
 		

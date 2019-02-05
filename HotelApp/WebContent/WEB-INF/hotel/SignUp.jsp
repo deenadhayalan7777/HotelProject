@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="s" uri="/struts-tags" %>
-    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,7 +28,16 @@
 	<s:textfield name ="x" cssClass="form-control" placeholder="x"/>
 	<s:textfield name ="y" cssClass="form-control" placeholder="y"/>
 	</div>
-	
+	 
+	 <div>
+	 <select name="id" >
+	 <c:set var="id" value="1" scope="page" />
+     <s:iterator value="#session.locations" status="stat">
+     <option value="${id}"><s:property /></option>
+      <c:set var="id" value="${id + 1}" scope="page"/>
+      </s:iterator>      
+      </select>
+	 </div>
 	<s:submit value="SIGNUP" onclick="" cssClass="btn btn-success btn-md" align="center"/>
 	
 	</s:form >

@@ -27,8 +27,8 @@
 		<result name="success">/hotel/Hotel.jsp</result> 
 		<result name="failure">/hotel/Login.jsp</result>  
 		</action> 
-		<action name ="signup">
-					<result >/hotel/SignUp.jsp</result>
+		<action name ="signup" class="controller.hotelController.SignAction">
+		<result name="success">/hotel/SignUp.jsp</result>
 		</action>
 		<action name="menu" class="controller.hotelController.MenuAction">  
 		<result name="success">/hotel/AddMenu.jsp</result> 

@@ -18,7 +18,7 @@ import hotel.Hotel;
 public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 
 	private Hotel hotel;
-	private int locationId;
+	private int id;
 	
 	public Hotel getHotel() {
 		return hotel;
@@ -50,7 +50,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 	public String execute() 
 	{
 		Application app=Application.getInstance();
-		int hotelId=app.hotelSignUp(hotel.getUsername(), hotel.getPassword(), hotel.getPhone(),locationId);
+		int hotelId=app.hotelSignUp(hotel.getUsername(), hotel.getPassword(), hotel.getPhone(),id);
 		
 		if(hotelId>0)
 		{	
@@ -62,12 +62,14 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Hotel> {
 		return "failure";
 	}
 
-	public int getLocationId() {
-		return locationId;
+	public int getId() {
+		return id;
 	}
 
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	
 
 }

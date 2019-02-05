@@ -18,7 +18,6 @@ import hotel.User;
 public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 
 	private User user;
-	private int locationId;
 	
 	
 	public User getUser() {
@@ -50,7 +49,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 	public String execute() 
 	{
 		Application app=Application.getInstance();
-		int userId=app.userSignUp(user.getUsername(), user.getPassword(), user.getPhone(),locationId);
+		int userId=app.userSignUp(user.getUsername(), user.getPassword(), user.getPhone());
 		
 		if(userId>0)
 		{	
@@ -61,5 +60,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 		}
 		return "failure";
 	}
+
+	
 
 }
