@@ -150,6 +150,7 @@ public class Application {
 			int hotelCount=getHotelCount()+1;
 			db.setHotel(new Hotel(hotelCount,username,cryptWithMD5(password),phone));
 			setHotelLocation(hotelId,locationId);
+			System.out.println(locationId);
 			hotelId=hotelCount;
 			hotelCount++;
 		    }
