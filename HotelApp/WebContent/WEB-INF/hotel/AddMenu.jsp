@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Menu</title>
-<script src="/HotelApp/hotel/AddMenu8.js"></script>
+<script src="/HotelApp/hotel/AddMenu.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 </head>
@@ -48,9 +48,9 @@
 
 <h4 align="left" style="color:green"> <s:property value=" #session.user.username"/></h4> 
  
+ <br>Hotel Menu<br> 
+  <div class="container" id="ordercontainer">
   
-  
-  <br>Hotel Menu<br>
   <table id="mytable" border="0" cellpadding="20">
    <tr>
                 <th>NAME</th>
@@ -74,10 +74,10 @@
 			</tr>  
   </s:iterator> 
   </table>
-  
-  <input name="name" id="name" type="text" />
-  <input name="price" id="price" type="text" />
-  <input name="time" id="time" type="text" />
+  </div>
+  <input name="name" id="name" type="text" placeholder ="Name"/>
+  <input name="price" id="price" type="text" placeholder ="Price"/>
+  <input name="time" id="time" type="text" placeholder ="Preparation time" />
   <input name="buttonExecute" onclick="addItem()" type="button" value="ADD ITEM" />
   
   <p id="box" > </p>

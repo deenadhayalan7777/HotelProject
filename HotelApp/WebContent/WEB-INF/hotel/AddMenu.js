@@ -58,12 +58,18 @@ function addItem()
 var namelist=[];
 function test(s)
 {
-	var table = document.getElementById("mytable");
-	var row=table.getElementsByTagName("tr");
 	var size=parseInt(s);
-	var n=document.getElementsByClassName("name");
-	for (var i = 0; i < size; i ++ )
-	{   
+	if(size==0)
+		{
+		document.getElementById("ordercontainer").innerHTML="No Items";
+		}
+	else
+	{var table = document.getElementById("mytable");
+	  var row=table.getElementsByTagName("tr");
+	
+	 var n=document.getElementsByClassName("name");
+	 for (var i = 0; i < size; i ++ )
+	 {   
 		var cell=row[i+1].getElementsByTagName("td");
 		
 		var stock=parseInt(cell[4].innerHTML);
@@ -77,8 +83,8 @@ function test(s)
 	    	off[i].className="btn btn-danger btn-sm off";
 	    	}
 	    cell[4].innerHTML="";
+	 }
 	}
-	
 	
 }
 function changeStatus(id,stockt,vt)

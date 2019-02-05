@@ -414,7 +414,7 @@ public class Application {
 		
 	
 		String fileName=System.getProperty("catalina.base")+C.conf+C.pathFile;
-		System.out.println(fileName);
+		
 		String pathText=getStringFromFile(fileName);
 		if(pathText!=null)
 		{   
@@ -448,10 +448,29 @@ public class Application {
 		return text;
 	}
 
+	private void setAllHotelLocation()
+	{
+
+		String fileName=System.getProperty("catalina.base")+C.conf+C.hotelFile;
+		
+		String pathText=getStringFromFile(fileName);
+		if(pathText!=null)
+		{   
+			
+			String[] paths = pathText.split(",");
+			for(String path:paths)
+			{
+				String[] p=path.split(" ");
+				int hotelId=Integer.parseInt(p[0]);
+				int locationId=Integer.parseInt(p[1]);
+				setHotelLocation(hotelId, locationId);;
+			}
+		}
+	}
 	private void populateLocations() {
 		
 		String fileName=System.getProperty("catalina.base")+C.conf+C.placeFile;
-		System.out.println(fileName);
+		
 		String placeText=getStringFromFile(fileName);
 		if(placeText!=null)
 		{   
@@ -467,7 +486,7 @@ public class Application {
 				db.addLocation(i,name, x, y);
 				i++;
 			}
-			db.setAllHotelLocation();
+			setAllHotelLocation();
 		}
 
 		
