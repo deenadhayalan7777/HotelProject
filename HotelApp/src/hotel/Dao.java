@@ -619,7 +619,7 @@ public void setAgentLocation(int agentId,int placeId) {
 
 public void setHotelLocation(int hotelId,int placeId) {
 	
-	String query = " update hotel set placeId=? where hotelId=?; ";
+	String query = " update hotel set placeId=? where hotelId=?";
 
     
     PreparedStatement preparedStmt;
@@ -627,6 +627,7 @@ public void setHotelLocation(int hotelId,int placeId) {
 		preparedStmt = con.prepareStatement(query);
 		preparedStmt.setInt(1,placeId );
 	      preparedStmt.setInt(2, hotelId); 
+	      System.out.println("Hotel Location Setted");
 	      preparedStmt.execute();
 
 	} catch (SQLException e) {
