@@ -42,7 +42,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
          <c:set var="id" value="1" scope="page" />
-         <s:iterator value="#session.locations" status="stat">
+         <s:iterator value="#application.locations" status="stat">
          <a class="dropdown-item" href="location?id=${id}"><s:property /></a>
          <c:set var="id" value="${id + 1}" scope="page"/>
          </s:iterator>         
