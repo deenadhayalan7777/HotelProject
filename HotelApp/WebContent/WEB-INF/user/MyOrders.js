@@ -71,8 +71,9 @@ function rateOrder(orderId,status)
 {
 	
 	var rating=document.getElementById(status).value;
+	
 	var rate=parseInt(rating);
-	if(rate<1||rate>5)
+	if(rate<1||rate>5||rating=="")
 		{alert("Enter rating within 1 to 5");
 		 document.getElementById(status).value="";
 		 return false;

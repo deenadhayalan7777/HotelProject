@@ -74,7 +74,7 @@
 	
 	
 	<action name="rateorderaction" class="controller.userController.RateOrderAction">  
-		<result name="success" type="redirectAction">home</result>
+		<result name="success" type="redirectAction">myorders</result>
 		<result name="failure">/user/User.jsp</result>  
 	</action>
 	
