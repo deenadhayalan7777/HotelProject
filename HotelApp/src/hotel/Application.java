@@ -22,7 +22,6 @@ public class Application {
 	
 	private static Application app=null;
 	private Map<Integer,Order> currentOrders;
-	private Map<Integer,List<Node>> map;
 	private Map<Integer,Location> locations;
 	private List<Path> paths;
 
@@ -49,7 +48,7 @@ public class Application {
 		 populatePaths();
 		 locations=db.getLocations();
 		 paths=db.getPaths();
-		 map=computeMap();
+		
 	}
 	
 	

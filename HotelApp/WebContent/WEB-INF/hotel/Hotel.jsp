@@ -38,12 +38,12 @@
      <li class="nav-item">
         <a class="nav-link" href="discount">Discount</a>
       </li>
-      
+      <li class="nav-item">
+      <a href="#" id="Location" class="btn btn-outline-light my-2 my-sm-0"><s:property value=" #session.hotel.location.name"/></a>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a href="#" id="Location" class="btn btn-outline-success my-2 my-sm-0"><s:property value=" #session.hotel.location.name"/></a>
-      </li>
+    
     <li class="nav-item">
       <a href="status" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
       </li>

@@ -42,11 +42,7 @@ function test(s)
       
     </ul>
     <ul class="navbar-nav ml-auto">
-    
-    <li class="nav-item">
-      <a href="status" id="status" class="btn btn-outline-success my-2 my-sm-0">OPEN</a>
-      </li>
-      
+     
       <li class="nav-item">
       <a href="logout" class="btn btn-outline-success my-2 my-sm-0">Logout</a>
       </li>
