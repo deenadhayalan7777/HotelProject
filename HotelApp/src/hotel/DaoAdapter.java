@@ -1,9 +1,9 @@
 package hotel;
 
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,7 +42,7 @@ public class DaoAdapter {
 	public void setHotel(Hotel hotel)  
 	{
        try {
-		dao.setHotel(hotel.getHotelId(),hotel.getUsername(),hotel.getPassword(),hotel.getPhone(),hotel.getRating(),hotel.getLocation().getLocationId());
+		dao.setHotel(hotel.getHotelId(),hotel.getUsername(),hotel.getPassword(),hotel.getPhone(),hotel.getRating());
 	       } catch (SQLException e) {System.out.println(e);}
 	}
    

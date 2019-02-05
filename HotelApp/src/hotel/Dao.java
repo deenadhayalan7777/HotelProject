@@ -90,10 +90,10 @@ public class Dao {
 		return dao;
 	}
 	
-	public void setHotel(int hotelId,String username,String password,String phone,float rating,int x) throws SQLException 
+	public void setHotel(int hotelId,String username,String password,String phone,float rating) throws SQLException 
 	{
-        String query = " insert into hotel(hotelId,username,password,phone,rating,placeId)"
-			        + " values (?,?,?,?,?,?)";
+        String query = " insert into hotel(hotelId,username,password,phone,rating)"
+			        + " values (?,?,?,?,?)";
 
 			     
 			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -103,7 +103,7 @@ public class Dao {
 			      preparedStmt.setString (3,password);
 			      preparedStmt.setString (4,phone);
 			      preparedStmt.setFloat(5, rating);
-			      preparedStmt.setInt(6, x);
+			     
 			      preparedStmt.execute();
 
 	}
