@@ -43,7 +43,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
          <c:set var="id" value="1" scope="page" />
          <s:iterator value="#session.locations" status="stat">
-         <a class="dropdown-item" href="location?id=${id}"><s:property /></a>
+         <button class="dropdown-item" onclick="loc(${id},'<s:property />')"><s:property /></button>
          <c:set var="id" value="${id + 1}" scope="page"/>
          </s:iterator>         
         </div>

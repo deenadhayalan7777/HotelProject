@@ -67,21 +67,29 @@ function test(c,s)
 	}
 }
 
-function rateOrder(orderId,status)
+function rateOrder(orderId,i)
 {
 	
-	var rating=document.getElementById(status).value;
-	
+	var rating=document.getElementById(i).value;
+	var ri=document.getElementsByClassName("rating1");
+	 var rab=document.getElementsByClassName("ratebtn");
 	var rate=parseInt(rating);
 	if(rate<1||rate>5||rating=="")
 		{alert("Enter rating within 1 to 5");
-		 document.getElementById(status).value="";
+		 document.getElementById(i).value="";
 		 return false;
 		}
-	document.getElementById("rating").value=rating;
-	document.getElementById("orderId").value=parseInt(orderId);
-	document.forms[0].submit();
-	
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	
+	    	ri[i].innerHTML= " <span class=\"badge badge-success \">"+rating+"</span>";
+	    	rab[i].innerHTML="";
+	    }
+	  };
+	  xhttp.open("GET", "rateorderaction?rating="+rating+"&orderId="+orderId, true);
+	  xhttp.send();
+
 }
 
 function trackOrder(orderId,status)

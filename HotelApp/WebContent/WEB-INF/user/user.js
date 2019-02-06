@@ -25,4 +25,18 @@ function test(s){
 	  }
 		
 	}
-
+function loc(id,name)
+{
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	
+	    	 document.getElementById("navbarDropdown").innerHTML = name;
+	    	
+	    }
+	  };
+	  xhttp.open("GET", "location?id="+id, true);
+	  xhttp.send();
+	  
+	
+}
