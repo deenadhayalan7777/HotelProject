@@ -79,6 +79,12 @@ public class LoginAction extends ActionSupport {
 			 return "success";
 			 
 		 }
+		 if(agentId==0)
+		 {
+			 addFieldError("username","Invalid Username");   
+		 }
+		 else
+			 addFieldError("password","Invalid Password");    
 		
 		return "failure";
 	}
