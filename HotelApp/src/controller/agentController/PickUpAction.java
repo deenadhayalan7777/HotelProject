@@ -1,27 +1,19 @@
 package controller.agentController;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Agent;
 import hotel.Application;
 import hotel.C;
-import hotel.Item;
-import hotel.ItemQuantity;
+
 import hotel.Order;
-import hotel.User;
 
 public class PickUpAction extends ActionSupport{
 

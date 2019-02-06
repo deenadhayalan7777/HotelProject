@@ -22,7 +22,6 @@ public class MenuAction extends ActionSupport {
 
 	 private List<Item> menu;
 	
-	
 	public String execute() 
 	{
 		
@@ -30,9 +29,6 @@ public class MenuAction extends ActionSupport {
 		Hotel hotel=(Hotel) ServletActionContext.getRequest().getSession().getAttribute("hotel");
 		int hotelId=hotel.getHotelId();
 		 setMenu(new ArrayList<Item>(app.getHotelMenu(hotelId).values()));
-		  
-		
-		
 	    return "success";
 		
 	}

@@ -19,9 +19,7 @@ public class Hotel implements Serializable {
 	private Discount discount;
 	
 	public Hotel()
-	{
-		
-	}
+	{}
 	
 	public Hotel(int hotelId,String username, String password, String phone) {
 		

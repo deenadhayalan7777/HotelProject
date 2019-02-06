@@ -1,30 +1,14 @@
 package controller.userController;
 
-
-
-
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-
-
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.dispatcher.SessionMap;
-
 import com.opensymphony.xwork2.ActionSupport;
-
 import hotel.Application;
-import hotel.Location;
 import hotel.User;
 
 public class LoginAction extends ActionSupport {
 
-	
 	private String username;
 	private String password;
-	
 	
 	public String getUsername() {
 		return username;
@@ -61,8 +45,7 @@ public class LoginAction extends ActionSupport {
 		Application app=Application.getInstance();
 		 Integer  userId=app.userLogin(username, password);
 		 if(userId>0)
-		 {
-			 
+		 { 
 			 User user=app.getUser(userId);
 			 ServletActionContext.getRequest().getSession().setAttribute("user", user);
 			 
@@ -72,11 +55,6 @@ public class LoginAction extends ActionSupport {
 		
 		return "failure";
 	}
-	
-	 
-	
-
-
 	
 	
 }

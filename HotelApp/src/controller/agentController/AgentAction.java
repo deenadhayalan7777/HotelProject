@@ -4,26 +4,16 @@ package controller.agentController;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-
-import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import hotel.Agent;
 import hotel.Application;
-import hotel.C;
-
 import hotel.HotelDetail;
 import hotel.Order;
-import hotel.User;
-
-
 
 public class AgentAction extends ActionSupport {
 
@@ -48,9 +38,6 @@ public class AgentAction extends ActionSupport {
 		this.currentOrders = currentOrders;
 	}
 
-	
-	
-	
 	public String execute() 
 	{
 		
@@ -64,7 +51,5 @@ public class AgentAction extends ActionSupport {
 		return "success";
 		
 	}
-
-	
 
 }

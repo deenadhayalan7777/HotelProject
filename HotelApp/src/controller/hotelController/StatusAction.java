@@ -35,10 +35,8 @@ public class StatusAction extends ActionSupport {
         	 st="OPEN";
         	}
          app.setHotelStatus(hotelId, status);
-         hotel=app.getHotel(hotelId);
-         ServletActionContext.getRequest().getSession().removeAttribute("hotel");
-         ServletActionContext.getRequest().getSession().setAttribute("hotel", hotel);
-   
+         hotel.setStatus(status);
+         
 	    return "success";
 		
 	}

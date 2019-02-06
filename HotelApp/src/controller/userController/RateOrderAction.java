@@ -25,10 +25,6 @@ public class RateOrderAction extends ActionSupport{
 	private int orderId;
 	private int rating;
 	
-
-	
-
-
 	public String execute()
 	{
 		

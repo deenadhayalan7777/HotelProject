@@ -19,8 +19,7 @@ public class SignUpAction extends ActionSupport implements ModelDriven<User> {
 
 	private User user;
 	
-	
-	public User getUser() {
+   public User getUser() {
 		return user;
 	}
 

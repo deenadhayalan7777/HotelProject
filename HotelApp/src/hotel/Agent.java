@@ -14,9 +14,7 @@ public class Agent implements Serializable {
 	
 	
 	public Agent()
-	{
-		
-	}
+	{}
 	
 	public Agent(int agentId, String username, String password, String phone) {
 		

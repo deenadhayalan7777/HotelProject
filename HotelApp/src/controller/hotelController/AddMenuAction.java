@@ -30,14 +30,9 @@ public class AddMenuAction extends ActionSupport{
 		return itemslist;
 	}
 
-
 	public void setItemslist(String itemslist) {
 		this.itemslist = itemslist;
 	}
-
-
-	
-
 
 	public String execute()
 	{

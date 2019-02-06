@@ -27,7 +27,6 @@ public class MapAction extends ActionSupport{
 	
 	private String placeJson;
 	private String pathJson;
-	private String orderPath;
 	private String agentJson;
 	private String hotelJson;
 	private String userJson;
@@ -51,16 +50,6 @@ public class MapAction extends ActionSupport{
 
 	public void setPathJson(String pathJson) {
 		this.pathJson = pathJson;
-	}
-
-
-	public String getOrderPath() {
-		return orderPath;
-	}
-
-
-	public void setOrderPath(String orderPath) {
-		this.orderPath = orderPath;
 	}
 
 
@@ -94,9 +83,6 @@ public class MapAction extends ActionSupport{
 	}
 
 
-	
-	
-
 	public String execute()
 	{
 		
@@ -115,8 +101,6 @@ public class MapAction extends ActionSupport{
 		  
 		placeJson=gson.toJson(new ArrayList<Location>(app.getLocations().values()));
 		pathJson=gson.toJson(app.getPaths());
-		
-		
 		
 		System.out.println(agentJson);
 		

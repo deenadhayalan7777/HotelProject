@@ -16,7 +16,7 @@ public static final	int GET_DISCOUNT=5;
 public static final	int BASED_ON_TOTAL=2;
 public static final	int BASED_ON_DATE=1;
 public static final	int BASED_ON_ITEM=3;
-//public static final	int VIEW_MENU=1;
+
 public static final	int LEAVE_AND_BACK=2;
 public static final	int HOLD_ORDER=3;
 public static final	int RESUME_ORDER=2;	

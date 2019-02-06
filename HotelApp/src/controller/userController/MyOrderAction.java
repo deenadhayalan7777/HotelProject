@@ -58,10 +58,5 @@ public class MyOrderAction extends ActionSupport {
 		this.currentOrders = currentOrders;
 	}
 	
-	 
-	
-
-
-	
 	
 }

@@ -5,9 +5,6 @@ package controller.hotelController;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;

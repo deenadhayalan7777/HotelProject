@@ -14,11 +14,8 @@ public class User implements Serializable{
 	private String phone;
 	private Location location;
 	
-	
 	public User()
-	{
-		
-	}
+	{}
 	public User(int userId, String username, String password, String phone) {
 		
 		this.userId = userId;

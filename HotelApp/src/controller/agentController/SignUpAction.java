@@ -18,11 +18,6 @@ public class SignUpAction extends ActionSupport implements ModelDriven<Agent> {
 
 	private Agent agent;
 	
-	
-	
-	
-
-
 
 	public Agent getModel(){  
 	    agent=new Agent();  
