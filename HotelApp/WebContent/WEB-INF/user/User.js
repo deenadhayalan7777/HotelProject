@@ -171,11 +171,8 @@ function printList()
 function makeOrder(hotelId)
 {
 	var itemString=JSON.stringify(itemslist);
-	document.getElementById("itemslist").value=itemString;
-	document.getElementById("total").value=total;
-	document.getElementById("hotelId").value=parseInt(hotelId);
 	
-	postAjax('makeorderaction', {itemslist:itemString,total:total,hotelId:hotelId}, function(data){
+	postAjax('orderaction', {itemslist:itemString,total:total,hotelId:hotelId}, function(data){
 		document.getElementById("home").className="nav-item active";
     	document.getElementById("my").className="nav-item";
         document.getElementById("tabdiv").innerHTML = data; });

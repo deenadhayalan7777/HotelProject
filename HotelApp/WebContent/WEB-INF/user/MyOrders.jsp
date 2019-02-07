@@ -58,6 +58,7 @@
 		    </s:if> 
             <s:else>
 			   <td class="rating1" ><span class="badge badge-success "><s:property  value="rating"/></span></td>
+			   <td class="ratebtn"></td>
 		    </s:else> 
 		    <c:set var="count" value="${count + 1}" scope="page"/>
 			</tr>   
