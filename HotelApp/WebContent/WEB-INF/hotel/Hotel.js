@@ -38,24 +38,28 @@ function changeStatus(i,id,stockt,vt)
 	
 	if((val==1 && stock==0)||(val==0 && stock>0))
 	{
-		var on=document.getElementsByClassName("on");
-    	var off=document.getElementsByClassName("off");
+		var on=document.getElementsByClassName("onbtn");
+    	var off=document.getElementsByClassName("offbtn");
 		var xhttp = new XMLHttpRequest();
 		  xhttp.onreadystatechange = function() {
 		    if (this.readyState == 4 && this.status == 200) {
-		    	if(val==0)
+		    	if(stock==0)
 		    		{
-		    		on[i].className="btn btn-success btn-sm on";
-			    	off[i].className="btn btn-default btn-sm off";
+		    		on[i].className="btn btn-success btn-sm onbtn";
+			    	off[i].className="btn btn-default btn-sm offbtn";
+			    	on[i].setAttribute( "onClick", "changeStatus("+i+","+itemId+",1,1)");
+			    	off[i].setAttribute( "onClick", "changeStatus("+i+","+itemId+",1,0)");
 		    		}
 		    	else
 		    		{
-		    		on[i].className="btn btn-default btn-sm on";
-			    	off[i].className="btn btn-danger btn-sm off";
+		    		on[i].className="btn btn-default btn-sm onbtn";
+			    	off[i].className="btn btn-danger btn-sm offbtn";
+			    	on[i].setAttribute( "onClick", "changeStatus("+i+","+itemId+",0,1)");
+			    	off[i].setAttribute( "onClick", "changeStatus("+i+","+itemId+",0,0)");
 		    		}
 		    }
 		  };
-		  xhttp.open("GET", "changestockaction?itemId="+itemId+"&stock="+val, true);
+		  xhttp.open("GET", "changestockaction?itemId="+itemId, true);
 		  xhttp.send();
 	}
 

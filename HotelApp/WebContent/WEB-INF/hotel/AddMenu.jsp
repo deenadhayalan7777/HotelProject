@@ -29,19 +29,18 @@
 			<td>
 			 <s:if test="%{stock==0}">
 	         <div class="btn-group" role="group" aria-label="Basic example">
-             <button type="button" class="btn btn-default btn-sm on" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','1')" >ON</button>
-             <button type="button" class="btn btn-danger btn-sm off" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','0')" >OFF</button>
+             <button type="button" class="btn btn-default btn-sm onbtn" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','1')" >ON</button>
+             <button type="button" class="btn btn-danger btn-sm offbtn" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','0')" >OFF</button>
             </div>
             </s:if>
              <s:else>
 			<div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-success btn-sm on" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','1')" >ON</button>
-            <button type="button" class="btn btn-default btn-sm off" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','0')" >OFF</button>
+            <button type="button" class="btn btn-success btn-sm onbtn" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','1')" >ON</button>
+            <button type="button" class="btn btn-default btn-sm offbtn" onclick="changeStatus('<s:property value="%{#stat.index}"/>','<s:property value="itemId" />','<s:property value="stock" />','0')" >OFF</button>
             </div>
             </s:else>
             </td>
-            <td><s:property value="stock"/></td>
-			</tr>  
+           </tr>  
   </s:iterator> 
   </table>
   </div>
