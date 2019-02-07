@@ -63,12 +63,12 @@ function pickup(sno)
 	if(!isPicked)
 	{ var pick=document.getElementsByClassName("pick");
 	var bt=document.getElementsByClassName("pickupbtn");
-	 bt[sno].disable=true;
+	 bt[sno].disabled=true;
 	var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
 	    	
-	    	bt[sno].disable=false;
+	    	bt[sno].disabled=false;
 	    	pick[sno].innerHTML=this.responseText;
 	    	bt[sno].innerHTML="CLOSE";
 	    	bt[sno].className="btn btn-outline-danger pickupbtn";

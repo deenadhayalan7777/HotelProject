@@ -57,7 +57,7 @@
   </div>
 </nav>
 <div id="tabdiv">
-<p>Deliver your orders now</p>
+<div class="p-3 mb-2 bg-light text-danger text-center">Deliver your orders now</div>
 <div id="ordercontainer" class="container">
 <s:if test="%{currentOrders.size()==0}">
 	         No Orders
@@ -94,18 +94,23 @@
  
 
 </div>
-<p>Pick Up Orders from below hotels<p>
+<div class="p-3 mb-2 bg-light text-primary text-center">Pick Up Orders from below hotels</div>
 <div id="hotelcontainer" class="container">
 <s:if test="%{hotels.size()==0}">
 	         No Orders
 </s:if>
  <s:else>
   <c:set var="count" value="0" scope="page" />
-  <br>Select any one of the Hotel below<br>
+  
   <div class="row">
   <div align="center" class="column">
   <table border="0" cellpadding="20">
+             <tr>
+                <th>HOTEL </th>
+                <th>RATING</th>
+             </tr>
    <s:iterator value="hotels" var="hotel">  
+            
 			<tr>
 			<td><s:property value="username"/></td>
 			<td><s:property value="rating"/></td> 
