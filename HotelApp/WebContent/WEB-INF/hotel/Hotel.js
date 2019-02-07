@@ -15,17 +15,11 @@ class Item{
 }
 function acceptOrder(i,orderId)
 {
+	ajax("orderacceptaction?orderId="+orderId,function(data){
 	var bt=document.getElementsByClassName("acceptbtn");
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	bt[i].innerHTML=" <span class=\"badge badge-success \">PREPARING</span>";
-	    	
-	    }
-	  };
-	  xhttp.open("GET", "orderacceptaction?orderId="+orderId, true);
-	  xhttp.send();
+	bt[i].innerHTML=" <span class=\"badge badge-success \">PREPARING</span>";
+	});
+	
 	
 	
 }	
@@ -38,6 +32,7 @@ function changeStatus(i,id,stockt,vt)
 	
 	if((val==1 && stock==0)||(val==0 && stock>0))
 	{
+		
 		var on=document.getElementsByClassName("onbtn");
     	var off=document.getElementsByClassName("offbtn");
 		var xhttp = new XMLHttpRequest();
@@ -59,7 +54,7 @@ function changeStatus(i,id,stockt,vt)
 		    		}
 		    }
 		  };
-		  xhttp.open("GET", "changestockaction?itemId="+itemId, true);
+		  xhttp.open("GET", "changestockaction?itemId="+itemId+"&stock="+val, true);
 		  xhttp.send();
 	}
 
@@ -71,6 +66,7 @@ function addItem()
 	var price=document.getElementById('price').value;
 	var time=document.getElementById('time').value;
 	var itembtn=document.getElementById('additembtn');
+	var namelist=document.getElementsByClassName("namelist");
 	if(name==="")
 		{
 		alert("name cant be blank");
@@ -89,7 +85,7 @@ function addItem()
 	for(var i=0;i<namelist.length;i++)
 		{
 		
-			if(name.trim() === namelist[i].trim())
+			if(name.trim() === namelist[i].innerHTML)
 			{
 				alert("Item elready exists");
 			 return false;
@@ -101,102 +97,102 @@ function addItem()
 	
 	var itemString=JSON.stringify(item);
 	itembtn.disabled=true;
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	document.getElementById('name').value="";
-	    	document.getElementById('price').value="";
-	    	document.getElementById('time').value="";
-	    	itembtn.disabled=false;
-	    }
-	  };
-	  xhttp.open("GET", "addmenuaction?itemslist="+itemString, true);
-	  xhttp.send();
+	postAjax('addmenuaction', {itemslist:itemString}, function(data){
+		document.getElementById("home").className="nav-item";
+    	document.getElementById("menutab").className="nav-item active";
+    	document.getElementById("my").className="nav-item";
+    	document.getElementById("distab").className="nav-item";
+    	 document.getElementById("tabdiv").innerHTML = data; });
+	
 	
 }
 
 function status()
 {
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	var status=document.getElementById("status").innerHTML;
-	    	if(status=='CLOSE')
-	    	 document.getElementById("status").innerHTML = "OPEN";
-	    	else
-	    	 document.getElementById("status").innerHTML="CLOSE";
-	    }
-	  };
-	  xhttp.open("GET", "status", true);
-	  xhttp.send();
-	  
-	
+	ajax("status ",function(data){
+		var status=document.getElementById("status").innerHTML;
+    	if(status=='CLOSE')
+    	 document.getElementById("status").innerHTML = "OPEN";
+    	else
+    	 document.getElementById("status").innerHTML="CLOSE";
+	});
+
 }
 function home()
 {
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	document.getElementById("home").className="nav-item active";
-	    	document.getElementById("menutab").className="nav-item ";
-	    	document.getElementById("my").className="nav-item";
-	    	document.getElementById("distab").className="nav-item";
-	    	 document.getElementById("tabdiv").innerHTML = this.responseText;
-	    	
-	    }
-	  };
-	  xhttp.open("GET", "homeaction", true);
-	  xhttp.send();
+	ajax("homeaction",function(data){
+		
+		document.getElementById("home").className="nav-item active";
+    	document.getElementById("menutab").className="nav-item ";
+    	document.getElementById("my").className="nav-item";
+    	document.getElementById("distab").className="nav-item";
+    	 document.getElementById("tabdiv").innerHTML = data;
+    	
+	});
+	
 }
 function myorders()
 {
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	document.getElementById("home").className="nav-item";
-	    	document.getElementById("menutab").className="nav-item ";
-	    	document.getElementById("my").className="nav-item active";
-	    	document.getElementById("distab").className="nav-item";
-	    	 document.getElementById("tabdiv").innerHTML = this.responseText;
-	    	
-	    }
-	  };
-	  xhttp.open("GET", "myorders", true);
-	  xhttp.send();
+	ajax("myorders ",function(data){
+		document.getElementById("home").className="nav-item";
+    	document.getElementById("menutab").className="nav-item ";
+    	document.getElementById("my").className="nav-item active";
+    	document.getElementById("distab").className="nav-item";
+    	 document.getElementById("tabdiv").innerHTML = data;
+	});
+	
 }
 function menu()
 {
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	document.getElementById("home").className="nav-item";
-	    	document.getElementById("menutab").className="nav-item active";
-	    	document.getElementById("my").className="nav-item";
-	    	document.getElementById("distab").className="nav-item";
-	    	 document.getElementById("tabdiv").innerHTML = this.responseText;
-	    	
-	    }
-	  };
-	  xhttp.open("GET", "menu", true);
-	  xhttp.send();
+	ajax("menu ",function(data){
+		document.getElementById("home").className="nav-item";
+    	document.getElementById("menutab").className="nav-item active";
+    	document.getElementById("my").className="nav-item";
+    	document.getElementById("distab").className="nav-item";
+    	 document.getElementById("tabdiv").innerHTML = data;
+	});
+	
 }
 function discount()
 {
+	
+	ajax("discount",function(data){
+		    document.getElementById("home").className="nav-item";
+	    	document.getElementById("menutab").className="nav-item";
+	    	document.getElementById("my").className="nav-item";
+	    	document.getElementById("distab").className="nav-item active";
+	    	 document.getElementById("tabdiv").innerHTML = data;
+	    	 });
+	
+
+}
+
+function ajax(url,success)
+{
+	
 	var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
 	    	
-	    	document.getElementById("home").className="nav-item";
-	    	document.getElementById("menutab").className="nav-item";
-	    	document.getElementById("my").className="nav-item";
-	    	document.getElementById("distab").className="nav-item active";
-	    	 document.getElementById("tabdiv").innerHTML = this.responseText;
-	    	
+	    	success(this.responseText);
 	    }
+	    	
 	  };
-	  xhttp.open("GET", "discount", true);
+	  xhttp.open("GET", url, true);
 	  xhttp.send();
+}
+function postAjax(url, data, success) {
+    var params = typeof data == 'string' ? data : Object.keys(data).map(
+            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+        ).join('&');
+
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('POST', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+    return xhr;
 }

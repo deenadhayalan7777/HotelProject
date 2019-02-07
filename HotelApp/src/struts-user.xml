@@ -31,6 +31,9 @@
 	<action name ="home" class="controller.userController.UserAction">
 		<result name="success" >/user/User.jsp</result>
 	</action>
+	<action name ="homeaction" class="controller.userController.UserAction">
+		<result name="success" >/user/Home.jsp</result>
+	</action>
 	<action name ="signup" >
 		<result >/user/SignUp.jsp</result>
 	</action>		

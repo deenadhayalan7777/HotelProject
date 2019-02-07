@@ -23,7 +23,13 @@
 			<td><s:property value="phoneNo"/></td>
 			<td><s:property value="total"/></td>  
 			<td><s:property value="date"/></td>  
-			<td><s:property value="rating"/></td> 
+			<td>
+			<s:if test="%{rating==0}">
+	         <span class="badge badge-secondary ">NOT RATED</span>
+            </s:if>
+            <s:else>
+			<s:property value="rating"/>
+			</s:else></td> 
 			</tr>   
 			</s:iterator>
  </table>

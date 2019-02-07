@@ -5,33 +5,19 @@ var isPicked=false;
 
 function loc(id,name)
 {
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	 document.getElementById("navbarDropdown").innerHTML = name;
-	    	
-	    }
-	  };
-	  xhttp.open("GET", "location?id="+id, true);
-	  xhttp.send();
-	  
+	ajax("location?id="+id,function(data){
+		 document.getElementById("navbarDropdown").innerHTML = name;
+	});
 	
 }
 function deliver(sno)
 {
-	 var bt=document.getElementsByClassName("deliverbtn");
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	bt[sno].innerHTML=" <span class=\"badge badge-success \">DELIVERED</span>";
-	    	
-	    }
-	  };
-	  xhttp.open("GET", "deliveryaction?sno="+sno, true);
-	  xhttp.send();
-	  
+	ajax("deliveryaction?sno="+sno,function(data){
+		var bt=document.getElementsByClassName("deliverbtn");	
+		bt[sno].innerHTML=" <span class=\"badge badge-success \">DELIVERED</span>";
+    	
+	});
+	
 	
 }
 
@@ -44,17 +30,11 @@ function pickUpOrders(hotelId,size)
 		 document.getElementById(number).value="";
 		 return false;
 	 }
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	window.location.reload();
-	    }
-	  };
-	  xhttp.open("GET", "pickupaction?hotelId="+hotelId+"&number="+number, true);
-	  xhttp.send();
-	
-	  
+	ajax("pickupaction?hotelId="+hotelId+"&number="+number ,function(data){
+		
+    	 document.getElementById("tabdiv").innerHTML = data;
+ 	
+	});
 	
 }
 
@@ -64,21 +44,18 @@ function pickup(sno)
 	{ var pick=document.getElementsByClassName("pick");
 	var bt=document.getElementsByClassName("pickupbtn");
 	 bt[sno].disabled=true;
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
+	 ajax("selecthotelaction?sno="+sno,function(data){
+		 var pick=document.getElementsByClassName("pick");
+	    	var bt=document.getElementsByClassName("pickupbtn");
 	    	bt[sno].disabled=false;
 	    	pick[sno].innerHTML=this.responseText;
 	    	bt[sno].innerHTML="CLOSE";
 	    	bt[sno].className="btn btn-outline-danger pickupbtn";
 	    	isPicked=true;
 	    	bt[sno].setAttribute( "onClick", "closeChoice("+sno+")" );
-	    
-	    }
-	  };
-	  xhttp.open("GET", "selecthotelaction?sno="+sno, true);
-	  xhttp.send();
+
+	 });
+	
 	}
 	else
 		alert("Close the selected hotel");
@@ -98,33 +75,35 @@ function closeChoice(sno)
 }
 function myorders()
 {
-	var xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    	document.getElementById("my").className="nav-item active ";
-	    	document.getElementById("home").className="nav-item ";
-	    	 document.getElementById("tabdiv").innerHTML = this.responseText;
-	    	
-	    }
-	  };
-	  xhttp.open("GET", "myorders", true);
-	  xhttp.send();
-	  
+	ajax("myorders" ,function(data){
+		document.getElementById("my").className="nav-item active ";
+    	document.getElementById("home").className="nav-item ";
+    	 document.getElementById("tabdiv").innerHTML = data;
+ 	
+	});
 	
 }
 function home()
 {
+	ajax("homeaction" ,function(data){
+		document.getElementById("my").className="nav-item";
+    	document.getElementById("home").className="nav-item active";
+    	 document.getElementById("tabdiv").innerHTML = data;
+    	
+	});
+	
+}
+function ajax(url,success)
+{
+	
 	var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
 	    	
-	    	document.getElementById("my").className="nav-item";
-	    	document.getElementById("home").className="nav-item active";
-	    	 document.getElementById("tabdiv").innerHTML = this.responseText;
-	    	
+	    	success(this.responseText);
 	    }
+	    	
 	  };
-	  xhttp.open("GET", "homeaction", true);
+	  xhttp.open("GET", url, true);
 	  xhttp.send();
 }

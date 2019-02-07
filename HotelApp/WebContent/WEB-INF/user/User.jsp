@@ -13,7 +13,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </head>
-<body onload="test('<s:property value ="hotels.size()"/>')" >
+<body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
@@ -26,11 +26,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item active" id="home">
+        <a class="nav-link" href='javascript:;' onclick="home()">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="myorders">MyOrders</a>
+      <li class="nav-item" id="my">
+        <a class="nav-link" href='javascript:;' onclick="myorders()">MyOrders</a>
       </li>
      
       
@@ -55,27 +55,10 @@
 
   </div>
 </nav>
-<div class="container" id="hotelcontainer">
- <c:set var="count" value="0" scope="page" />
-<form action="selecthotelaction" method="get" align="center">
-  <div class="row">
-  <div align="center" class="column">
-  <table border="0" cellpadding="20">
-   <s:iterator value="hotels" >  
-			<tr>
-			<td><s:property value="username"/></td> 
-			<td><s:property value="rating"/></td>  
-			<td><button class="btn btn-outline-info viewbtn" name="sno" type="submit" value="${count }">OPEN</button></td>
-			<c:set var="count" value="${count + 1}" scope="page"/>
-			<td class="status"><s:property value="status"/></td> 
-			</tr>  
-  </s:iterator> 
-  </table>
-  </div>
-  </div>
-</form>
-</div>
+<div id="tabdiv">
+<jsp:include page="Home.jsp" />  
  
+</div> 
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">

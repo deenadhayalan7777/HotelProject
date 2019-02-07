@@ -22,7 +22,7 @@
    <s:iterator  value="menu" status="stat">  
            
 			<tr>
-			<td class="name"><s:property value="name"/></td>  
+			<td class="namelist"><s:property value="name"/></td>  
 			<td><s:property value="price"/></td>  
 			<td><s:property value="time"/></td>
 			
