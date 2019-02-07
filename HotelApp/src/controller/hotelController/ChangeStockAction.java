@@ -12,7 +12,7 @@ public class ChangeStockAction extends ActionSupport {
 
 	
 	private int itemId;
-	
+	private int stock;
 	public int getItemId() {
 		return itemId;
 	}
@@ -25,15 +25,19 @@ public class ChangeStockAction extends ActionSupport {
 	{
 		
 		Application app=Application.getInstance();
-		Hotel hotel=(Hotel) ServletActionContext.getRequest().getSession().getAttribute("hotel");
-		Item item=app.getHotelMenu(hotel.getHotelId()).get(itemId);
-		if(item.getStock()==0)
-	      app.setItemStock(itemId,1);
-		else
-			app.setItemStock(itemId,0);
 		
-	    return "success";
+	      app.setItemStock(itemId,stock);
+
+	      return "success";
 		
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	
