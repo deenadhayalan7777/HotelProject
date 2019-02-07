@@ -31,6 +31,11 @@
 					<result name="success" >/agent/Agent.jsp</result>
 					<result name="failure">/agent/Login.jsp</result>				
 		</action>
+		<action name ="homeaction" class="controller.agentController.AgentAction">
+					
+					<result name="success" >/agent/Home.jsp</result>
+					<result name="failure">/agent/Login.jsp</result>				
+		</action>
 		<action name ="myorders" class="controller.agentController.MyOrderAction">
 					<result name="success" >/agent/MyOrders.jsp</result>
 					<result name="failure">/agent/Agent.jsp</result>				

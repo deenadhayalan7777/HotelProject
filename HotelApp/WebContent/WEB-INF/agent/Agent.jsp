@@ -15,6 +15,7 @@
 
 </head>
 <body >
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.agent.username"/></a>
@@ -27,7 +28,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active" id="home">
-        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href='javascript:;' onclick="home()">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" id="my">
         <a class="nav-link" href='javascript:;' onclick="myorders()">MyOrders</a>
@@ -137,5 +138,6 @@
      <strong>Success!</strong> <s:actionmessage/>
    </div>
 </s:if>
+
 </body>
 </html>

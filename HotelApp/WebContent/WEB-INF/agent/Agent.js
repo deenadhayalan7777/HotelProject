@@ -63,10 +63,12 @@ function pickup(sno)
 	if(!isPicked)
 	{ var pick=document.getElementsByClassName("pick");
 	var bt=document.getElementsByClassName("pickupbtn");
+	 bt[sno].disable=true;
 	var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
 	    	
+	    	bt[sno].disable=false;
 	    	pick[sno].innerHTML=this.responseText;
 	    	bt[sno].innerHTML="CLOSE";
 	    	bt[sno].className="btn btn-outline-danger pickupbtn";
@@ -84,7 +86,7 @@ function pickup(sno)
 }
 function closeChoice(sno)
 {
-	console.log("In close") ;
+	
 	var bt=document.getElementsByClassName("pickupbtn");
 	var pick=document.getElementsByClassName("pick");
 	pick[sno].innerHTML="";
@@ -93,7 +95,6 @@ function closeChoice(sno)
 	bt[sno].className="btn btn-outline-info pickupbtn";
 	bt[sno].setAttribute( "onClick", "pickup("+sno+")" );
 	
-	console.log("After Close")
 }
 function myorders()
 {
@@ -111,4 +112,19 @@ function myorders()
 	  xhttp.send();
 	  
 	
+}
+function home()
+{
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	
+	    	document.getElementById("my").className="nav-item";
+	    	document.getElementById("home").className="nav-item active";
+	    	 document.getElementById("tabdiv").innerHTML = this.responseText;
+	    	
+	    }
+	  };
+	  xhttp.open("GET", "homeaction", true);
+	  xhttp.send();
 }
