@@ -27,6 +27,10 @@
 		<result name="success">/hotel/Hotel.jsp</result> 
 		<result name="failure">/hotel/Login.jsp</result>  
 		</action> 
+		<action name="homeaction" class="controller.hotelController.HotelAction">  
+		<result name="success">/hotel/Home.jsp</result> 
+		<result name="failure">/hotel/Login.jsp</result>  
+		</action> 
 		<action name ="signup" class="controller.hotelController.SignAction">
 		<result name="success">/hotel/SignUp.jsp</result>
 		</action>
