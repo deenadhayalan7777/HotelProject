@@ -57,78 +57,7 @@
   </div>
 </nav>
 <div id="tabdiv">
-<div class="p-3 mb-2 bg-light text-danger text-center">Deliver your orders now</div>
-<div id="ordercontainer" class="container">
-<s:if test="%{currentOrders.size()==0}">
-	         No Orders
-</s:if>
- <s:else>
-            <c:set var="count" value="0" scope="page" />
-
- <table border="0" cellpadding="20">
-            <tr>
-                <th>HOTEL NAME</th>
-                <th>USER PHONE</th>
-                <th>TOTAL</th>
-                <th>DATE</th>
-            </tr>
-            <s:iterator value="currentOrders">  
-			<tr>
-			<td><s:property value="hotelname"/></td>
-			<td><s:property value="phoneNo"/></td>  
-			<td><s:property value="total"/></td>  
-			<td><s:property value="date"/></td>  
-			<td class="deliverbtn">
-			<s:if test="%{timer==0}">
-	         <button class="btn btn-outline-primary" name="sno" onclick="deliver(${count})" >DELIVER</button>
-             </s:if>
-            <s:else>
-            <span class="badge badge-warning "><s:property value="timer"/></span>
-            </s:else>
-			</td>
-			 <c:set var="count" value="${count + 1}" scope="page"/>
-			</tr>   
-			</s:iterator>
-        </table>
- </s:else>
- 
-
-</div>
-<div class="p-3 mb-2 bg-light text-primary text-center">Pick Up Orders from below hotels</div>
-<div id="hotelcontainer" class="container">
-<s:if test="%{hotels.size()==0}">
-	         No Orders
-</s:if>
- <s:else>
-  <c:set var="count" value="0" scope="page" />
-  
-  <div class="row">
-  <div align="center" class="column">
-  <table border="0" cellpadding="20">
-             <tr>
-                <th>HOTEL </th>
-                <th>RATING</th>
-             </tr>
-   <s:iterator value="hotels" var="hotel">  
-            
-			<tr>
-			<td><s:property value="username"/></td>
-			<td><s:property value="rating"/></td> 
-			<td><s:if test="%{status==0}">
-	         <button class="btn btn-outline-info pickupbtn"  disabled >CLOSED</button>   
-             </s:if>
-            <s:else>
-            <button class="btn btn-outline-info pickupbtn" name="sno" onclick="pickup(${count})" >PICKUP</button>
-            </s:else></td> 
-			<c:set var="count" value="${count + 1}" scope="page"/>
-			<td><div class="pick"></div> 
-			</tr>  
-  </s:iterator> 
-  </table>
-  </div>
-  </div>
-</s:else>  
-</div>
+<jsp:include page="Home.jsp" />  
 </div>
 <s:if test="hasActionErrors()">
    

@@ -14,7 +14,7 @@
 
 <script src="/HotelApp/hotel/hotel.js"></script>
 </head>
-<body onload = "test('<s:property value="#session.hotel.status"/>','<s:property value ="currentOrders.size()"/>')">
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 	<a class="navbar-brand" style="color:red;" href="#"><s:property value=" #session.hotel.username"/></a>
@@ -26,17 +26,17 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item active" id="home">
+        <a class="nav-link" href='javascript:;' onclick="home()">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="menu">Menu</a>
+      <li class="nav-item" id="menutab">
+        <a class="nav-link" href='javascript:;' onclick="menu()">Menu</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="myorders">MyOrders</a>
+      <li class="nav-item" id="my">
+        <a class="nav-link" href='javascript:;' onclick="myorders()">MyOrders</a>
       </li>
-     <li class="nav-item">
-        <a class="nav-link" href="discount">Discount</a>
+     <li class="nav-item" id="distab">
+        <a class="nav-link" href='javascript:;' onclick="discount()">Discount</a>
       </li>
       <li class="nav-item">
       <a href="#" id="Location" class="btn btn-outline-light my-2 my-sm-0"><s:property value=" #session.hotel.location.name"/></a>
@@ -45,7 +45,12 @@
     <ul class="navbar-nav ml-auto">
     
     <li class="nav-item">
-      <button  id="status" class="btn btn-outline-success my-2 my-sm-0" onclick="status()">OPEN</button>
+       <s:if test="%{#session.hotel.status==0}">
+	       <button  id="status" class="btn btn-outline-success my-2 my-sm-0" onclick="status()">CLOSE</button>
+       </s:if>
+       <s:else>
+        <button  id="status" class="btn btn-outline-success my-2 my-sm-0" onclick="status()">OPEN</button>
+      </s:else>
       </li>
       
       <li class="nav-item">
@@ -55,31 +60,10 @@
 
   </div>
 </nav>
-<div class="container" id="ordercontainer">
-<table border="0" cellpadding="20">
-            <tr>
-                <th>PHONE NO</th>
-                <th>TOTAL</th>
-                <th>DATE</th>
-                
-               
-            </tr>
-            <s:iterator value="currentOrders">  
-			<tr>
-			<td><s:property value="phoneNo"/></td>
-			<td><s:property value="total"/></td>  
-			<td><s:property value="date"/></td>  
-			<td class="acceptbtn"><button  type="button" class="btn btn-outline-success acceptOrder" onclick="acceptOrder('<s:property value="orderId"/>')"> ACCEPT </button></td>
-			<td class="timer"><s:property value="timer"/></td>  
-			<td class="status"><s:property value="status"/></td>  
-			</tr>   
-			</s:iterator>
- </table>
- </div>
- <s:form name="myForm" action="orderacceptaction"   method="post" >
-<s:hidden name="orderId" id="orderId" value='0'/>
-</s:form>
+<div id="tabdiv">
+<jsp:include page="Home.jsp" />  
  
+</div> 
 <s:if test="hasActionErrors()">
    
      <div class="alert alert-danger">
