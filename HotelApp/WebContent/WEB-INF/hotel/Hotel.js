@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 class Item{
 	
 	constructor(name,price,time,stock)
@@ -98,11 +99,7 @@ function addItem()
 	var itemString=JSON.stringify(item);
 	itembtn.disabled=true;
 	postAjax('addmenuaction', {itemslist:itemString}, function(data){
-		document.getElementById("home").className="nav-item";
-    	document.getElementById("menutab").className="nav-item active";
-    	document.getElementById("my").className="nav-item";
-    	document.getElementById("distab").className="nav-item";
-    	 document.getElementById("tabdiv").innerHTML = data; });
+		menu(); });
 	
 	
 }
@@ -118,9 +115,10 @@ function status()
 	});
 
 }
+
 function home()
 {
-	ajax("homeaction",function(data){
+ajax("homeaction",function(data){
 		
 		document.getElementById("home").className="nav-item active";
     	document.getElementById("menutab").className="nav-item ";
@@ -133,6 +131,7 @@ function home()
 }
 function myorders()
 {
+	
 	ajax("myorders ",function(data){
 		document.getElementById("home").className="nav-item";
     	document.getElementById("menutab").className="nav-item ";
@@ -144,6 +143,7 @@ function myorders()
 }
 function menu()
 {
+	
 	ajax("menu ",function(data){
 		document.getElementById("home").className="nav-item";
     	document.getElementById("menutab").className="nav-item active";

@@ -23,7 +23,7 @@
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.js"></script>
   
   <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis-network.min.css" rel="stylesheet" type="text/css" />
-<script src="/HotelApp/user/Map3.js"></script>
+<script src="/HotelApp/user/Map.js"></script>
 </head>
 <body onload="test('<s:property value ="placeJson"/>','<s:property value ="pathJson"/>','<s:property value ="hotelJson"/>','<s:property value ="userJson"/>','<s:property value ="agentJson"/>')" >
 

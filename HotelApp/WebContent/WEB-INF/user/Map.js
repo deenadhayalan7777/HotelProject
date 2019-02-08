@@ -36,7 +36,7 @@ function test(placeJson,pathJson,hotelJson,userJson,agentJson)
 	var hotel=JSON.parse(hotelJson);
 	var user=JSON.parse(userJson);
 	var agent=JSON.parse(agentJson);
-	//var path=JSON.parse(orderPath);
+	
 	var nodesdata=[];
 	var edgesdata=[];
 	
@@ -53,10 +53,6 @@ function test(placeJson,pathJson,hotelJson,userJson,agentJson)
 	nodesdata.push({shape: 'image', image: userImage,label:user.name,x:(parseInt(user.x)+20),y:(parseInt(user.y)+20)});
 	nodesdata.push({shape: 'image', image: agentImage,label:'Agent',x:(parseInt(agent.x)),y:(parseInt(agent.y))});
 	
-	/*for(var i=0;i<path.length-1;i++)
-		{
-		edgesdata.push({to:path[i],from:path[i+1],width:3});
-		}*/
 	var nodes=new vis.DataSet(nodesdata);
 	var edges=new vis.DataSet(edgesdata);
 	var red='#f44242';
@@ -93,4 +89,6 @@ function test(placeJson,pathJson,hotelJson,userJson,agentJson)
     layout: {randomSeed:0}
   };
 network.setOptions(options);
+
 }
+

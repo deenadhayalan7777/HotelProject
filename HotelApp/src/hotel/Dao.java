@@ -133,7 +133,7 @@ public class Dao {
   public void setUser(int userId,String username,String password,String phone) throws SQLException 
 	{
       String query = " insert into user(userId,username,password,phone)"
-			        + " values (?,?,?,?,?)";
+			        + " values (?,?,?,?)";
 
 			     
 			      PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -157,7 +157,7 @@ public class Dao {
   public void setAgent(int agentId,String username,String password,String phone) throws SQLException 
  	{
        String query = " insert into agent(agentId,username,password,phone)"
- 			        + " values (?,?,?,?,?)";
+ 			        + " values (?,?,?,?)";
 
  			     
  			      PreparedStatement preparedStmt = con.prepareStatement(query);

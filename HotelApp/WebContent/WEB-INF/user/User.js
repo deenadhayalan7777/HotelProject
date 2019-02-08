@@ -4,8 +4,10 @@
 
 function home()
 {
+	
 	ajax("homeaction",function(data){
 		
+		 
 		document.getElementById("home").className="nav-item active";
     	document.getElementById("my").className="nav-item";
     	 document.getElementById("tabdiv").innerHTML = data;
@@ -13,6 +15,7 @@ function home()
 	});
 	
 }
+
 function myorders()
 {
 	ajax("myorders ",function(data){
@@ -20,7 +23,6 @@ function myorders()
     	document.getElementById("my").className="nav-item active";
     	 document.getElementById("tabdiv").innerHTML = data;
 	});
-	
 }
 function loc(id,name)
 {
@@ -170,12 +172,21 @@ function printList()
 }
 function makeOrder(hotelId)
 {
+	var location=document.getElementById("navbarDropdown").innerHTML;
+	if(location.trim()===""||location.trim()==null)
+	{
+	 alert("Select User Location For delivery");
+	 return false;
+	}
+    if(itemslist.length==0)
+    	{
+    	 alert("Add items to make order");
+    	 return false;
+    	}
 	var itemString=JSON.stringify(itemslist);
 	
 	postAjax('orderaction', {itemslist:itemString,total:total,hotelId:hotelId}, function(data){
-		document.getElementById("home").className="nav-item active";
-    	document.getElementById("my").className="nav-item";
-        document.getElementById("tabdiv").innerHTML = data; });
+		myorders(); });
 	
 }
 function ajax(url,success)

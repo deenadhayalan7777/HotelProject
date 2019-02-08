@@ -31,10 +31,8 @@ function pickUpOrders(hotelId,size)
 		 return false;
 	 }
 	ajax("pickupaction?hotelId="+hotelId+"&number="+number ,function(data){
-		
-    	 document.getElementById("tabdiv").innerHTML = data;
- 	
-	});
+	 	 home();
+     });
 	
 }
 
@@ -75,6 +73,7 @@ function closeChoice(sno)
 }
 function myorders()
 {
+	
 	ajax("myorders" ,function(data){
 		document.getElementById("my").className="nav-item active ";
     	document.getElementById("home").className="nav-item ";
@@ -83,6 +82,7 @@ function myorders()
 	});
 	
 }
+
 function home()
 {
 	ajax("homeaction" ,function(data){
@@ -93,6 +93,7 @@ function home()
 	});
 	
 }
+
 function ajax(url,success)
 {
 	
