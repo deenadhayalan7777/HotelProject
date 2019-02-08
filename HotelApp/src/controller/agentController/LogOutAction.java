@@ -13,9 +13,6 @@ public class LogOutAction extends ActionSupport  {
 		   HttpSession session=ServletActionContext.getRequest().getSession();
 	       session.setAttribute("agent", null);
 	       
-	       if(session.getAttribute("user")==null && session.getAttribute("agent")==null && session.getAttribute("hotel")==null)
-		    session.invalidate();
-	     
 		  return "success";
 		}
 
