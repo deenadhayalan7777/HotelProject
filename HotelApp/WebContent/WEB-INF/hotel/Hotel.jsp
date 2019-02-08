@@ -46,10 +46,10 @@
     
     <li class="nav-item">
        <s:if test="%{#session.hotel.status==0}">
-	       <button  id="status" class="btn btn-outline-success my-2 my-sm-0" onclick="status()">CLOSE</button>
+	       <button  id="status" class="btn btn-outline-success my-2 my-sm-0" onclick="status()">OPEN</button>
        </s:if>
        <s:else>
-        <button  id="status" class="btn btn-outline-success my-2 my-sm-0" onclick="status()">OPEN</button>
+        <button  id="status" class="btn btn-outline-success my-2 my-sm-0" onclick="status()">CLOSE</button>
       </s:else>
       </li>
       

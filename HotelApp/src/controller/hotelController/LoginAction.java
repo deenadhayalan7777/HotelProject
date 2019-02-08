@@ -1,11 +1,14 @@
 package controller.hotelController;
 
 
+import java.util.List;
+
 import org.apache.struts2.ServletActionContext;
 
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import hotel.Agent;
 import hotel.Application;
 import hotel.Hotel;
 
@@ -51,15 +54,20 @@ public class LoginAction extends ActionSupport {
 		
 		Application app=Application.getInstance();
 		 Integer  hotelId=app.hotelLogin(username, password);
+		
 		 if(hotelId>0)
 		 {
 			 Hotel hotel=app.getHotel(hotelId);
 			 ServletActionContext.getRequest().getSession().setAttribute("hotel", hotel);
 			  
 			 return "success";
-			 
 		 }
-		
+		 if(hotelId==0)
+		 {
+			 addFieldError("username","Invalid Username");   
+		 }
+		 else
+			 addFieldError("password","Invalid Password");  
 		return "failure";
 	}
 	

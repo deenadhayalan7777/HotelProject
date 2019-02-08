@@ -25,13 +25,14 @@ function pickUpOrders(hotelId,size)
 {
 	var number=document.getElementById("number").value;
 	var rate=parseInt(number);
-	if(rate>parseInt(size))
+	if(rate>parseInt(size)|| rate<=0)
 		{alert("Requested number of orders not available in hotel");
 		 document.getElementById(number).value="";
 		 return false;
 	 }
 	ajax("pickupaction?hotelId="+hotelId+"&number="+number ,function(data){
-	 	 home();
+	 	isPicked=false; 
+		home();
      });
 	
 }
