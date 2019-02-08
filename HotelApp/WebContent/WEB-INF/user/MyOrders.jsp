@@ -35,10 +35,12 @@
                   </s:if>
                  <s:else>
 			     	<td><span class="badge badge-warning ">PREPARING FOOD</span></td>
+			     	<td><span class="badge badge-danger "><s:property value="timer"/></span></td>
                  </s:else> 
             </s:elseif>
 			<s:else>
 			   <td><span class="badge badge-success ">ASSIGNED</span></td>
+			   <td><span class="badge badge-danger "><s:property value="timer"/></span></td>
 			   <td class="track"><button  type="button" class="btn btn-outline-warning" onclick="trackOrder('<s:property value="orderId"/>')"> TRACK ORDER </button></td>
 		    </s:else> 
 			</tr>   

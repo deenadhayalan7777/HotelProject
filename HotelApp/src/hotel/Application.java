@@ -50,6 +50,24 @@ public class Application {
 		 paths=db.getPaths();
 		
 	}
+	public void startTimer()
+	{
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+		       @Override
+		       public void run() {
+		          for(Order order:currentOrders.values())
+		          {
+		        	  if(order.getTimer()!=0)
+		        	  {  
+		        		  int timer=order.getTimer()-1;
+		        		  order.setTimer(timer);
+		        		  db.setOrderTimer(order.getOrderId(),timer);
+		        	  }
+		          }
+		       }
+		    }, 0, 5000);
+	}
 	
 	
 	private Map<Integer, Order> getAllUsersCurrentOrders() {
@@ -71,7 +89,7 @@ public class Application {
 		 
 		 if(user!=null)
 		 {
-			 if(user.getPassword().equals(cryptWithMD5(password)))
+			 if(user.getPassword().equals(Util.cryptWithMD5(password)))
 				 userId= user.getUserId();
 			 else
 				 userId=-1;
@@ -86,7 +104,7 @@ public class Application {
 		if(user==null)
 		{synchronized(this){
 			int userCount=getUserCount()+1;
-			db.setUser(new User(userCount,username,cryptWithMD5(password),phone));
+			db.setUser(new User(userCount,username,Util.cryptWithMD5(password),phone));
 			userId=userCount;
 			userCount++;
 		    }
@@ -101,7 +119,7 @@ public class Application {
 		 
 		 if(agent!=null)
 		 {
-			 if(agent.getPassword().equals(cryptWithMD5(password)))
+			 if(agent.getPassword().equals(Util.cryptWithMD5(password)))
 				 agentId= agent.getAgentId();
 			 else
 				 agentId=-1;
@@ -116,7 +134,7 @@ public class Application {
 		{
 			synchronized(this){
 				int agentCount=getAgentCount()+1;
-			db.setAgent(new Agent(agentCount,username,cryptWithMD5(password),phone));
+			db.setAgent(new Agent(agentCount,username,Util.cryptWithMD5(password),phone));
 			
 			agentId=agentCount;
 			agentCount++;
@@ -133,7 +151,7 @@ public class Application {
 		 
 		 if(hotel!=null)
 		 {
-			 if(hotel.getPassword().equals(cryptWithMD5(password)))
+			 if(hotel.getPassword().equals(Util.cryptWithMD5(password)))
 				 hotelId= hotel.getHotelId();
 			 else
 				 hotelId=-1;
@@ -147,7 +165,7 @@ public class Application {
 		if(hotel==null)
 		{synchronized(this){
 			int hotelCount=getHotelCount()+1;
-			db.setHotel(new Hotel(hotelCount,username,cryptWithMD5(password),phone));
+			db.setHotel(new Hotel(hotelCount,username,Util.cryptWithMD5(password),phone));
 			setHotelLocation(hotelCount,locationId);
 			hotelId=hotelCount;
 			hotelCount++;
@@ -293,26 +311,7 @@ public class Application {
 		db.setHotelRating(hotelId, totalRating);
 		}
 	}
-     public static String cryptWithMD5(String text){
-		
-		StringBuffer sb = new StringBuffer();
-		 
-	        byte[] digested;
-			try {
-				digested = MessageDigest.getInstance("MD5").digest(text.getBytes());
-				 sb = new StringBuffer();
-		        for(int i=0;i<digested.length;i++){
-		            sb.append(Integer.toHexString(0xff & digested[i]));
-		        }
-		        
-			} catch (NoSuchAlgorithmException e) {
-				
-			}  
-	        
-			return sb.toString();
-
-
-	   }
+    
 
 	public void setItemStock(int itemId,int stock) {
 		
@@ -391,31 +390,13 @@ public class Application {
 		
 	}
 	
-	public void startTimer()
-	{
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-		       @Override
-		       public void run() {
-		          for(Order order:currentOrders.values())
-		          {
-		        	  if(order.getTimer()!=0)
-		        	  {  
-		        		  int timer=order.getTimer()-1;
-		        		  order.setTimer(timer);
-		        		  db.setOrderTimer(order.getOrderId(),timer);
-		        	  }
-		          }
-		       }
-		    }, 0, 10000);
-	}
 	
   private void populatePaths() {
 		
 	
 		String fileName=System.getProperty("catalina.base")+C.conf+C.pathFile;
 		
-		String pathText=getStringFromFile(fileName);
+		String pathText=Util.getStringFromFile(fileName);
 		if(pathText!=null)
 		{   
 			db.deletePaths();
@@ -431,29 +412,14 @@ public class Application {
 
 	}
 
-	private String getStringFromFile(String fileName) {
-		
-		String text="";
-		try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
-		    String line;
-		    while ((line = br.readLine()) != null) 
-              text+=line; 
-            br.close();
-
-		   } catch (IOException e) {
-		    System.out.println("ERROR: unable to read file " + fileName);
-		    e.printStackTrace();   
-		    }
-		return text;
-	}
+	
 
 	private void setAllHotelLocation()
 	{
 
 		String fileName=System.getProperty("catalina.base")+C.conf+C.hotelFile;
 		
-		String pathText=getStringFromFile(fileName);
+		String pathText=Util.getStringFromFile(fileName);
 		if(pathText!=null)
 		{   
 			
@@ -471,7 +437,7 @@ public class Application {
 		
 		String fileName=System.getProperty("catalina.base")+C.conf+C.placeFile;
 		
-		String placeText=getStringFromFile(fileName);
+		String placeText=Util.getStringFromFile(fileName);
 		if(placeText!=null)
 		{   
 			db.deleteLocations();
