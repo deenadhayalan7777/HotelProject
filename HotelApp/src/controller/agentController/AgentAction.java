@@ -47,7 +47,8 @@ public class AgentAction extends ActionSupport {
 		int agentId=agent.getAgentId();
 		setHotels(new ArrayList<HotelDetail>(app.getHotelList().values()));
 		setCurrentOrders(new ArrayList<Order>(app.getAgentCurrentOrders(agentId).values()));
-		
+		List<String> locations=app.getLocationNames();
+		ServletActionContext.getRequest().getSession().setAttribute("locations", locations);
 		return "success";
 		
 	}

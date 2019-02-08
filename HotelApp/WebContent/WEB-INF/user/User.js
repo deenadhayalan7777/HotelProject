@@ -52,7 +52,8 @@ function rateOrder(orderId,i)
 		 document.getElementById(i).value="";
 		 return false;
 		}
-
+	var ratebtn=document.getElementsByClassName("rating1");
+	ratebtn[i].disabled=true;
 	  ajax("rateorderaction?rating="+rating+"&orderId="+orderId,function(data){
 		    var ri=document.getElementsByClassName("rating1");
 	   	    var rab=document.getElementsByClassName("ratebtn");
@@ -184,7 +185,7 @@ function makeOrder(hotelId)
     	 return false;
     	}
 	var itemString=JSON.stringify(itemslist);
-	
+	document.getElementById("makeorderbtn").disabled=true;
 	postAjax('orderaction', {itemslist:itemString,total:total,hotelId:hotelId}, function(data){
 		myorders(); });
 	

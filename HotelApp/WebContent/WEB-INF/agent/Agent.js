@@ -46,7 +46,7 @@ function pickup(sno)
 		 var pick=document.getElementsByClassName("pick");
 	    	var bt=document.getElementsByClassName("pickupbtn");
 	    	bt[sno].disabled=false;
-	    	pick[sno].innerHTML=this.responseText;
+	    	pick[sno].innerHTML=data;
 	    	bt[sno].innerHTML="CLOSE";
 	    	bt[sno].className="btn btn-outline-danger pickupbtn";
 	    	isPicked=true;

@@ -7,7 +7,10 @@
 
 <body>
 
-
+<s:if test="%{currentOrders.size()==0}">
+	        
+</s:if>
+ <s:else>
 <div class="container border border-danger" >
 
  <table id="mytable" class="table table-hover">
@@ -43,10 +46,22 @@
 </table>
 
 </div>
+</s:else>
+<div class="p-3 mb-2 bg-light text-danger text-center">YourOrders</div>
+<s:if test="%{myOrders.size()==0}">
+	         No Orders
+</s:if>
+ <s:else>
  <c:set var="count" value="0" scope="page" />
 <div class="container border border-light">
  <table id="mytable" class="table table-hover">
-           
+           <tr>
+                <th>HOTEL NAME</th>
+                <th>TOTAL</th>
+                <th>DATE</th>
+                <th>RATING</th>
+               
+            </tr>
             <s:iterator value="myOrders" status="stat">  
 			<tr>
 			<td><s:property value="hotelname"/></td>
@@ -54,7 +69,7 @@
 			<td><s:property value="date"/></td> 
 			<s:if test="%{status==3}">
 	         <td class="rating1"><input name="rate" id="${count}" type="text" value="" /></td>
-	         <td class="ratebtn"><button  type="button" class="btn btn-outline-success" onclick="rateOrder('<s:property value="orderId"/>','<s:property value="%{#stat.index}" />')"> RATE </button></td>
+	         <td class="ratebtn"><button  type="button" class="btn btn-outline-success ratebtn1" onclick="rateOrder('<s:property value="orderId"/>','<s:property value="%{#stat.index}" />')"> RATE </button></td>
 		    </s:if> 
             <s:else>
 			   <td class="rating1" ><span class="badge badge-success "><s:property  value="rating"/></span></td>
@@ -65,5 +80,6 @@
 			</s:iterator>
 </table>
  </div>
+ </s:else>
 </body>
 </html>

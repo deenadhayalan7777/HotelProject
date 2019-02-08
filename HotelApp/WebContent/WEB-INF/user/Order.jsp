@@ -32,7 +32,7 @@
 </s:else>  
   <p id="box" > </p>
 
- <button type="button" class="btn btn-outline-success"  onclick="makeOrder('<s:property value="#session.hdetail.hotelId"/> ')" >MAKE ORDER</button>
+ <button type="button" class="btn btn-outline-success" id="makeorderbtn" onclick="makeOrder('<s:property value="#session.hdetail.hotelId"/> ')" >MAKE ORDER</button>
 
 </body>
 </html>
